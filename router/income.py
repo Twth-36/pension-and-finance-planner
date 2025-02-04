@@ -1,4 +1,4 @@
-""" Class Income for planning all possible incomes except automatic generated """
+""" Class Income for planning all possible incomes"""
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import Optional, List
@@ -9,7 +9,7 @@ class IncomeEvents(BaseModel):
     scenario_id: int 
     eventDate: monthYear.MonthYear
     newValue: Optional[float]
-    percentalChange: Optional[float]
+    percentageAdjustment: Optional[float]
     inEventDoc: bool
     eventDecription: Optional[str]
 

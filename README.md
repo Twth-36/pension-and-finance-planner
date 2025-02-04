@@ -3,7 +3,7 @@
 pension-and-finance-planner is a webbased pension- and finance-planner which takes taxquestions, wealth-management and other important parts into account.
 
 ## Package-Installation
-For installing all packages use a virtual environemten to install all packages of 'requirements.txt'
+For installing all packages use a virtual environemtent to install all packages of 'requirements.txt'
 
 For Windows:
 ```bash
