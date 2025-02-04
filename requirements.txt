@@ -1,0 +1,4 @@
+# All packages in this file will get installed by the command 
+# versions can get updated by '$ pip-review --auto' but pip-tools need to be installed ('pip install pip-tools')
+
+fastapi[standard] == 0.115.8
