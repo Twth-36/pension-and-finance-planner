@@ -1,11 +1,17 @@
 """ Free assets as liquidity and investments """
+
 from fastapi import APIRouter, Path
-from .planningposition import *
-from typing import Optional
+from generalClasses.planningposition import *
+from typing import Optional, List
+from pydantic import BaseModel
 
 
-class FreeAsset(Planningposition):
-    returnRate: Optional[float]=0
+class FreeAsset(BaseModel):
+    name: str
+    person_id: int
+    currentValue: List[Planningposition]
+    returnRate: List[Planningposition]
+  
 
 freeAssetDic = {}
 

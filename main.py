@@ -1,9 +1,9 @@
 from fastapi import FastAPI #if not installed pip install fastapi
 from fastapi.middleware.cors import CORSMiddleware
 
-#selfcreated classes
+#import all generated classes
 from router import *
-
+from generalClasses import *
 
 app = FastAPI()
 

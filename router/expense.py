@@ -2,20 +2,15 @@
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import Optional, List
-from generalClasses import *
-from .planningposition import Planningposition
+from generalClasses.planningposition import *
 
-class ExpenseEvents(BaseModel):
-    scenario_id: int 
-    eventDate: monthYear.MonthYear
-    newValue: Optional[float]
-    percentageAdjustment: Optional[float]
-    inEventDoc: bool
-    eventDecription: Optional[str]
 
-class Income(Planningposition):
-    inflation: float
-    changes: Optional[List[ExpenseEvents]] = Field(default_factory=list)
+class Expense(BaseModel):
+    name: str
+    person_id: int
+    currentValue: List[Planningposition]
+    taxableRate: List[Planningposition]
+    inflationRate: List[Planningposition] 
 
 #Dictionary for managing all income position
 expenseDic = {}

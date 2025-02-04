@@ -5,3 +5,4 @@ from pydantic import BaseModel
 class Scenario(BaseModel):
     scenario_id: int
     description: str
+    planningYears: int
