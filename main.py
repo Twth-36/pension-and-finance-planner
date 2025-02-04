@@ -7,17 +7,10 @@ from router import *
 
 app = FastAPI()
 
-# Allow all origins (for development)
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # You can restrict this to your frontend domain
-    allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods (GET, POST, PUT, DELETE, etc.)
-    allow_headers=["*"],  # Allow all headers
-)
-
+#include all routers
 app.include_router(person.router)
 app.include_router(freeAsset.router)
+app.include_router(income.router)
 
 
 # Server starten: uvicorn main:app --reload

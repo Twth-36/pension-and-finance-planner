@@ -1,6 +1,6 @@
 """ Free assets as liquidity and investments """
 from fastapi import APIRouter, Path
-from router.planningposition import *
+from .planningposition import *
 from typing import Optional
 
 
@@ -11,6 +11,7 @@ freeAssetDic = {}
 
 router = APIRouter()
 
+#creating a new free-asset-object
 @router.post("/freeAsset/create-freeAsset/{freeAsset_id}")
 def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     if freeAsset_id in freeAssetDic:
@@ -19,6 +20,7 @@ def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     freeAssetDic[freeAsset_id] = freeAsset
     return freeAssetDic[freeAsset_id]
 
+#changes on existing free-asset-object
 @router.put("/freeAsset/update-freeAsset/{freeAsset_id}")
 def update_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     if freeAsset_id not in freeAssetDic:

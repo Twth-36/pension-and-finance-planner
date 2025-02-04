@@ -1,10 +1,23 @@
 """ Class Income for planning all possible incomes except automatic generated """
+from fastapi import APIRouter
+from pydantic import BaseModel, Field
+from typing import Optional, List
+from generalClasses import *
+from .planningposition import Planningposition
 
-from planningposition import *
-from scenario import *
-from person import*
+class IncomeEvents(BaseModel):
+    scenario_id: int 
+    eventDate: monthYear.MonthYear
+    newValue: Optional[float]
+    percentalChange: Optional[float]
+    inEventDoc: bool
+    eventDecription: Optional[str]
 
 class Income(Planningposition):
-    name: str
-    person_id: int
-    
+    changes: Optional[List[IncomeEvents]] = Field(default_factory=list)
+
+#Dictionary for managing all income position
+incomeDic = {}
+
+#starting router
+router = APIRouter()

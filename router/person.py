@@ -2,35 +2,33 @@
 from fastapi import APIRouter, Path
 from pydantic import BaseModel
 from typing import Optional
+from generalClasses import *
 
 
 class Person(BaseModel):
     name: str
-    birthmonth: int
-    birthyear: int
+    birth: monthYear.MonthYear
     ZIPCode: int
 
+#Dictionary for managing the planning persons
 personDic = {
     1: {
         "name": "John",
-        "birthmonth": 8,
-        "birthyear": 1998,
+        "birth": {"month": 8, "year": 1997},
         "ZIPCode": 2552
     },
     2: {
         "name": "Johnine",
-        "birthmonth": 7,
-        "birthyear": 1995,
+        "birth": {"month": 8, "year": 1997},
         "ZIPCode": 2552
     },
-    3: {"surname": "gemeinsam",
-        "prename": None,
-        "birthmonth": None,
-        "birthyear": None,
+    3: {"name": "gemeinsam",
+        "birth": None,
         "ZIPCode:": 2552
         }
 }
 
+#Starting router
 router = APIRouter()
 
 @router.get("/person/get-person/{person_id}")

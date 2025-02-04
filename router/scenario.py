@@ -1,12 +1,7 @@
 """ Class for different scenarios in the planning """
 
-class Scenario:
+from pydantic import BaseModel
 
-    scenarioList = []
-    scenarioCounter = 0
-
-    def __init__(self, name):
-        self.name = name
-        self.id = Scenario.scenarioCounter
-        Scenario.scenarioCounter += 1
-        Scenario.scenarioList.append(self)
+class Scenario(BaseModel):
+    scenario_id: int
+    description: str
