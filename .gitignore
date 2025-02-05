@@ -1,5 +1,5 @@
 ## The following get ignored while pushing to git
 
-*__pycache__/
+**/__pycache__/
 
-venv/
+**/venv/
