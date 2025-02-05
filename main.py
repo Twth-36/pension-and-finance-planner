@@ -9,6 +9,7 @@ from generalClasses import *
 app = FastAPI()
 
 #include all routers
+app.include_router(credit.router)
 app.include_router(expense.router)
 app.include_router(freeAsset.router)
 app.include_router(income.router)

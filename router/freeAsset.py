@@ -1,20 +1,39 @@
 """ Free assets as liquidity and investments """
 
-from fastapi import APIRouter, Path
+from fastapi import APIRouter
 from generalClasses import *
 from generalClasses.planningposition import Planningposition
-from typing import Optional, List, Dict
+from typing import Optional, List
 from pydantic import BaseModel
+from generalClasses.monthYear import * 
 
-
+## class for all freeAsset in detail
 class FreeAsset(BaseModel):
     name: str
     person_id: int
-    currentValue: List[Planningposition]
-    returnRate: List[Planningposition]
-  
+    value: Planningposition
 
-freeAssetDic: Dict[int, FreeAsset] = {}
+## class for aggregated free assets i.e. liqudity and assets to generate income
+class MainFreeAsset(BaseModel):
+    name: str
+    person_id: int
+    value: Optional[List[Planningposition]] = []
+    returnRate: Optional[List[Planningposition]] = []
+
+# Dictionary to manage all FreeAsset-objects
+freeAssetDic = {}
+
+# Dictionary to mana MainFreeAsset-objects
+mainFreeAssetDic = {
+    0: {
+        "name": "Liquidität",
+        "person_id": 1,
+    },
+    1: {
+        "name": "Kapital zur Einkommensgewinnung",
+        "person_id": 1,
+    }
+}
 
 router = APIRouter()
 
@@ -32,7 +51,7 @@ def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
 def update_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     if freeAsset_id not in freeAssetDic:
         return {"Error": "freeAsset_id not found"}
-    
+
     freeAssetDic[freeAsset_id].update(freeAsset)
     return freeAssetDic[freeAsset_id]
 
@@ -44,3 +63,32 @@ def delete_freeAsset(freeAsset_id: int):
     
     del freeAssetDic[freeAsset_id]
     return {"Success": "FreeAsset deleted"}
+
+# Returns freeAsset position by id
+@router.get("/freeAsset/get-freeAsset/{freeAsset_id}")
+def get_freeAsset(freeAsset_id: int):
+    if freeAsset_id not in freeAssetDic:
+        return {"Error": "freeAsset_id not found"}
+    return freeAssetDic[freeAsset_id]
+
+# Returns all freeAssets
+@router.get("/freeAsset/get-allfreeAssets/")
+def get_allfreeAssets():
+    return freeAssetDic
+
+# Returns first free id in freeAssetDic
+@router.get("/freeAsset/get-firstFreeId/")
+def get_firstFreeId():
+    free_id = 0
+    while free_id in freeAssetDic:
+        free_id += 1
+    return free_id
+
+## ExampleValues for show-purposes and testing
+planpos = Planningposition(period=get_lastYearLastMonth(), value=15000, inDoc=False)
+freeAsset = FreeAsset(name="MigrosBank Sparkonto", person_id=0, value = planpos)
+create_freeAsset(get_firstFreeId(), freeAsset)
+
+planpos.value = 55000
+freeAsset = FreeAsset(name="Raiffeisen Sparkonto", person_id=1, value = planpos)
+create_freeAsset(get_firstFreeId(), freeAsset)

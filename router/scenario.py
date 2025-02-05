@@ -5,11 +5,13 @@ from fastapi import APIRouter
 from typing import Optional
 from generalClasses.monthYear import *
 
+# Planninghorizon for all scenarios identical
+baseDate: MonthYear
+endDate: MonthYear
+
 class Scenario(BaseModel):
     scenario_id: Optional[int] = 0
     description: str
-    baseDate: MonthYear
-    endDate: MonthYear
 
 
 #Dictionary for managing all scenario position
@@ -17,6 +19,11 @@ scenarioDic = {}
 
 #starting router
 router = APIRouter()
+
+# Returs basedate
+@router.post("/scenario/get-baseDate/")
+def get_baseDate():
+    return baseDate
 
 #creating a new scenario-object
 @router.post("/scenario/create-scenario/{scenario_id}")

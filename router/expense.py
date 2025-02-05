@@ -9,7 +9,7 @@ from generalClasses.planningposition import *
 class Expense(BaseModel):
     name: str
     person_id: int
-    currentValue: List[Planningposition]
+    value: List[Planningposition]
     taxableRate: List[Planningposition]
     inflationRate: List[Planningposition] 
 

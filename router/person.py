@@ -15,15 +15,15 @@ personCounter = 2
 # Dictionary for managing the planning persons
 # The person-objects are fixed and can only be changed, but not created since the Planner works only for a single person or (married by tax-reason) couple
 personDic = {
+    0: {
+        "name": "Andy",
+        "birth": {"month": 8, "year": 1975}
+    },
     1: {
-        "name": "John",
-        "birth": {"month": 8, "year": 1997}
+        "name": "Lou",
+        "birth": {"month": 11, "year": 1977}
     },
-    2: {
-        "name": "Johnine",
-        "birth": {"month": 8, "year": 1997}
-    },
-    3: {"name": "gemeinsam",
+    2: {"name": "gemeinsam",
         "birth": None
         }
 }

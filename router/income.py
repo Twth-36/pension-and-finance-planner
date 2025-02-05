@@ -1,13 +1,20 @@
 """ Class Income for planning all possible incomes"""
+
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from generalClasses.planningposition import *
+from enum import Enum
 
+# classifies income-position if earned by work and if 'Säule 3a' may be deducted
+class IncomeClass(Enum):
+    other = 0
+    AHVrelevantIncome = 1
 
 class Income(BaseModel):
     name: str
     person_id: int
+    incomeClass_id: IncomeClass #see above
     currentValue: List[Planningposition]
     taxableRate: List[Planningposition]
 
