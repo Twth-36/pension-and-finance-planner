@@ -1,4 +1,4 @@
-## The following should be ignored while pushing to git
+## The following get ignored while pushing to git
 
 __pycache__/
 
