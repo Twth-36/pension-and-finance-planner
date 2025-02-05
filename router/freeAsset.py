@@ -1,8 +1,9 @@
 """ Free assets as liquidity and investments """
 
 from fastapi import APIRouter, Path
-from generalClasses.planningposition import *
-from typing import Optional, List
+from generalClasses import *
+from generalClasses.planningposition import Planningposition
+from typing import Optional, List, Dict
 from pydantic import BaseModel
 
 
@@ -13,11 +14,11 @@ class FreeAsset(BaseModel):
     returnRate: List[Planningposition]
   
 
-freeAssetDic = {}
+freeAssetDic: Dict[int, FreeAsset] = {}
 
 router = APIRouter()
 
-#creating a new free-asset-object
+#creating a new freeAsset-object
 @router.post("/freeAsset/create-freeAsset/{freeAsset_id}")
 def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     if freeAsset_id in freeAssetDic:
@@ -26,7 +27,7 @@ def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     freeAssetDic[freeAsset_id] = freeAsset
     return freeAssetDic[freeAsset_id]
 
-#changes on existing free-asset-object
+#changes on existing freeAsset-object
 @router.put("/freeAsset/update-freeAsset/{freeAsset_id}")
 def update_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     if freeAsset_id not in freeAssetDic:
@@ -35,7 +36,7 @@ def update_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     freeAssetDic[freeAsset_id].update(freeAsset)
     return freeAssetDic[freeAsset_id]
 
-# Deleting an existing free-asset object
+# Deleting an existing freeAsset-object
 @router.delete("/freeAsset/delete-freeAsset/{freeAsset_id}")
 def delete_freeAsset(freeAsset_id: int):
     if freeAsset_id not in freeAssetDic:

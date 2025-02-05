@@ -17,6 +17,15 @@ incomeDic = {}
 #starting router
 router = APIRouter()
 
+#creating a new income-object
+@router.post("/income/create-income/{income_id}")
+def create_income(income_id: int, income: Income):
+    if income_id in incomeDic:
+        return {"Error": "income_id already used"}
+    
+    incomeDic[income_id] = income
+    return incomeDic[income_id]
+
 # Changes on existing income-object
 @router.put("/income/update-income/{income_id}")
 def update_income(income_id: int, income: Income):

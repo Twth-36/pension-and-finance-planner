@@ -58,3 +58,4 @@ def get_expense(expense_id: int):
 @router.get("/expense/get-allexpenses/")
 def get_allexpenses():
     return expenseDic
+

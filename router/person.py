@@ -9,10 +9,11 @@ class Person(BaseModel):
     name: str
     birth: Optional[monthYear.MonthYear] = None
 
-#Represents if the plan is for a single person or a (married) couple
+# Represents if the plan is for a single person or a (married) couple
 personCounter = 2
 
-#Dictionary for managing the planning persons
+# Dictionary for managing the planning persons
+# The person-objects are fixed and can only be changed, but not created since the Planner works only for a single person or (married by tax-reason) couple
 personDic = {
     1: {
         "name": "John",
@@ -27,15 +28,17 @@ personDic = {
         }
 }
 
-#Starting router
+# Starting router
 router = APIRouter()
 
+# Returs person object by id
 @router.get("/person/get-person/{person_id}")
 def get_person(person_id: int):
     if person_id not in personDic:
         return {"Error": "person_id not found"}
     return personDic[person_id]
 
+# Changes existing Person-object
 @router.put("/person/update-person/{person_id}")
 def update_person(person_id: int, person: Person):
     if person_id not in personDic:

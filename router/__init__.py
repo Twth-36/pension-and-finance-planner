@@ -1,3 +1,3 @@
-"""Class for importing all classes in this folder with 'from generalClasses import *' """
+"""Class for importing all classes in this folder with 'from router import *' """
 
-__all__ = ['person', 'freeAsset', 'income', 'expense']
+__all__ = ['expense', 'freeAsset', 'income', 'person', 'realEstate', 'scenario']

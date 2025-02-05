@@ -5,13 +5,19 @@ from fastapi.middleware.cors import CORSMiddleware
 from router import *
 from generalClasses import *
 
+# Start app
 app = FastAPI()
 
 #include all routers
-app.include_router(person.router)
+app.include_router(expense.router)
 app.include_router(freeAsset.router)
 app.include_router(income.router)
-app.include_router(expense.router)
+app.include_router(person.router)
+app.include_router(realEstate.router)
+app.include_router(scenario.router)
+
+
+
 
 
 # Server starten: uvicorn main:app --reload

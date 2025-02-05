@@ -1,12 +1,11 @@
 """Class for general planningposition"""
 
 from pydantic import BaseModel
-from generalClasses.monthYear import *
+from generalClasses.monthYear import MonthYear
 from typing import Optional
-from router import *
 
 class Planningposition(BaseModel):
-    scenario_id: Scenario
+    scenario_id: Optional[int] = 0
     period: MonthYear
     value: float
     inDoc: bool
