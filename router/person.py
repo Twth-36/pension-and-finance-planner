@@ -7,24 +7,23 @@ from generalClasses import *
 
 class Person(BaseModel):
     name: str
-    birth: monthYear.MonthYear
-    ZIPCode: int
+    birth: Optional[monthYear.MonthYear] = None
+
+#Represents if the plan is for a single person or a (married) couple
+personCounter = 2
 
 #Dictionary for managing the planning persons
 personDic = {
     1: {
         "name": "John",
-        "birth": {"month": 8, "year": 1997},
-        "ZIPCode": 2552
+        "birth": {"month": 8, "year": 1997}
     },
     2: {
         "name": "Johnine",
-        "birth": {"month": 8, "year": 1997},
-        "ZIPCode": 2552
+        "birth": {"month": 8, "year": 1997}
     },
     3: {"name": "gemeinsam",
-        "birth": None,
-        "ZIPCode:": 2552
+        "birth": None
         }
 }
 

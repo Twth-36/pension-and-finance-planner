@@ -31,5 +31,15 @@ def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
 def update_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     if freeAsset_id not in freeAssetDic:
         return {"Error": "freeAsset_id not found"}
+    
     freeAssetDic[freeAsset_id].update(freeAsset)
     return freeAssetDic[freeAsset_id]
+
+# Deleting an existing free-asset object
+@router.delete("/freeAsset/delete-freeAsset/{freeAsset_id}")
+def delete_freeAsset(freeAsset_id: int):
+    if freeAsset_id not in freeAssetDic:
+        return {"Error": "freeAsset_id not found"}
+    
+    del freeAssetDic[freeAsset_id]
+    return {"Success": "FreeAsset deleted"}

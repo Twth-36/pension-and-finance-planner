@@ -11,6 +11,7 @@ app = FastAPI()
 app.include_router(person.router)
 app.include_router(freeAsset.router)
 app.include_router(income.router)
+app.include_router(expense.router)
 
 
 # Server starten: uvicorn main:app --reload
