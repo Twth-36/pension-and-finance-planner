@@ -7,7 +7,8 @@ from generalClasses.planningposition import * #issue why necessary?
 from pydantic import BaseModel
 
 class Credit(BaseModel):
-    value: List[Planningposition]
+    fixValue: List[Planningposition]
+    planValue: Optional[List[Planningposition]] = None
     interestRate: List[Planningposition]
     endDate: MonthYear
     interstExpense_id: int

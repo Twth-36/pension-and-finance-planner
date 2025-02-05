@@ -14,8 +14,9 @@ class IncomeClass(Enum):
 class Income(BaseModel):
     name: str
     person_id: int
+    fixValue: List[Planningposition]
+    planValue: Optional[List[Planningposition]] = None
     incomeClass_id: IncomeClass #see above
-    currentValue: List[Planningposition]
     taxableRate: List[Planningposition]
 
 #Dictionary for managing all income position

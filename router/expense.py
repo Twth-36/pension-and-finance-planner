@@ -9,7 +9,8 @@ from generalClasses.planningposition import *
 class Expense(BaseModel):
     name: str
     person_id: int
-    value: List[Planningposition]
+    fixValue: List[Planningposition]
+    planValue: Optional[List[Planningposition]] = None
     taxableRate: List[Planningposition]
     inflationRate: List[Planningposition] 
 

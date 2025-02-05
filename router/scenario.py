@@ -5,14 +5,14 @@ from fastapi import APIRouter
 from typing import Optional
 from generalClasses.monthYear import *
 
-# Planninghorizon for all scenarios identical
-baseDate: MonthYear
-endDate: MonthYear
 
 class Scenario(BaseModel):
     scenario_id: Optional[int] = 0
     description: str
 
+# Planninghorizon for all scenarios identical
+baseDate = get_lastYearLastMonth
+endDate = get_lastYearLastMonth
 
 #Dictionary for managing all scenario position
 scenarioDic = {}

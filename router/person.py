@@ -9,6 +9,7 @@ class Person(BaseModel):
     name: str
     birth: Optional[monthYear.MonthYear] = None
 
+
 # Represents if the plan is for a single person or a (married) couple
 personCounter = 2
 
@@ -46,3 +47,12 @@ def update_person(person_id: int, person: Person):
     personDic[person_id].update(person)
     return personDic[person_id]
 
+# Changes the number of persons (personCounter)
+@router.put("/person/update-personCounter/{new_counterValue}")
+def update_personCounter(new_CounterValue: int):
+    personCounter = new_CounterValue
+
+# Returns the current number of persons (personCounter)
+@router.put("/person/update-personCounter/")
+def get_PersonCounter():
+    return personCounter

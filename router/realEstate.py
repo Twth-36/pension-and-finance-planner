@@ -5,13 +5,21 @@ from typing import Optional, List
 from generalClasses import *
 from generalClasses.planningposition import * #issue why necessary?
 from pydantic import BaseModel
+from generalClasses.monthYear import *
+from router.scenario import *
 
 
 class RealEstate(BaseModel):
-    value: List[Planningposition]
-    taxValue: List[Planningposition]
-    realEstateTaxRate: List[Planningposition]
-    maintenanceCostRate: float
+    name: str
+    person_id: int
+    fixValue: List[Planningposition]
+    ZIPCode: int
+    planValue: Optional[List[Planningposition]] = None
+    taxValue: Optional[List[Planningposition]] = None
+    realEstateTaxRate: Optional[List[Planningposition]] = None
+    maintenanceCostRate: Optional[List[Planningposition]] = None
+    maintenanceExpense_id: Optional[int] = None
+    renovations: Optional[List[Planningposition]] = None
     renovationExpense_id: Optional[int] = None
 
 realEstateDic = {}
@@ -58,3 +66,24 @@ def get_realEstate(realEstate_id: int):
 def get_allrealEstates():
     return realEstateDic
 
+# Returns first free id in realEstateDic
+@router.get("/realEstate/get-firstFreeId/")
+def get_firstFreeId():
+    free_id = 0
+    while free_id in realEstateDic:
+        free_id += 1
+    return free_id
+
+
+
+
+
+
+
+
+
+
+## ExampleValues for show-purposes and testing
+planpos = Planningposition(period=get_lastYearLastMonth(), value=750000, inDoc=False)
+freeAsset = RealEstate(name="EFH Biel", person_id=2, fixValue=[planpos], ZIPCode=2502)
+create_realEstate(get_firstFreeId(), freeAsset)
