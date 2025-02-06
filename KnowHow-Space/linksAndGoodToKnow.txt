@@ -1,0 +1,3 @@
+Blog about Centralized Error Handler in FASTAPI:
+https://www.bhavaniravi.com/python/fastapi/the-pain-of-building-a-centralized-error-handler-in-fastapi
+
