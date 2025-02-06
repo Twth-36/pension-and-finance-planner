@@ -19,7 +19,7 @@ class Expense(BaseModel):
 expenseDic = {}
 
 #starting router
-router = APIRouter()
+router = APIRouter(prefix="/expense", tags=["expense"])
 
 
 # Creating a new expense-object

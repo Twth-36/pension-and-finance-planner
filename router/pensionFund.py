@@ -21,7 +21,7 @@ class PensionFund(BaseModel):
 pensionFundDic = {}
 
 #starting router
-router = APIRouter()
+router = APIRouter(prefix="/pensionFund", tags=["pensionFund"])
 
 
 #creating a new pensionFund-object

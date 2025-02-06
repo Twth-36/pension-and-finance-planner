@@ -20,7 +20,7 @@ class Credit(BaseModel):
 creditDic = {}
 
 #starting router
-router = APIRouter()
+router = APIRouter(prefix="/credit", tags=["credit"])
 
 #creating a new credit-object
 @router.post("/credit/create-credit/{credit_id}")

@@ -15,6 +15,7 @@ app.include_router(freeAsset.router)
 app.include_router(income.router)
 app.include_router(pensionFund.router)
 app.include_router(person.router)
+app.include_router(pillar3a.router)
 app.include_router(realEstate.router)
 app.include_router(scenario.router)
 

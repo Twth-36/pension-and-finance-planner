@@ -37,7 +37,7 @@ mainFreeAssetDic = {
     }
 }
 
-router = APIRouter()
+router = APIRouter(prefix="/freeAsset", tags=["freeAsset"])
 
 #creating a new freeAsset-object
 @router.post("/freeAsset/create-freeAsset/{freeAsset_id}")
@@ -105,4 +105,3 @@ freeAsset = FreeAsset(name="MigrosBank Sparkonto", person_id=0, baseValue=50000)
 create_freeAsset(get_firstFreeId(), freeAsset)
 
 freeAsset = FreeAsset(name="Raiffeisen Sparkonto", person_id=1, baseValue=75000)
-create_freeAsset(get_firstFreeId(), freeAsset)

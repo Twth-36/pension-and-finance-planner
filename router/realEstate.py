@@ -26,7 +26,7 @@ class RealEstate(BaseModel):
 realEstateDic = {}
 
 
-router = APIRouter()
+router = APIRouter(prefix="/realEstate", tags=["realEstate"])
 
 #creating a new realEstate-object
 @router.post("/realEstate/create-realEstate/{realEstate_id}")

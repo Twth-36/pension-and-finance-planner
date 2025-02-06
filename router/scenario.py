@@ -18,7 +18,7 @@ endDate = get_lastYearLastMonth
 scenarioDic = {}
 
 #starting router
-router = APIRouter()
+router = APIRouter(prefix="/scenario", tags=["scenario"])
 
 # Returs basedate
 @router.post("/scenario/get-baseDate/")

@@ -30,7 +30,7 @@ personDic = {
 }
 
 # Starting router
-router = APIRouter()
+router = APIRouter(prefix="/person", tags=["person"])
 
 # Returs person object by id
 @router.get("/person/get-person/{person_id}")

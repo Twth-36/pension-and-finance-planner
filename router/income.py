@@ -18,7 +18,7 @@ class Income(BaseModel):
 incomeDic = {}
 
 #starting router
-router = APIRouter()
+router = APIRouter(prefix="/income", tags=["income"])
 
 #creating a new income-object
 @router.post("/income/create-income/{income_id}")

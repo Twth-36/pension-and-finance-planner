@@ -26,7 +26,7 @@ class Pillar3a(BaseModel):
 pillar3aDic = {}
 
 #starting router
-router = APIRouter()
+router = APIRouter(prefix="/pillar3a", tags=["pillar3a"])
 
 #creating a new pillar3a-object
 @router.post("/pillar3a/create-pillar3a/{pillar3a_id}")
