@@ -1,0 +1,3 @@
+Ortsverzeichnis.csv:
+https://www.swisstopo.admin.ch/de/amtliches-ortschaftenverzeichnis
+
