@@ -21,12 +21,12 @@ scenarioDic = {}
 router = APIRouter(prefix="/scenario", tags=["scenario"])
 
 # Returs basedate
-@router.post("/scenario/get-baseDate/")
+@router.post("/get-baseDate/")
 def get_baseDate():
     return baseDate
 
 #creating a new scenario-object
-@router.post("/scenario/create-scenario/{scenario_id}")
+@router.post("/create-scenario/{scenario_id}")
 def create_scenario(scenario_id: int, scenario: Scenario):
     if scenario_id in scenarioDic:
         return {"Error": "scenario_id already used"}
@@ -35,7 +35,7 @@ def create_scenario(scenario_id: int, scenario: Scenario):
     return scenarioDic[scenario_id]
 
 # Changes on existing scenario-object
-@router.put("/scenario/update-scenario/{scenario_id}")
+@router.put("/update-scenario/{scenario_id}")
 def update_scenario(scenario_id: int, scenario: Scenario):
     if scenario_id not in scenarioDic:
         return {"Error": "scenario_id not found"}
@@ -44,7 +44,7 @@ def update_scenario(scenario_id: int, scenario: Scenario):
     return scenarioDic[scenario_id]
 
 # Deleting an existing scenario object
-@router.delete("/scenario/delete-scenario/{scenario_id}")
+@router.delete("/delete-scenario/{scenario_id}")
 def delete_scenario(scenario_id: int):
     if scenario_id not in scenarioDic:
         return {"Error": "scenario_id not found"}
@@ -53,14 +53,14 @@ def delete_scenario(scenario_id: int):
     return {"Success": "Scenario deleted"}
 
 # Returns scenario position by id
-@router.get("/scenario/get-scenario/{scenario_id}")
+@router.get("/get-scenario/{scenario_id}")
 def get_scenario(scenario_id: int):
     if scenario_id not in scenarioDic:
         return {"Error": "scenario_id not found"}
     return scenarioDic[scenario_id]
 
 # Returns all Scenarios
-@router.get("/scenario/get-allscenarios/")
+@router.get("/get-allscenarios/")
 def get_allscenarios():
     return scenarioDic
 

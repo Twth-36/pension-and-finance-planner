@@ -21,7 +21,7 @@ incomeDic = {}
 router = APIRouter(prefix="/income", tags=["income"])
 
 #creating a new income-object
-@router.post("/income/create-income/{income_id}")
+@router.post("/create-income/{income_id}")
 def create_income(income_id: int, income: Income):
     if income_id in incomeDic:
         return {"Error": "income_id already used"}
@@ -30,7 +30,7 @@ def create_income(income_id: int, income: Income):
     return incomeDic[income_id]
 
 # Changes on existing income-object
-@router.put("/income/update-income/{income_id}")
+@router.put("/update-income/{income_id}")
 def update_income(income_id: int, income: Income):
     if income_id not in incomeDic:
         return {"Error": "income_id not found"}
@@ -39,7 +39,7 @@ def update_income(income_id: int, income: Income):
     return incomeDic[income_id]
 
 # Deleting an existing income object
-@router.delete("/income/delete-income/{income_id}")
+@router.delete("/delete-income/{income_id}")
 def delete_income(income_id: int):
     if income_id not in incomeDic:
         return {"Error": "income_id not found"}
@@ -48,13 +48,13 @@ def delete_income(income_id: int):
     return {"Success": "Income deleted"}
 
 # Returns income position by id
-@router.get("/income/get-income/{income_id}")
+@router.get("/get-income/{income_id}")
 def get_income(income_id: int):
     if income_id not in incomeDic:
         return {"Error": "income_id not found"}
     return incomeDic[income_id]
 
 # Returns all Incomes
-@router.get("/income/get-allincomes/")
+@router.get("/get-allincomes/")
 def get_allincomes():
     return incomeDic

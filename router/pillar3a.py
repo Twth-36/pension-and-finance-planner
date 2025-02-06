@@ -29,7 +29,7 @@ pillar3aDic = {}
 router = APIRouter(prefix="/pillar3a", tags=["pillar3a"])
 
 #creating a new pillar3a-object
-@router.post("/pillar3a/create-pillar3a/{pillar3a_id}")
+@router.post("/create-pillar3a/{pillar3a_id}")
 def create_pillar3a(pillar3a_id: int, pillar3a: Pillar3a):
     if pillar3a_id in pillar3aDic:
         return {"Error": "pillar3a_id already used"}
@@ -38,7 +38,7 @@ def create_pillar3a(pillar3a_id: int, pillar3a: Pillar3a):
     return pillar3aDic[pillar3a_id]
 
 # Changes on existing pillar3a-object
-@router.put("/pillar3a/update-pillar3a/{pillar3a_id}")
+@router.put("/update-pillar3a/{pillar3a_id}")
 def update_pillar3a(pillar3a_id: int, pillar3a: Pillar3a):
     if pillar3a_id not in pillar3aDic:
         return {"Error": "pillar3a_id not found"}
@@ -47,7 +47,7 @@ def update_pillar3a(pillar3a_id: int, pillar3a: Pillar3a):
     return pillar3aDic[pillar3a_id]
 
 # Deleting an existing pillar3a object
-@router.delete("/pillar3a/delete-pillar3a/{pillar3a_id}")
+@router.delete("/delete-pillar3a/{pillar3a_id}")
 def delete_pillar3a(pillar3a_id: int):
     if pillar3a_id not in pillar3aDic:
         return {"Error": "pillar3a_id not found"}
@@ -56,14 +56,14 @@ def delete_pillar3a(pillar3a_id: int):
     return {"Success": "pillar3a deleted"}
 
 # Returns pillar3a position by id
-@router.get("/pillar3a/get-pillar3a/{pillar3a_id}")
+@router.get("/get-pillar3a/{pillar3a_id}")
 def get_pillar3a(pillar3a_id: int):
     if pillar3a_id not in pillar3aDic:
         return {"Error": "pillar3a_id not found"}
     return pillar3aDic[pillar3a_id]
 
 # Returns all pillar3as
-@router.get("/pillar3a/get-allpillar3as/")
+@router.get("/get-allpillar3as/")
 def get_allpillar3as():
     return pillar3aDic
 

@@ -23,7 +23,7 @@ router = APIRouter(prefix="/expense", tags=["expense"])
 
 
 # Creating a new expense-object
-@router.post("/expense/create-expense/{expense_id}")
+@router.post("/create-expense/{expense_id}")
 def creeate_expense(expense_id: int, expense: Expense):
     if expense_id in expenseDic:
         return {"Error": "expense_id already used"}
@@ -32,7 +32,7 @@ def creeate_expense(expense_id: int, expense: Expense):
     return expenseDic[expense]
 
 # Changes on existing expense-object
-@router.put("/expense/update-expense/{expense_id}")
+@router.put("/update-expense/{expense_id}")
 def update_expense(expense_id: int, expense: Expense):
     if expense_id not in expenseDic:
         return {"Error": "expense_id not found"}
@@ -41,7 +41,7 @@ def update_expense(expense_id: int, expense: Expense):
     return expenseDic[expense_id]
 
 # Deleting an existing expense object
-@router.delete("/expense/delete-expense/{expense_id}")
+@router.delete("/delete-expense/{expense_id}")
 def delete_expense(expense_id: int):
     if expense_id not in expenseDic:
         return {"Error": "expense_id not found"}
@@ -50,14 +50,14 @@ def delete_expense(expense_id: int):
     return {"Success": "Expense deleted"}
 
 # Returns expense position by id
-@router.get("/expense/get-expense/{expense_id}")
+@router.get("/get-expense/{expense_id}")
 def get_expense(expense_id: int):
     if expense_id not in expenseDic:
         return {"Error": "expense_id not found"}
     return expenseDic[expense_id]
 
 # Returns all Expenses
-@router.get("/expense/get-allexpenses/")
+@router.get("/get-allexpenses/")
 def get_allexpenses():
     return expenseDic
 

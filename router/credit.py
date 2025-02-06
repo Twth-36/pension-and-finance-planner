@@ -23,7 +23,7 @@ creditDic = {}
 router = APIRouter(prefix="/credit", tags=["credit"])
 
 #creating a new credit-object
-@router.post("/credit/create-credit/{credit_id}")
+@router.post("/create-credit/{credit_id}")
 def create_credit(credit_id: int, credit: Credit):
     if credit_id in creditDic:
         return {"Error": "credit_id already used"}
@@ -32,7 +32,7 @@ def create_credit(credit_id: int, credit: Credit):
     return creditDic[credit_id]
 
 # Changes on existing credit-object
-@router.put("/credit/update-credit/{credit_id}")
+@router.put("/update-credit/{credit_id}")
 def update_credit(credit_id: int, credit: Credit):
     if credit_id not in creditDic:
         return {"Error": "credit_id not found"}
@@ -41,7 +41,7 @@ def update_credit(credit_id: int, credit: Credit):
     return creditDic[credit_id]
 
 # Deleting an existing credit object
-@router.delete("/credit/delete-credit/{credit_id}")
+@router.delete("/delete-credit/{credit_id}")
 def delete_credit(credit_id: int):
     if credit_id not in creditDic:
         return {"Error": "credit_id not found"}
@@ -50,13 +50,13 @@ def delete_credit(credit_id: int):
     return {"Success": "Credit deleted"}
 
 # Returns credit position by id
-@router.get("/credit/get-credit/{credit_id}")
+@router.get("/get-credit/{credit_id}")
 def get_credit(credit_id: int):
     if credit_id not in creditDic:
         return {"Error": "credit_id not found"}
     return creditDic[credit_id]
 
 # Returns all Credits
-@router.get("/credit/get-allcredits/")
+@router.get("/get-allcredits/")
 def get_allcredits():
     return creditDic

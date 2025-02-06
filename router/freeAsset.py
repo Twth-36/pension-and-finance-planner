@@ -40,7 +40,7 @@ mainFreeAssetDic = {
 router = APIRouter(prefix="/freeAsset", tags=["freeAsset"])
 
 #creating a new freeAsset-object
-@router.post("/freeAsset/create-freeAsset/{freeAsset_id}")
+@router.post("/create-freeAsset/{freeAsset_id}")
 def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     if freeAsset_id in freeAssetDic:
         return {"Error": "freeAsset_id already used"}
@@ -49,7 +49,7 @@ def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     return freeAssetDic[freeAsset_id]
 
 #changes on existing freeAsset-object
-@router.put("/freeAsset/update-freeAsset/{freeAsset_id}")
+@router.put("/update-freeAsset/{freeAsset_id}")
 def update_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     if freeAsset_id not in freeAssetDic:
         return {"Error": "freeAsset_id not found"}
@@ -58,7 +58,7 @@ def update_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
     return freeAssetDic[freeAsset_id]
 
 # Deleting an existing freeAsset-object
-@router.delete("/freeAsset/delete-freeAsset/{freeAsset_id}")
+@router.delete("/delete-freeAsset/{freeAsset_id}")
 def delete_freeAsset(freeAsset_id: int):
     if freeAsset_id not in freeAssetDic:
         return {"Error": "freeAsset_id not found"}
@@ -67,19 +67,19 @@ def delete_freeAsset(freeAsset_id: int):
     return {"Success": "FreeAsset deleted"}
 
 # Returns freeAsset position by id
-@router.get("/freeAsset/get-freeAsset/{freeAsset_id}")
+@router.get("/get-freeAsset/{freeAsset_id}")
 def get_freeAsset(freeAsset_id: int):
     if freeAsset_id not in freeAssetDic:
         return {"Error": "freeAsset_id not found"}
     return freeAssetDic[freeAsset_id]
 
 # Returns all freeAssets
-@router.get("/freeAsset/get-allfreeAssets/")
+@router.get("/get-allfreeAssets/")
 def get_allfreeAssets():
     return freeAssetDic
 
 # Returns first free id in freeAssetDic
-@router.get("/freeAsset/get-firstFreeId/")
+@router.get("/get-firstFreeId/")
 def get_firstFreeId():
     free_id = 0
     while free_id in freeAssetDic:

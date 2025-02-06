@@ -33,14 +33,14 @@ personDic = {
 router = APIRouter(prefix="/person", tags=["person"])
 
 # Returs person object by id
-@router.get("/person/get-person/{person_id}")
+@router.get("/get-person/{person_id}")
 def get_person(person_id: int):
     if person_id not in personDic:
         return {"Error": "person_id not found"}
     return personDic[person_id]
 
 # Changes existing Person-object
-@router.put("/person/update-person/{person_id}")
+@router.put("/update-person/{person_id}")
 def update_person(person_id: int, person: Person):
     if person_id not in personDic:
         return {"Error": "person_id not found"}
@@ -48,11 +48,11 @@ def update_person(person_id: int, person: Person):
     return personDic[person_id]
 
 # Changes the number of persons (personCounter)
-@router.put("/person/update-personCounter/{new_counterValue}")
+@router.put("/update-personCounter/{new_counterValue}")
 def update_personCounter(new_CounterValue: int):
     personCounter = new_CounterValue
 
 # Returns the current number of persons (personCounter)
-@router.get("/person/get-personCounter/")
+@router.get("/get-personCounter/")
 def get_PersonCounter():
     return personCounter

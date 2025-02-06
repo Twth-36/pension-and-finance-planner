@@ -25,7 +25,7 @@ router = APIRouter(prefix="/pensionFund", tags=["pensionFund"])
 
 
 #creating a new pensionFund-object
-@router.post("/pensionFund/create-pensionFund/{pensionFund_id}")
+@router.post("/create-pensionFund/{pensionFund_id}")
 def create_pensionFund(pensionFund_id: int, pensionFund: PensionFund):
     if pensionFund_id in pensionFundDic:
         return {"Error": "pensionFund_id already used"}
@@ -34,7 +34,7 @@ def create_pensionFund(pensionFund_id: int, pensionFund: PensionFund):
     return pensionFundDic[pensionFund_id]
 
 # Changes on existing pensionFund-object
-@router.put("/pensionFund/update-pensionFund/{pensionFund_id}")
+@router.put("/update-pensionFund/{pensionFund_id}")
 def update_pensionFund(pensionFund_id: int, pensionFund: PensionFund):
     if pensionFund_id not in pensionFundDic:
         return {"Error": "pensionFund_id not found"}
@@ -43,7 +43,7 @@ def update_pensionFund(pensionFund_id: int, pensionFund: PensionFund):
     return pensionFundDic[pensionFund_id]
 
 # Deleting an existing pensionFund object
-@router.delete("/pensionFund/delete-pensionFund/{pensionFund_id}")
+@router.delete("/delete-pensionFund/{pensionFund_id}")
 def delete_pensionFund(pensionFund_id: int):
     if pensionFund_id not in pensionFundDic:
         return {"Error": "pensionFund_id not found"}
@@ -52,13 +52,13 @@ def delete_pensionFund(pensionFund_id: int):
     return {"Success": "pensionFund deleted"}
 
 # Returns pensionFund position by id
-@router.get("/pensionFund/get-pensionFund/{pensionFund_id}")
+@router.get("/get-pensionFund/{pensionFund_id}")
 def get_pensionFund(pensionFund_id: int):
     if pensionFund_id not in pensionFundDic:
         return {"Error": "pensionFund_id not found"}
     return pensionFundDic[pensionFund_id]
 
 # Returns all pensionFunds
-@router.get("/pensionFund/get-allpensionFunds/")
+@router.get("/get-allpensionFunds/")
 def get_allpensionFunds():
     return pensionFundDic

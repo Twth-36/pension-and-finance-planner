@@ -29,7 +29,7 @@ realEstateDic = {}
 router = APIRouter(prefix="/realEstate", tags=["realEstate"])
 
 #creating a new realEstate-object
-@router.post("/realEstate/create-realEstate/{realEstate_id}")
+@router.post("/create-realEstate/{realEstate_id}")
 def create_realEstate(realEstate_id: int, realEstate: RealEstate):
     if realEstate_id in realEstateDic:
         return {"Error": "realEstate_id already used"}
@@ -38,7 +38,7 @@ def create_realEstate(realEstate_id: int, realEstate: RealEstate):
     return realEstateDic[realEstate_id]
 
 # Changes on existing realEstate-object
-@router.put("/realEstate/update-realEstate/{realEstate_id}")
+@router.put("/update-realEstate/{realEstate_id}")
 def update_realEstate(realEstate_id: int, realEstate: RealEstate):
     if realEstate_id not in realEstateDic:
         return {"Error": "realEstate_id not found"}
@@ -47,7 +47,7 @@ def update_realEstate(realEstate_id: int, realEstate: RealEstate):
     return realEstateDic[realEstate_id]
 
 # Deleting an existing realEstate object
-@router.delete("/realEstate/delete-realEstate/{realEstate_id}")
+@router.delete("/delete-realEstate/{realEstate_id}")
 def delete_realEstate(realEstate_id: int):
     if realEstate_id not in realEstateDic:
         return {"Error": "realEstate_id not found"}
@@ -56,19 +56,19 @@ def delete_realEstate(realEstate_id: int):
     return {"Success": "realEstate deleted"}
 
 # Returns realEstate position by id
-@router.get("/realEstate/get-realEstate/{realEstate_id}")
+@router.get("/get-realEstate/{realEstate_id}")
 def get_realEstate(realEstate_id: int):
     if realEstate_id not in realEstateDic:
         return {"Error": "realEstate_id not found"}
     return realEstateDic[realEstate_id]
 
 # Returns all realEstates
-@router.get("/realEstate/get-allrealEstates/")
+@router.get("/get-allrealEstates/")
 def get_allrealEstates():
     return realEstateDic
 
 # Returns first free id in realEstateDic
-@router.get("/realEstate/get-firstFreeId/")
+@router.get("/get-firstFreeId/")
 def get_firstFreeId():
     free_id = 0
     while free_id in realEstateDic:
