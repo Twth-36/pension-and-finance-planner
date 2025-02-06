@@ -11,13 +11,13 @@ from generalClasses.monthYear import *
 class FreeAsset(BaseModel):
     name: str
     person_id: int
-    fixValue: Planningposition
+    baseValue: float
 
 ## class for aggregated free assets i.e. liqudity and assets to generate income
 class MainFreeAsset(BaseModel):
     name: str
     person_id: int
-    planValue: List[Planningposition]
+    planValue: Optional[List[Planningposition]] = []
     returnRate: Optional[List[Planningposition]] = []
 
 # Dictionary to manage all FreeAsset-objects
@@ -101,10 +101,8 @@ def get_firstFreeId():
 
 
 ## ExampleValues for show-purposes and testing
-planpos = Planningposition(period=get_lastYearLastMonth(), value=15000, inDoc=False)
-freeAsset = FreeAsset(name="MigrosBank Sparkonto", person_id=0, fixValue=planpos)
+freeAsset = FreeAsset(name="MigrosBank Sparkonto", person_id=0, baseValue=50000)
 create_freeAsset(get_firstFreeId(), freeAsset)
 
-planpos.value = 55000
-freeAsset = FreeAsset(name="Raiffeisen Sparkonto", person_id=1, fixValue=planpos)
+freeAsset = FreeAsset(name="Raiffeisen Sparkonto", person_id=1, baseValue=75000)
 create_freeAsset(get_firstFreeId(), freeAsset)

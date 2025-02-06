@@ -7,11 +7,14 @@ from generalClasses.planningposition import * #issue why necessary?
 from pydantic import BaseModel
 
 class Credit(BaseModel):
-    fixValue: List[Planningposition]
-    planValue: Optional[List[Planningposition]] = None
-    interestRate: List[Planningposition]
+    name: str
+    person_id: int
+    baseValue: float
     endDate: MonthYear
-    interstExpense_id: int
+    fixValue: Optional[List[Planningposition]] = []
+    planValue: Optional[List[Planningposition]] = []
+    interestRate: Optional[List[Planningposition]] = [] #p.a.
+    interstExpense_id: Optional[int] = None
     realEstate_id: Optional[int] = None #if mortgage
 
 creditDic = {}

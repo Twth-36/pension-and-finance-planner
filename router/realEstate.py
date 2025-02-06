@@ -12,8 +12,9 @@ from router.scenario import *
 class RealEstate(BaseModel):
     name: str
     person_id: int
-    fixValue: List[Planningposition]
-    ZIPCode: int
+    baseValue: float
+    ZIPCode: Optional[int]
+    fixValue: Optional[List[Planningposition]] = None
     planValue: Optional[List[Planningposition]] = None
     taxValue: Optional[List[Planningposition]] = None
     realEstateTaxRate: Optional[List[Planningposition]] = None
@@ -84,6 +85,5 @@ def get_firstFreeId():
 
 
 ## ExampleValues for show-purposes and testing
-planpos = Planningposition(period=get_lastYearLastMonth(), value=750000, inDoc=False)
-freeAsset = RealEstate(name="EFH Biel", person_id=2, fixValue=[planpos], ZIPCode=2502)
+freeAsset = RealEstate(name="EFH Biel", person_id=2, baseValue=750000, ZIPCode=2502)
 create_realEstate(get_firstFreeId(), freeAsset)

@@ -9,10 +9,11 @@ from generalClasses.planningposition import *
 class Expense(BaseModel):
     name: str
     person_id: int
-    fixValue: List[Planningposition]
-    planValue: Optional[List[Planningposition]] = None
-    taxableRate: List[Planningposition]
-    inflationRate: List[Planningposition] 
+    baseValue: float #YEARLY
+    fixValue: Optional[List[Planningposition]] = [] 
+    planValue: Optional[List[Planningposition]] = []
+    taxablePortion: Optional[List[Planningposition]] = []
+    inflationRate: Optional[List[Planningposition]] = []
 
 #Dictionary for managing all income position
 expenseDic = {}

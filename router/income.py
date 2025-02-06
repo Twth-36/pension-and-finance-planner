@@ -4,20 +4,15 @@ from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from generalClasses.planningposition import *
-from enum import Enum
-
-# classifies income-position if earned by work and if 'Säule 3a' may be deducted
-class IncomeClass(Enum):
-    other = 0
-    AHVrelevantIncome = 1
 
 class Income(BaseModel):
     name: str
     person_id: int
-    fixValue: List[Planningposition]
-    planValue: Optional[List[Planningposition]] = None
-    incomeClass_id: IncomeClass #see above
-    taxableRate: List[Planningposition]
+    baseValue: float #YEARLY
+    fixValue: Optional[List[Planningposition]] = []
+    planValue: Optional[List[Planningposition]] = []
+    AHVrelevantIncome: Optional[bool] = False #relevant for calculation 'Säule 3a' payments
+    taxablePortion: Optional[List[Planningposition]] = []
 
 #Dictionary for managing all income position
 incomeDic = {}

@@ -65,5 +65,3 @@ def get_allscenarios():
     return scenarioDic
 
 
-# Generate Base scenario base-value inputs which get used by all scenarios
-scenarioDic[0] = Scenario(scenario_id=0, description="Base Scenario", baseDate=get_lastYearLastMonth(), endDate=get_lastYearLastMonth())
