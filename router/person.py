@@ -53,6 +53,6 @@ def update_personCounter(new_CounterValue: int):
     personCounter = new_CounterValue
 
 # Returns the current number of persons (personCounter)
-@router.put("/person/update-personCounter/")
+@router.get("/person/get-personCounter/")
 def get_PersonCounter():
     return personCounter
