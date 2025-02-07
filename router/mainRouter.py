@@ -5,6 +5,7 @@ from fastapi import APIRouter
 
 router = APIRouter(prefix="/mainRouter", tags=["mainRouter"])
 
+"""
 # Returns all Persons
 @router.get("/load-examplePlan/{example_name}")
 def get_examplePlan(example_name: str):
@@ -13,3 +14,5 @@ def get_examplePlan(example_name: str):
             return {example_name: "geladen"}
         case _:
             return {example_name: "noch nicht erstellt"}
+
+"""
