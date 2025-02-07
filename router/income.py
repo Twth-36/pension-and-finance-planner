@@ -1,60 +1,47 @@
-""" Class Income for planning all possible incomes"""
+""" 
+Class Income for planning all possible incomes
+
+Objects can't get created via API! see manualIncome
+"""
 
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import ClassVar, Optional, List
+from generalClasses.nameManager import *
 from generalClasses.planningposition import *
 
 class Income(BaseModel):
+    # Object-attributes
     name: str
     person_id: int
-    baseValue: float #YEARLY
-    fixValue: Optional[List[Planningposition]] = []
-    planValue: Optional[List[Planningposition]] = []
-    AHVrelevantIncome: Optional[bool] = False #relevant for calculation 'Säule 3a' payments
+    planValue: Optional[List[Planningposition]] = [] 
     taxablePortion: Optional[List[Planningposition]] = []
+    incomeTaxPosition_id: int
 
-#Dictionary for managing all income position
-incomeDic = {}
+    # Class-attribute
+    instanceDic: ClassVar[dict] = {}
+
+    #Init-Function and adding to instanceDic
+    def __init__(self, **data):
+        """
+        not using self.__class__ sinc if the object gets created by another class which inherits from this one, 
+        self.__class__ refers on the class the object gets actually created
+        """
+        super().__init__(**data)
+        self.name = generate_uniqueName(self.name, Income.instanceDic)
+        Income.instanceDic[self.name] = self
 
 #starting router
 router = APIRouter(prefix="/income", tags=["income"])
 
-#creating a new income-object
-@router.post("/create-income/{income_id}")
-def create_income(income_id: int, income: Income):
-    if income_id in incomeDic:
-        return {"Error": "income_id already used"}
-    
-    incomeDic[income_id] = income
-    return incomeDic[income_id]
-
-# Changes on existing income-object
-@router.put("/update-income/{income_id}")
-def update_income(income_id: int, income: Income):
-    if income_id not in incomeDic:
-        return {"Error": "income_id not found"}
-    
-    incomeDic[income_id].update(income)
-    return incomeDic[income_id]
-
-# Deleting an existing income object
-@router.delete("/delete-income/{income_id}")
-def delete_income(income_id: int):
-    if income_id not in incomeDic:
-        return {"Error": "income_id not found"}
-    
-    del incomeDic[income_id]
-    return {"Success": "Income deleted"}
-
-# Returns income position by id
-@router.get("/get-income/{income_id}")
-def get_income(income_id: int):
-    if income_id not in incomeDic:
-        return {"Error": "income_id not found"}
-    return incomeDic[income_id]
+# Returns income position by name
+@router.get("/get-income/{object_name}")
+def get_income(object_name: str):
+    if object_name not in Income.instanceDic:
+        return {"Error": "object_name not found"}
+    return Income.instanceDic[object_name]
 
 # Returns all Incomes
 @router.get("/get-allincomes/")
 def get_allincomes():
-    return incomeDic
+    return Income.instanceDic

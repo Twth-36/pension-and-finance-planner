@@ -2,13 +2,19 @@
 
 from pydantic import BaseModel
 from fastapi import APIRouter
-from typing import Optional
+from typing import ClassVar, Optional
 from generalClasses.monthYear import *
 
 
 class Scenario(BaseModel):
+    # Objectvariable
     scenario_id: Optional[int] = 0
     description: str
+
+    # classvariable
+    baseDate: ClassVar[MonthYear] = get_lastYearLastMonth
+    endDate: ClassVar[MonthYear] = get_lastYearLastMonth
+
 
 # Planninghorizon for all scenarios identical
 baseDate = get_lastYearLastMonth

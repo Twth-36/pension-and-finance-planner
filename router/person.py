@@ -1,58 +1,55 @@
 """ Class for data about the planningperson """
 from fastapi import APIRouter, Path
 from pydantic import BaseModel
-from typing import Optional
+from typing import ClassVar, Optional
 from generalClasses import *
 
 
 class Person(BaseModel):
+    #Object-attribute
     name: str
     birth: Optional[monthYear.MonthYear] = None
 
+    #Class-attribute
+    personCounter: ClassVar[int] = 2 # Represents if the plan is for a single person or a couple
+    personDic: ClassVar[dict] = {
+        0: {
+            "name": "Andy",
+            "birth": {"month": 8, "year": 1975}
+        },
+        1: {
+            "name": "Lou",
+            "birth": {"month": 11, "year": 1977}
+        },
+        2: {"name": "gemeinsam",
+            "birth": None
+            }
+    }
 
-# Represents if the plan is for a single person or a (married) couple
-personCounter = 2
+
+
 
 # Dictionary for managing the planning persons
 # The person-objects are fixed and can only be changed, but not created since the Planner works only for a single person or (married by tax-reason) couple
-personDic = {
-    0: {
-        "name": "Andy",
-        "birth": {"month": 8, "year": 1975}
-    },
-    1: {
-        "name": "Lou",
-        "birth": {"month": 11, "year": 1977}
-    },
-    2: {"name": "gemeinsam",
-        "birth": None
-        }
-}
+
 
 # Starting router
 router = APIRouter(prefix="/person", tags=["person"])
 
-# Returs person object by id
-@router.get("/get-person/{person_id}")
-def get_person(person_id: int):
-    if person_id not in personDic:
-        return {"Error": "person_id not found"}
-    return personDic[person_id]
+# Changes liquidity reserve
+@router.put("/put-newPersonCounter/{personCounter}")
+def put_newPersonCounter(personCounter: float):
+    Person.personCounter = personCounter
+    return Person.personCounter
 
-# Changes existing Person-object
-@router.put("/update-person/{person_id}")
-def update_person(person_id: int, person: Person):
-    if person_id not in personDic:
-        return {"Error": "person_id not found"}
-    personDic[person_id].update(person)
-    return personDic[person_id]
+# Returns person position by name
+@router.get("/get-credit/{object_name}")
+def get_credit(object_name: str):
+    if object_name not in Person.instanceDic:
+        return {"Error": "object_name not found"}
+    return Person.instanceDic[object_name]
 
-# Changes the number of persons (personCounter)
-@router.put("/update-personCounter/{new_counterValue}")
-def update_personCounter(new_CounterValue: int):
-    personCounter = new_CounterValue
-
-# Returns the current number of persons (personCounter)
-@router.get("/get-personCounter/")
-def get_PersonCounter():
-    return personCounter
+# Returns all Persons
+@router.get("/get-allPersons/")
+def get_allPersons():
+    return Person.instanceDic

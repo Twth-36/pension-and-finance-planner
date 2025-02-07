@@ -2,7 +2,8 @@
 
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import ClassVar, Optional, List
+from generalClasses.nameManager import *
 from generalClasses.planningposition import *
 from enum import Enum
 
@@ -12,6 +13,7 @@ class Pillar3aType(Enum):
     police = 2
 
 class Pillar3a(BaseModel):
+    # Object-Variables
     name: str
     person_id: int
     type: Pillar3aType
@@ -22,49 +24,40 @@ class Pillar3a(BaseModel):
     returnRate: Optional[List[Planningposition]] = []
     expensePosition_id: Optional[int] = None # expense Position where deposits are accounted
 
- #Dictionary for managing all pillar3a position
-pillar3aDic = {}
+    #Class-variables
+    pillar3aDic: ClassVar[dict] = {}
+
+    # Init-Function and adding to instanceDic
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
+        self.__class__.instanceDic[self.name] = self
 
 #starting router
 router = APIRouter(prefix="/pillar3a", tags=["pillar3a"])
 
 #creating a new pillar3a-object
-@router.post("/create-pillar3a/{pillar3a_id}")
-def create_pillar3a(pillar3a_id: int, pillar3a: Pillar3a):
-    if pillar3a_id in pillar3aDic:
-        return {"Error": "pillar3a_id already used"}
-    
-    pillar3aDic[pillar3a_id] = pillar3a
-    return pillar3aDic[pillar3a_id]
-
-# Changes on existing pillar3a-object
-@router.put("/update-pillar3a/{pillar3a_id}")
-def update_pillar3a(pillar3a_id: int, pillar3a: Pillar3a):
-    if pillar3a_id not in pillar3aDic:
-        return {"Error": "pillar3a_id not found"}
-    
-    pillar3aDic[pillar3a_id].update(pillar3a)
-    return pillar3aDic[pillar3a_id]
+@router.post("/create-pillar3a/")
+def create_pillar3a(new_object: Pillar3a):
+    return new_object.__class__.instanceDic[new_object.name]
 
 # Deleting an existing pillar3a object
-@router.delete("/delete-pillar3a/{pillar3a_id}")
-def delete_pillar3a(pillar3a_id: int):
-    if pillar3a_id not in pillar3aDic:
-        return {"Error": "pillar3a_id not found"}
+@router.delete("/delete-pillar3a/{object_name}")
+def delete_pillar3a(object_name: str):
+    if object_name not in Pillar3a.instanceDic:
+        return {"Error": "object_name not found"}
     
-    del pillar3aDic[pillar3a_id]
-    return {"Success": "pillar3a deleted"}
+    del Pillar3a.instanceDic[object_name]
+    return {"Success": "Pillar3a deleted"}
 
-# Returns pillar3a position by id
-@router.get("/get-pillar3a/{pillar3a_id}")
-def get_pillar3a(pillar3a_id: int):
-    if pillar3a_id not in pillar3aDic:
-        return {"Error": "pillar3a_id not found"}
-    return pillar3aDic[pillar3a_id]
+# Returns pillar3a position by name
+@router.get("/get-pillar3a/{object_name}")
+def get_pillar3a(object_name: str):
+    if object_name not in Pillar3a.instanceDic:
+        return {"Error": "object_name not found"}
+    return Pillar3a.instanceDic[object_name]
 
-# Returns all pillar3as
-@router.get("/get-allpillar3as/")
+# Returns all Pillar3as
+@router.get("/get-allPillar3as/")
 def get_allpillar3as():
-    return pillar3aDic
-
-
+    return Pillar3a.instanceDic

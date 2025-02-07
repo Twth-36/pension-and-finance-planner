@@ -1,11 +1,13 @@
-""" Class for Pensionfund inclusive organising withdrawal as capital or pension """
+""" Class for PensionFund inclusive organising withdrawal as capital or pension """
 
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import ClassVar, Optional, List
+from generalClasses.nameManager import *
 from generalClasses.planningposition import *
 
 class PensionFund(BaseModel):
+    # Object-attributes
     name: str
     person_id: int
     baseValue: float
@@ -17,48 +19,40 @@ class PensionFund(BaseModel):
     capitalPortion: Optional[List[Planningposition]] = [] # Portion OF THE WITHDRAWED pensioncapital which gets paid out as capital
     conversionRate: Optional[List[Planningposition]] = [] # dt: Umwandlungssatz
 
-#Dictionary for managing all pensionFund positions
-pensionFundDic = {}
+    # Class-attributes
+    instanceDic: ClassVar[dict] = {}
+
+    # Init-Function and adding to instanceDic
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
+        self.__class__.instanceDic[self.name] = self
 
 #starting router
 router = APIRouter(prefix="/pensionFund", tags=["pensionFund"])
 
-
 #creating a new pensionFund-object
-@router.post("/create-pensionFund/{pensionFund_id}")
-def create_pensionFund(pensionFund_id: int, pensionFund: PensionFund):
-    if pensionFund_id in pensionFundDic:
-        return {"Error": "pensionFund_id already used"}
-    
-    pensionFundDic[pensionFund_id] = pensionFund
-    return pensionFundDic[pensionFund_id]
-
-# Changes on existing pensionFund-object
-@router.put("/update-pensionFund/{pensionFund_id}")
-def update_pensionFund(pensionFund_id: int, pensionFund: PensionFund):
-    if pensionFund_id not in pensionFundDic:
-        return {"Error": "pensionFund_id not found"}
-    
-    pensionFundDic[pensionFund_id].update(pensionFund)
-    return pensionFundDic[pensionFund_id]
+@router.post("/create-pensionFund/")
+def create_pensionFund(new_object: PensionFund):
+    return new_object.__class__.instanceDic[new_object.name]
 
 # Deleting an existing pensionFund object
-@router.delete("/delete-pensionFund/{pensionFund_id}")
-def delete_pensionFund(pensionFund_id: int):
-    if pensionFund_id not in pensionFundDic:
-        return {"Error": "pensionFund_id not found"}
+@router.delete("/delete-pensionFund/{object_name}")
+def delete_pensionFund(object_name: str):
+    if object_name not in PensionFund.instanceDic:
+        return {"Error": "object_name not found"}
     
-    del pensionFundDic[pensionFund_id]
-    return {"Success": "pensionFund deleted"}
+    del PensionFund.instanceDic[object_name]
+    return {"Success": "PensionFund deleted"}
 
-# Returns pensionFund position by id
-@router.get("/get-pensionFund/{pensionFund_id}")
-def get_pensionFund(pensionFund_id: int):
-    if pensionFund_id not in pensionFundDic:
-        return {"Error": "pensionFund_id not found"}
-    return pensionFundDic[pensionFund_id]
+# Returns pensionFund position by name
+@router.get("/get-pensionFund/{object_name}")
+def get_pensionFund(object_name: str):
+    if object_name not in PensionFund.instanceDic:
+        return {"Error": "object_name not found"}
+    return PensionFund.instanceDic[object_name]
 
-# Returns all pensionFunds
+# Returns all PensionFunds
 @router.get("/get-allpensionFunds/")
 def get_allpensionFunds():
-    return pensionFundDic
+    return PensionFund.instanceDic

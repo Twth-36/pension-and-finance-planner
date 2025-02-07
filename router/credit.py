@@ -1,62 +1,61 @@
 """ Credit inclusive interest and backpayments"""
 
-from fastapi import APIRouter, Path
-from typing import Optional, List
+from fastapi import APIRouter
+from typing import Optional, List, ClassVar
 from generalClasses import *
 from generalClasses.planningposition import * #issue why necessary?
 from pydantic import BaseModel
+from generalClasses.nameManager import *
+from router.scenario import *
+from router.person import *
 
 class Credit(BaseModel):
+    # Object-attributes
     name: str
-    person_id: int
-    baseValue: float
-    endDate: MonthYear
+    person: Person
+    endDate: Optional[MonthYear] = Scenario.endDate
+    baseValue: Optional[float] = 0
     fixValue: Optional[List[Planningposition]] = []
     planValue: Optional[List[Planningposition]] = []
     interestRate: Optional[List[Planningposition]] = [] #p.a.
     interstExpense_id: Optional[int] = None
     realEstate_id: Optional[int] = None #if mortgage
 
-creditDic = {}
+    # Class-attributes
+    instanceDic: ClassVar[dict] = {}
+
+    # Init-Function and adding to instanceDic
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
+        self.__class__.instanceDic[self.name] = self
+
 
 #starting router
 router = APIRouter(prefix="/credit", tags=["credit"])
 
 #creating a new credit-object
-@router.post("/create-credit/{credit_id}")
-def create_credit(credit_id: int, credit: Credit):
-    if credit_id in creditDic:
-        return {"Error": "credit_id already used"}
-    
-    creditDic[credit_id] = credit
-    return creditDic[credit_id]
-
-# Changes on existing credit-object
-@router.put("/update-credit/{credit_id}")
-def update_credit(credit_id: int, credit: Credit):
-    if credit_id not in creditDic:
-        return {"Error": "credit_id not found"}
-    
-    creditDic[credit_id].update(credit)
-    return creditDic[credit_id]
+@router.post("/create-credit/")
+def create_credit(new_object: Credit):
+    return new_object.__class__.instanceDic[new_object.name]
 
 # Deleting an existing credit object
-@router.delete("/delete-credit/{credit_id}")
-def delete_credit(credit_id: int):
-    if credit_id not in creditDic:
-        return {"Error": "credit_id not found"}
+@router.delete("/delete-credit/{object_name}")
+def delete_credit(object_name: str):
+    if object_name not in Credit.instanceDic:
+        return {"Error": "object_name not found"}
     
-    del creditDic[credit_id]
+    del Credit.instanceDic[object_name]
     return {"Success": "Credit deleted"}
 
-# Returns credit position by id
-@router.get("/get-credit/{credit_id}")
-def get_credit(credit_id: int):
-    if credit_id not in creditDic:
-        return {"Error": "credit_id not found"}
-    return creditDic[credit_id]
+# Returns credit position by name
+@router.get("/get-credit/{object_name}")
+def get_credit(object_name: str):
+    if object_name not in Credit.instanceDic:
+        return {"Error": "object_name not found"}
+    return Credit.instanceDic[object_name]
 
 # Returns all Credits
-@router.get("/get-allcredits/")
+@router.get("/get-allCredits/")
 def get_allcredits():
-    return creditDic
+    return Credit.instanceDic

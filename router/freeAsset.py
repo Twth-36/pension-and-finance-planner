@@ -1,107 +1,60 @@
-""" Free assets as liquidity and investments """
+"""
+Free assets as liquidity and investments 
+
+not for planning purposes, see AggFreeAsset
+"""
 
 from fastapi import APIRouter
 from generalClasses import *
+from generalClasses.nameManager import *
 from generalClasses.planningposition import Planningposition
-from typing import Optional, List
+from typing import ClassVar, Optional, List
 from pydantic import BaseModel
 from generalClasses.monthYear import * 
 
-## class for all freeAsset in detail
 class FreeAsset(BaseModel):
+    # Oject-attributes
     name: str
     person_id: int
     baseValue: float
 
-## class for aggregated free assets i.e. liqudity and assets to generate income
-class MainFreeAsset(BaseModel):
-    name: str
-    person_id: int
-    planValue: Optional[List[Planningposition]] = []
-    returnRate: Optional[List[Planningposition]] = []
+    # Class-attributes
+    instanceDic: ClassVar[dict] = {}
 
-# Dictionary to manage all FreeAsset-objects
-freeAssetDic = {}
-
-# Dictionary to mana MainFreeAsset-objects
-mainFreeAssetDic = {
-    0: {
-        "name": "Liquidität",
-        "person_id": 2,
-        "planValue": []
-    },
-    1: {
-        "name": "Kapital zur Einkommensgewinnung",
-        "person_id": 2,
-        "planValue": []
-    }
-}
-
+    # Init-Function and adding to instanceDic
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
+        self.__class__.instanceDic[self.name] = self
+    
+#starting router    
 router = APIRouter(prefix="/freeAsset", tags=["freeAsset"])
 
 #creating a new freeAsset-object
-@router.post("/create-freeAsset/{freeAsset_id}")
-def create_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
-    if freeAsset_id in freeAssetDic:
-        return {"Error": "freeAsset_id already used"}
+@router.post("/create-freeAsset/")
+def create_freeAsset(new_object: FreeAsset):
+    return new_object.__class__.instanceDic[new_object.name]
+
+# Deleting an existing freeAsset object
+@router.delete("/delete-freeAsset/{object_name}")
+def delete_freeAsset(object_name: str):
+    if object_name not in FreeAsset.instanceDic:
+        return {"Error": "object_name not found"}
     
-    freeAssetDic[freeAsset_id] = freeAsset
-    return freeAssetDic[freeAsset_id]
+    del FreeAsset.instanceDic[object_name]
+    return {"Success": "freeAsset deleted"}
 
-#changes on existing freeAsset-object
-@router.put("/update-freeAsset/{freeAsset_id}")
-def update_freeAsset(freeAsset_id: int, freeAsset: FreeAsset):
-    if freeAsset_id not in freeAssetDic:
-        return {"Error": "freeAsset_id not found"}
-
-    freeAssetDic[freeAsset_id].update(freeAsset)
-    return freeAssetDic[freeAsset_id]
-
-# Deleting an existing freeAsset-object
-@router.delete("/delete-freeAsset/{freeAsset_id}")
-def delete_freeAsset(freeAsset_id: int):
-    if freeAsset_id not in freeAssetDic:
-        return {"Error": "freeAsset_id not found"}
-    
-    del freeAssetDic[freeAsset_id]
-    return {"Success": "FreeAsset deleted"}
-
-# Returns freeAsset position by id
-@router.get("/get-freeAsset/{freeAsset_id}")
-def get_freeAsset(freeAsset_id: int):
-    if freeAsset_id not in freeAssetDic:
-        return {"Error": "freeAsset_id not found"}
-    return freeAssetDic[freeAsset_id]
+# Returns freeAsset position by name
+@router.get("/get-freeAsset/{object_name}")
+def get_freeAsset(object_name: str):
+    if object_name not in FreeAsset.instanceDic:
+        return {"Error": "object_name not found"}
+    return FreeAsset.instanceDic[object_name]
 
 # Returns all freeAssets
-@router.get("/get-allfreeAssets/")
+@router.get("/get-allFreeAssets/")
 def get_allfreeAssets():
-    return freeAssetDic
-
-# Returns first free id in freeAssetDic
-@router.get("/get-firstFreeId/")
-def get_firstFreeId():
-    free_id = 0
-    while free_id in freeAssetDic:
-        free_id += 1
-    return free_id
+    return FreeAsset.instanceDic
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-## ExampleValues for show-purposes and testing
-freeAsset = FreeAsset(name="MigrosBank Sparkonto", person_id=0, baseValue=50000)
-create_freeAsset(get_firstFreeId(), freeAsset)
-
-freeAsset = FreeAsset(name="Raiffeisen Sparkonto", person_id=1, baseValue=75000)

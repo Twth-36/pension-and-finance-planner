@@ -1,63 +1,52 @@
-""" Class Expense for planning all possible expenses"""
+"""
+Class Expense for planning all possible expenses
+
+Objects can't get created via API! see manualExpense
+"""
 
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from generalClasses.planningposition import *
+from router.incomeTaxPos import *
+from router.person import *
 
 
 class Expense(BaseModel):
+    # Object-attributes
     name: str
-    person_id: int
-    baseValue: float #YEARLY
-    fixValue: Optional[List[Planningposition]] = [] 
+    person: Person
     planValue: Optional[List[Planningposition]] = []
     taxablePortion: Optional[List[Planningposition]] = []
     inflationRate: Optional[List[Planningposition]] = []
+    taxPosition: IncomeTaxPos
 
-#Dictionary for managing all income position
-expenseDic = {}
+    # Class-attribute
+    instanceDic: ClassVar[dict] = {}
+
+    #Init-Function and adding to instanceDic
+    def __init__(self, **data):
+        """
+        not using self.__class__ sinc if the object gets created by another class which inherits from this one, 
+        self.__class__ refers on the class the object gets actually created
+        """
+        super().__init__(**data)
+        self.name = generate_uniqueName(self.name, Expense.instanceDic)
+        Expense.instanceDic[self.name] = self
+
 
 #starting router
 router = APIRouter(prefix="/expense", tags=["expense"])
 
-
-# Creating a new expense-object
-@router.post("/create-expense/{expense_id}")
-def creeate_expense(expense_id: int, expense: Expense):
-    if expense_id in expenseDic:
-        return {"Error": "expense_id already used"}
-    
-    expenseDic[expense] = expense
-    return expenseDic[expense]
-
-# Changes on existing expense-object
-@router.put("/update-expense/{expense_id}")
-def update_expense(expense_id: int, expense: Expense):
-    if expense_id not in expenseDic:
-        return {"Error": "expense_id not found"}
-    
-    expenseDic[expense_id].update(expense)
-    return expenseDic[expense_id]
-
-# Deleting an existing expense object
-@router.delete("/delete-expense/{expense_id}")
-def delete_expense(expense_id: int):
-    if expense_id not in expenseDic:
-        return {"Error": "expense_id not found"}
-    
-    del expenseDic[expense_id]
-    return {"Success": "Expense deleted"}
-
-# Returns expense position by id
-@router.get("/get-expense/{expense_id}")
-def get_expense(expense_id: int):
-    if expense_id not in expenseDic:
-        return {"Error": "expense_id not found"}
-    return expenseDic[expense_id]
+# Returns expense position by name
+@router.get("/get-expense/{object_name}")
+def get_expense(object_name: str):
+    if object_name not in Expense.instanceDic:
+        return {"Error": "object_name not found"}
+    return Expense.instanceDic[object_name]
 
 # Returns all Expenses
 @router.get("/get-allexpenses/")
 def get_allexpenses():
-    return expenseDic
+    return Expense.instanceDic
 
