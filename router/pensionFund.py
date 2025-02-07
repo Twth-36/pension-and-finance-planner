@@ -5,11 +5,12 @@ from pydantic import BaseModel, Field
 from typing import ClassVar, Optional, List
 from generalClasses.nameManager import *
 from generalClasses.planningposition import *
+from router.person import *
 
 class PensionFund(BaseModel):
     # Object-attributes
     name: str
-    person_id: int
+    person: Person
     baseValue: float
     fixValue: Optional[List[Planningposition]] = []
     planValue: Optional[List[Planningposition]] = []

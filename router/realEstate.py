@@ -7,23 +7,28 @@ from generalClasses.nameManager import *
 from generalClasses.planningposition import * #issue why necessary?
 from pydantic import BaseModel
 from generalClasses.monthYear import *
+from router.expense import *
+from router.person import *
 from router.scenario import *
 
 
 class RealEstate(BaseModel):
     # Object-variable
     name: str
-    person_id: int
+    person: Person
     baseValue: float
-    ZIPCode: Optional[int]
     fixValue: Optional[List[Planningposition]] = None
     planValue: Optional[List[Planningposition]] = None
+
+    ZIPCode: Optional[int]
     taxValue: Optional[List[Planningposition]] = None
-    realEstateTaxRate: Optional[List[Planningposition]] = None #only for dt: "Liegenschaftssteuer"
-    maintenanceCostRate: Optional[List[Planningposition]] = None
-    maintenanceExpense_id: Optional[int] = None
+    taxRate: Optional[List[Planningposition]] = None #only for dt: "Liegenschaftssteuer"
+
+    maintCostRate: Optional[List[Planningposition]] = None
+    maintenanceExpense: Optional[Expense] = None
+    
     renovations: Optional[List[Planningposition]] = None
-    renovationExpense_id: Optional[int] = None
+    renovationExpense: Optional[Expense] = None
 
     # Class-variable
     instanceDic: ClassVar[dict] = {}

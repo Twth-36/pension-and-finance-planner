@@ -6,6 +6,7 @@ from typing import ClassVar, Optional, List
 from generalClasses.nameManager import *
 from generalClasses.planningposition import *
 from enum import Enum
+from router.expense import *
 
 class Pillar3aType(Enum):
     account = 0
@@ -15,14 +16,14 @@ class Pillar3aType(Enum):
 class Pillar3a(BaseModel):
     # Object-Variables
     name: str
-    person_id: int
+    person: Person
     type: Pillar3aType
     baseValue: float
     fixValue: Optional[List[Planningposition]] = [] #only for polices
     planValue: Optional[List[Planningposition]] = []
     endDate: Optional[MonthYear] = None #when it gets withdrawed or the police ends
     returnRate: Optional[List[Planningposition]] = []
-    expensePosition_id: Optional[int] = None # expense Position where deposits are accounted
+    depositExpense: Optional[Expense] = None # expense Position where deposits are accounted
 
     #Class-variables
     pillar3aDic: ClassVar[dict] = {}

@@ -6,6 +6,7 @@ from generalClasses import *
 from generalClasses.planningposition import * #issue why necessary?
 from pydantic import BaseModel
 from generalClasses.nameManager import *
+from router.expense import *
 from router.scenario import *
 from router.person import *
 
@@ -18,8 +19,8 @@ class Credit(BaseModel):
     fixValue: Optional[List[Planningposition]] = []
     planValue: Optional[List[Planningposition]] = []
     interestRate: Optional[List[Planningposition]] = [] #p.a.
-    interstExpense_id: Optional[int] = None
-    realEstate_id: Optional[int] = None #if mortgage
+    interstExpense: Optional[Expense] = None
+    realEstate: Optional[Expense] = None #if mortgage
 
     # Class-attributes
     instanceDic: ClassVar[dict] = {}

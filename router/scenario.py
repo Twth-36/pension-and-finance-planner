@@ -8,7 +8,6 @@ from generalClasses.monthYear import *
 
 class Scenario(BaseModel):
     # Objectvariable
-    scenario_id: Optional[int] = 0
     description: str
 
     # classvariable

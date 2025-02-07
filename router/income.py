@@ -9,14 +9,16 @@ from pydantic import BaseModel, Field
 from typing import ClassVar, Optional, List
 from generalClasses.nameManager import *
 from generalClasses.planningposition import *
+from router.person import *
+from router.incomeTaxPos import *
 
 class Income(BaseModel):
     # Object-attributes
     name: str
-    person_id: int
+    person: Person
     planValue: Optional[List[Planningposition]] = [] 
     taxablePortion: Optional[List[Planningposition]] = []
-    incomeTaxPosition_id: int
+    incomeTaxPosition: IncomeTaxPos
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}

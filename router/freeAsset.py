@@ -10,12 +10,13 @@ from generalClasses.nameManager import *
 from generalClasses.planningposition import Planningposition
 from typing import ClassVar, Optional, List
 from pydantic import BaseModel
-from generalClasses.monthYear import * 
+from generalClasses.monthYear import *
+from router.person import * 
 
 class FreeAsset(BaseModel):
     # Oject-attributes
     name: str
-    person_id: int
+    person: Person
     baseValue: float
 
     # Class-attributes
