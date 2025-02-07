@@ -7,18 +7,35 @@ from generalClasses.nameManager import *
 from generalClasses.planningposition import *
 from router.person import *
 
+class PensFundPayoutPos(Planningposition):
+    # extends Planningposition with more variable
+    """
+    Inherited attributes:
+        scenario: Scenario
+        period: MonthYear
+        value: Optional[float] = 0
+        inDoc: Optional[bool] = False
+        description: Optional[str] = None
+    """
+    withdrawalPortion: float # Portion which gets withdrawed as part of a (partly-)Pension
+    capitalPortion: float # Portion OF THE WITHDRAWED pensioncapital which gets paid out as capital
+    conversionRate: float # dt: Umwandlungssatz
+
+    # Surpress usage of value since we distinguish between the free attributes abovo
+    def __init__(self, **data):
+        super().__init__(**data)
+        self.__dict__.pop("value", None)
+
 class PensionFund(BaseModel):
     # Object-attributes
     name: str
     person: Person
     baseValue: float
-    fixValue: Optional[List[Planningposition]] = []
+    fixValue: Optional[List[Planningposition]] = [] #overturns planning value
     planValue: Optional[List[Planningposition]] = []
     savingContribution: Optional[List[Planningposition]] = [] #dt: Sparbeitrag (monthly)
     returnRate: Optional[List[Planningposition]] = []
-    withdrawalPortion: Optional[List[Planningposition]] = [] # Portion which gets withdrawed as part of a (partly-)Pension
-    capitalPortion: Optional[List[Planningposition]] = [] # Portion OF THE WITHDRAWED pensioncapital which gets paid out as capital
-    conversionRate: Optional[List[Planningposition]] = [] # dt: Umwandlungssatz
+    payout:  Optional[List[Planningposition]] = []
 
     # Class-attributes
     instanceDic: ClassVar[dict] = {}

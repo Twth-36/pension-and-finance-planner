@@ -19,7 +19,7 @@ class Pillar3a(BaseModel):
     person: Person
     type: Pillar3aType
     baseValue: float
-    fixValue: Optional[List[Planningposition]] = [] #only for polices
+    fixValue: Optional[List[Planningposition]] = [] #overturns planning value
     planValue: Optional[List[Planningposition]] = []
     endDate: Optional[MonthYear] = None #when it gets withdrawed or the police ends
     returnRate: Optional[List[Planningposition]] = []

@@ -2,13 +2,13 @@
 from fastapi import APIRouter, Path
 from pydantic import BaseModel
 from typing import ClassVar, Optional
-from generalClasses import *
+from generalClasses.monthYear import *
 
 
 class Person(BaseModel):
     #Object-attribute
     name: str
-    birth: Optional[monthYear.MonthYear] = None
+    birth: Optional[MonthYear] = None
 
     #Class-attribute
     personCounter: ClassVar[int] = 2 # Represents if the plan is for a single person or a couple

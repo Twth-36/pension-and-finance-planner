@@ -12,7 +12,7 @@ from router.person import *
 class ManualIncome(Income):
     # Object-attributes
     baseValue: Optional[float] = 0 #p.a.
-    fixValue: Optional[List[Planningposition]] = []
+    fixValue: Optional[List[Planningposition]] = [] #overturns planning value
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}

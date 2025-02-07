@@ -13,7 +13,7 @@ from router.incomeTaxPos import *
 class ManualIncomeTaxPos(IncomeTaxPos):
     # Object-attributes
     baseValue: float #YEARLY
-    fixValue: Optional[List[Planningposition]] = []
+    fixValue: Optional[List[Planningposition]] = [] #overturns planning value
     planValue: Optional[List[Planningposition]] = []
 
     # Class-attributes
