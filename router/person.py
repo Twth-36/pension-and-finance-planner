@@ -1,8 +1,11 @@
 """ Class for data about the planningperson """
-from fastapi import APIRouter, Path
+
+from logger_setup import logger
+from fastapi import APIRouter, HTTPException, Path
 from pydantic import BaseModel
 from typing import ClassVar, Optional
 from generalClasses.monthYear import *
+from utils.nameManager import *
 
 
 class Person(BaseModel):
@@ -11,41 +14,37 @@ class Person(BaseModel):
     birth: Optional[MonthYear] = None
 
     #Class-attribute
-    personCounter: ClassVar[int] = 2 # Represents if the plan is for a single person or a couple
-    instanceDic: ClassVar[dict] = {
-        "Andy": {
-            "name": "Andy",
-            "birth": {"month": 8, "year": 1975}
-        },
-        "Lou": {
-            "name": "Lou",
-            "birth": {"month": 11, "year": 1977}
-        },
-        "gemeinsam": {"name": "gemeinsam",
-            "birth": None
-            }
-    }
+    instanceDic: ClassVar[dict] = {}
+
+    # Create new object with validation and adding to instanceDic
+    @classmethod
+    def create(cls, **data) -> "Person":
+        obj = cls.model_validate(data) #Creation and validation
+        obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
+        cls.instanceDic[obj.name] = obj #adding to instanceDic
+        return obj
 
 
-
-
-# Dictionary for managing the planning persons
-# The person-objects are fixed and can only be changed, but not created since the Planner works only for a single person or (married by tax-reason) couple
-
-
-# Starting router
+#starting router
 router = APIRouter(prefix="/person", tags=["person"])
 
-# Changes liquidity reserve
-@router.put("/put-newPersonCounter/{personCounter}")
-def put_newPersonCounter(personCounter: float):
-    Person.personCounter = personCounter
-    return Person.personCounter
+#creating a new cedit-object
+@router.post("/create-person/")
+def create_person(name: str):
+    try:
+        new_object = Person.create(name=name)
+        logger.debug({"New object created": new_object})
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
+    return new_object.model_dump()
+
 
 # Returns person position by name
 @router.get("/get-person/{name}")
 def get_person(name: str):
-    if name not in Person.instanceDic:
+    if name is None:
+        return None
+    elif name not in Person.instanceDic:
         return {"Error": "name not found"}
     return Person.instanceDic[name]
 

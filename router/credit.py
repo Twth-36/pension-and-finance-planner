@@ -13,7 +13,7 @@ from router.person import *
 class Credit(BaseModel):
     # Object-attributes
     name: str
-    person: Person
+    person: Optional[Person] = None
     endDate: Optional[MonthYear] = Scenario.endDate
     baseValue: Optional[float] = 0
     fixValue: Optional[List[Planningposition]] = [] #overturns planning value
@@ -25,12 +25,6 @@ class Credit(BaseModel):
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
 
-    # Init-Function and adding to instanceDic
-    def __init__(self, **data):
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
-        self.__class__.instanceDic[self.name] = self
-    
     @field_validator('baseValue', mode='after')  
     @classmethod
     def is_nonNegative(cls, baseValue: float) -> float:
@@ -52,7 +46,7 @@ router = APIRouter(prefix="/credit", tags=["credit"])
 
 #creating a new cedit-object
 @router.post("/create-credit/")
-def create_credit(name: str, personName: str, baseValue: Optional[float] = 0):
+def create_credit(name: str, personName: Optional[str] = None, baseValue: Optional[float] = 0):
     try:
         new_object = Credit.create(name=name, person=get_person(personName), baseValue=baseValue)
     except ValueError as e:

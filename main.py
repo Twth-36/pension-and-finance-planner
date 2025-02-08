@@ -26,6 +26,8 @@ app.include_router(pillar3a.router)
 app.include_router(realEstate.router)
 app.include_router(scenario.router)
 
+
+
 # Server starten: uvicorn main:app --reload
 
 

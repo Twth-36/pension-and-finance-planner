@@ -12,14 +12,15 @@ from router.incomeTaxPos import *
 from router.person import *
 
 
+
 class Expense(BaseModel):
     # Object-attributes
     name: str
-    person: Person
+    person: Optional[Person] = None
     planValue: Optional[List[Planningposition]] = []
-    taxablePortion: Optional[List[Planningposition]] = []
+    taxablePortion: Optional[float] = 0
     inflationRate: Optional[List[Planningposition]] = []
-    taxPosition: IncomeTaxPos
+    taxPosition: Optional[IncomeTaxPos] = None
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
@@ -33,7 +34,7 @@ class Expense(BaseModel):
 
         # if incomeTaxPosition not exisiting, creating one
         if obj.taxPosition is None:
-            obj.taxPosition = IncomeTaxPos.create(name=obj.name)
+            obj.taxPosition = IncomeTaxPos.create(name=obj.name, person=obj.person)
 
         return obj
 

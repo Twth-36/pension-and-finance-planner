@@ -41,6 +41,7 @@ router = APIRouter(prefix="/manualIncome", tags=["manualIncome"])
 def create_manualIncome(name: str, personName: str, baseValue: Optional[float] = 0):
     try:
         new_object = ManualIncome.create(name=name, person=get_person(personName), baseValue=baseValue)
+        logger.debug({"New object created": new_object})
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
     return new_object.model_dump()

@@ -16,7 +16,7 @@ from router.person import *
 class FreeAsset(BaseModel):
     # Oject-attributes
     name: str
-    person: Person
+    person: Optional[Person] = None
     baseValue: float
 
     # Class-attributes
@@ -46,7 +46,7 @@ router = APIRouter(prefix="/freeAsset", tags=["freeAsset"])
 
 #creating a new income-object
 @router.post("/create-freeAsset/")
-def create_freeAsset(name: str, personName: str, baseValue: Optional[float] = 0):
+def create_freeAsset(name: str, personName: Optional[str] = None, baseValue: Optional[float] = 0):
     try:
         new_object = FreeAsset.create(name=name, person=get_person(personName), baseValue=baseValue)
     except ValueError as e:

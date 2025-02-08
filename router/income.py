@@ -11,13 +11,14 @@ from utils.nameManager import *
 from generalClasses.planningposition import *
 from router.person import *
 from router.incomeTaxPos import *
+from router.scenario import *
 
 class Income(BaseModel):
     # Object-attributes
     name: str
-    person: Person
+    person: Optional[Person] = None
     planValue: Optional[List[Planningposition]] = [] 
-    taxablePortion: Optional[List[Planningposition]] = []
+    taxablePortion: Optional[float] = 1
     taxPosition: Optional[IncomeTaxPos] = None
 
     # Class-attribute
@@ -33,7 +34,7 @@ class Income(BaseModel):
 
         # if incomeTaxPosition not exisiting, creating one
         if obj.taxPosition is None:
-            obj.taxPosition = IncomeTaxPos.create(name=obj.name)
+            obj.taxPosition = IncomeTaxPos.create(name=obj.name, person=obj.person)
 
         return obj
 

@@ -3,9 +3,12 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field, field_validator
 from typing import ClassVar, Optional, List
+from router.expense import *
+from router.income import *
 from utils.nameManager import *
 from generalClasses.planningposition import *
 from router.person import *
+
 
 class PensFundPayoutPos(Planningposition):
     # extends Planningposition with more variable
@@ -28,9 +31,14 @@ class PensionFund(BaseModel):
     baseValue: float
     fixValue: Optional[List[Planningposition]] = [] #overturns planning value
     planValue: Optional[List[Planningposition]] = []
-    savingContribution: Optional[List[Planningposition]] = [] #dt: Sparbeitrag (monthly)
     returnRate: Optional[List[Planningposition]] = []
+    savingContribution: Optional[List[Planningposition]] = [] #dt: Sparbeitrag (monthly)
+    
+    buyin: Optional[List[Planningposition]] = []
+    buyinExpense: Optional[Expense] = None #Expenseobject to make buyins
+    
     payout:  Optional[List[Planningposition]] = []
+    pensionIncome: Optional[Income] = None
 
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
@@ -49,6 +57,19 @@ class PensionFund(BaseModel):
         obj = cls.model_validate(data) #Creation and validation
         obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
         cls.instanceDic[obj.name] = obj #adding to instanceDic
+
+        logger.debug({"in pensionfund init": obj})
+
+        # if no buyin-object is assigned -> generate one
+        if obj.buyinExpense is None:
+            obj.buyinExpense = Expense.create(name="Einkauf - " + obj.name, person=obj.person, taxablePortion=1)
+
+        """#if no pensionIncome-object is assigned -> generate one
+        if obj.pensionIncome is None:
+            obj.pensionIncome = Income.create(name="Rente - " + obj.name, person=obj.person, taxablePortion=1)
+        """
+
+
         return obj
     
 
@@ -63,6 +84,7 @@ router = APIRouter(prefix="/pensionFund", tags=["pensionFund"])
 def create_pensionFund(name: str, personName: str, baseValue: Optional[float] = 0):
     try:
         new_object = PensionFund.create(name=name, person=get_person(personName), baseValue=baseValue)
+        logger.debug({"New object created": new_object})
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
     return new_object.model_dump()

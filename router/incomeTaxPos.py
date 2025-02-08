@@ -18,6 +18,7 @@ Examples: income by labor, interest-payments
 class IncomeTaxPos(BaseModel):
     # Object-attributes
     name: str
+    person: Optional[Person] = None
     planValue: Optional[List[Planningposition]] = []
 
     # Class-attribute

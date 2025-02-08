@@ -15,7 +15,7 @@ from router.scenario import *
 class RealEstate(BaseModel):
     # Object-variable
     name: str
-    person: Person
+    person: Optional[Person] = None
     baseValue: float
     fixValue: Optional[List[Planningposition]] = None
     planValue: Optional[List[Planningposition]] = None
