@@ -3,7 +3,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import ClassVar, Optional, List
-from generalClasses.nameManager import *
+from utils.nameManager import *
 from generalClasses.planningposition import *
 from router.person import *
 
@@ -45,6 +45,7 @@ class PensionFund(BaseModel):
         super().__init__(**data)
         self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
         self.__class__.instanceDic[self.name] = self
+
 
 #starting router
 router = APIRouter(prefix="/pensionFund", tags=["pensionFund"])

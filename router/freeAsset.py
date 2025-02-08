@@ -6,7 +6,7 @@ not for planning purposes, see AggFreeAsset
 
 from fastapi import APIRouter
 from generalClasses import *
-from generalClasses.nameManager import *
+from utils.nameManager import *
 from generalClasses.planningposition import Planningposition
 from typing import ClassVar, Optional, List
 from pydantic import BaseModel
@@ -24,9 +24,11 @@ class FreeAsset(BaseModel):
 
     # Init-Function and adding to instanceDic
     def __init__(self, **data):
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
-        self.__class__.instanceDic[self.name] = self
+        obj = super().__init__(**data)
+        obj.name = generate_uniqueName(obj.name, obj.__class__.instanceDic)
+        obj.__class__.instanceDic[obj.name] = obj
+
+        return obj
     
 #starting router    
 router = APIRouter(prefix="/freeAsset", tags=["freeAsset"])

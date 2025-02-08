@@ -3,7 +3,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import ClassVar, Optional, List
-from generalClasses.nameManager import *
+from utils.nameManager import *
 from generalClasses.planningposition import *
 from enum import Enum
 from router.expense import *

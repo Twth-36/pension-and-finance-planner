@@ -33,19 +33,10 @@ class AggFreeAsset(BaseModel):
             "planValue": []
         }
     }
-
-    def __new__(cls, *args, **kwargs):
-        # Always prevent instantiation by raising an error
-        raise TypeError(
-            "Instantiating AggFreeAsset is not allowed. "
-            "Please use the fixed instances provided in AggFreeAsset.instanceDic."
-        )
-
-  
+ 
 
 #starting router
 router = APIRouter(prefix="/aggFreeAsset", tags=["aggFreeAsset"])
-
 
 # Returns aggFreeAsset position by name
 @router.get("/get-aggFreeAsset/{object_name}")

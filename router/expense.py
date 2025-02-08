@@ -27,12 +27,14 @@ class Expense(BaseModel):
     #Init-Function and adding to instanceDic
     def __init__(self, **data):
         """
-        not using self.__class__ sinc if the object gets created by another class which inherits from this one, 
-        self.__class__ refers on the class the object gets actually created
+        not using obj.__class__ since if the object gets created by another class which inherits from this one, 
+        obj.__class__ refers on the class the object gets actually created
         """
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, Expense.instanceDic)
-        Expense.instanceDic[self.name] = self
+        obj = super().__init__(**data)
+        obj.name = generate_uniqueName(obj.name, Expense.instanceDic)
+        Expense.instanceDic[obj.name] = obj
+
+        return obj
 
 
 #starting router

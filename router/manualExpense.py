@@ -23,9 +23,8 @@ class ManualExpense(Expense):
         self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
         self.__class__.instanceDic[self.name] = self
 
-
 #starting router
-router = APIRouter(prefix="/expense", tags=["expense"])
+router = APIRouter(prefix="/manualExpense", tags=["manualExpense"])
 
 #creating a new income-object
 @router.post("/create-manualExpense/")

@@ -12,8 +12,8 @@ class Scenario(BaseModel):
     description: str
 
     # classvariable
-    baseDate: ClassVar[MonthYear] = get_lastYearLastMonth
-    endDate: ClassVar[MonthYear] = get_lastYearLastMonth
+    baseDate: ClassVar[MonthYear] = get_lastYearLastMonth()
+    endDate: ClassVar[MonthYear] = get_lastYearLastMonth()
 
 
 

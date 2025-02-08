@@ -7,7 +7,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List, Optional, ClassVar
 from generalClasses.planningposition import *
-from generalClasses.nameManager import *
+from utils.nameManager import *
 from router.incomeTaxPos import *
 
 class ManualIncomeTaxPos(IncomeTaxPos):
@@ -49,9 +49,9 @@ def get_manualIncomeTaxPos(object_name: str):
         return {"Error": "object_name not found"}
     return ManualIncomeTaxPos.instanceDic[object_name]
 
-# Returns all manualIncomeTaxPoss
-@router.get("/get-allManualIncomeTaxPoss/")
-def get_allmanualIncomeTaxPoss():
+# Returns all manualIncomeTaxPos
+@router.get("/get-allManualIncomeTaxPos/")
+def get_allmanualIncomeTaxPos():
     return ManualIncomeTaxPos.instanceDic
 
 

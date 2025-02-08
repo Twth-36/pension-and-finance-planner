@@ -25,15 +25,16 @@ class ManualIncome(Income):
 
 
 #starting router
-router = APIRouter(prefix="/income", tags=["income"])
+router = APIRouter(prefix="/manualIncome", tags=["manualIncome"])
 
 #creating a new income-object
-@router.post("/create-manualIncomeTaxPosition/")
-def create_manualIncomeTaxPosition(new_object: ManualIncome):
-    return new_object.__class__.instanceDic[new_object.name]
+@router.post("/create-manualIncome/")
+def create_manualIncome(name: str, personName: str, baseValue: Optional[float] = 0):
+    new_object = ManualIncome(name=name, person=get_person(personName), baseValue=baseValue)
+    return new_object
 
-# Returns all manualIncomeTaxPositions
-@router.get("/get-manualIncomeTaxPositions/")
-def get_manualIncomeTaxPositions():
+# Returns all manualIncomes
+@router.get("/get-manualIncomes/")
+def get_manualIncomes():
     return ManualIncome.instanceDic
 

@@ -9,7 +9,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List, Optional, ClassVar
 from generalClasses.planningposition import *
-from generalClasses.nameManager import *
+from utils.nameManager import *
 
 """
 Class for all incometax positions, which depend directly on an income or expense-object

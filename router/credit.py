@@ -5,7 +5,7 @@ from typing import Optional, List, ClassVar
 from generalClasses import *
 from generalClasses.planningposition import * #issue why necessary?
 from pydantic import BaseModel
-from generalClasses.nameManager import *
+from utils.nameManager import *
 from router.expense import *
 from router.scenario import *
 from router.person import *
@@ -27,9 +27,11 @@ class Credit(BaseModel):
 
     # Init-Function and adding to instanceDic
     def __init__(self, **data):
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
-        self.__class__.instanceDic[self.name] = self
+        obj = super().__init__(**data)
+        obj.name = generate_uniqueName(obj.name, obj.__class__.instanceDic)
+        obj.__class__.instanceDic[obj.name] = obj
+
+        return obj
 
 
 #starting router

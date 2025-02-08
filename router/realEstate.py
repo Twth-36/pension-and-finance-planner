@@ -3,7 +3,7 @@
 from fastapi import APIRouter, Path
 from typing import Optional, List
 from generalClasses import *
-from generalClasses.nameManager import *
+from utils.nameManager import *
 from generalClasses.planningposition import * #issue why necessary?
 from pydantic import BaseModel
 from generalClasses.monthYear import *

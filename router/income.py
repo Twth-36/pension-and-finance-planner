@@ -7,7 +7,7 @@ Objects can't get created via API! see manualIncome
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import ClassVar, Optional, List
-from generalClasses.nameManager import *
+from utils.nameManager import *
 from generalClasses.planningposition import *
 from router.person import *
 from router.incomeTaxPos import *
@@ -18,7 +18,7 @@ class Income(BaseModel):
     person: Person
     planValue: Optional[List[Planningposition]] = [] 
     taxablePortion: Optional[List[Planningposition]] = []
-    incomeTaxPosition: IncomeTaxPos
+    incomeTaxPosition: Optional[IncomeTaxPos] = None
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
@@ -32,6 +32,8 @@ class Income(BaseModel):
         super().__init__(**data)
         self.name = generate_uniqueName(self.name, Income.instanceDic)
         Income.instanceDic[self.name] = self
+        if self.incomeTaxPosition == None:
+            self.incomeTaxPosition = IncomeTaxPos(name=self.name)
 
 #starting router
 router = APIRouter(prefix="/income", tags=["income"])

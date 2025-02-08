@@ -12,16 +12,16 @@ class Person(BaseModel):
 
     #Class-attribute
     personCounter: ClassVar[int] = 2 # Represents if the plan is for a single person or a couple
-    personDic: ClassVar[dict] = {
-        0: {
+    instanceDic: ClassVar[dict] = {
+        "Andy": {
             "name": "Andy",
             "birth": {"month": 8, "year": 1975}
         },
-        1: {
+        "Lou": {
             "name": "Lou",
             "birth": {"month": 11, "year": 1977}
         },
-        2: {"name": "gemeinsam",
+        "gemeinsam": {"name": "gemeinsam",
             "birth": None
             }
     }
@@ -43,11 +43,11 @@ def put_newPersonCounter(personCounter: float):
     return Person.personCounter
 
 # Returns person position by name
-@router.get("/get-credit/{object_name}")
-def get_credit(object_name: str):
-    if object_name not in Person.instanceDic:
-        return {"Error": "object_name not found"}
-    return Person.instanceDic[object_name]
+@router.get("/get-person/{name}")
+def get_person(name: str):
+    if name not in Person.instanceDic:
+        return {"Error": "name not found"}
+    return Person.instanceDic[name]
 
 # Returns all Persons
 @router.get("/get-allPersons/")
