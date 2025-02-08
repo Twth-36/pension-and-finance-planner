@@ -1,7 +1,7 @@
 """ Class for PensionFund inclusive organising withdrawal as capital or pension """
 
-from fastapi import APIRouter
-from pydantic import BaseModel, Field
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel, Field, field_validator
 from typing import ClassVar, Optional, List
 from utils.nameManager import *
 from generalClasses.planningposition import *
@@ -21,11 +21,6 @@ class PensFundPayoutPos(Planningposition):
     capitalPortion: float # Portion OF THE WITHDRAWED pensioncapital which gets paid out as capital
     conversionRate: float # dt: Umwandlungssatz
 
-    # Surpress usage of value since we distinguish between the free attributes abovo
-    def __init__(self, **data):
-        super().__init__(**data)
-        self.__dict__.pop("value", None)
-
 class PensionFund(BaseModel):
     # Object-attributes
     name: str
@@ -40,20 +35,37 @@ class PensionFund(BaseModel):
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
 
-    # Init-Function and adding to instanceDic
-    def __init__(self, **data):
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
-        self.__class__.instanceDic[self.name] = self
+    # Validation non-negative baseValue
+    @field_validator('baseValue', mode='after')  
+    @classmethod
+    def is_nonNegative(cls, baseValue: float) -> float:
+        if baseValue < 0:
+            raise ValueError(f'{baseValue} is strict smaller than 0')
+        return baseValue 
+    
+    # Create new object with validation and adding to instanceDic
+    @classmethod
+    def create(cls, **data) -> "PensionFund":
+        obj = cls.model_validate(data) #Creation and validation
+        obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
+        cls.instanceDic[obj.name] = obj #adding to instanceDic
+        return obj
+    
+
+
 
 
 #starting router
 router = APIRouter(prefix="/pensionFund", tags=["pensionFund"])
 
-#creating a new pensionFund-object
+#creating a new income-object
 @router.post("/create-pensionFund/")
-def create_pensionFund(new_object: PensionFund):
-    return new_object.__class__.instanceDic[new_object.name]
+def create_pensionFund(name: str, personName: str, baseValue: Optional[float] = 0):
+    try:
+        new_object = PensionFund.create(name=name, person=get_person(personName), baseValue=baseValue)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
+    return new_object.model_dump()
 
 # Deleting an existing pensionFund object
 @router.delete("/delete-pensionFund/{object_name}")

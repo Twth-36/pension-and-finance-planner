@@ -13,7 +13,7 @@ class Scenario(BaseModel):
 
     # classvariable
     baseDate: ClassVar[MonthYear] = get_lastYearLastMonth()
-    endDate: ClassVar[MonthYear] = get_lastYearLastMonth()
+    endDate: ClassVar[MonthYear] = MonthYear(month=get_currentDate().month, year=get_currentDate().year + 10)
 
 
 

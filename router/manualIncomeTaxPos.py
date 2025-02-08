@@ -3,12 +3,13 @@ Class for calculate incometax, which aren't connected to a income or expense-obj
 Examples: single-household-deduction (Alleinstehendenabzug), professional expenses, donations
 """
 
-from fastapi import APIRouter
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel, field_validator
 from typing import List, Optional, ClassVar
 from generalClasses.planningposition import *
 from utils.nameManager import *
 from router.incomeTaxPos import *
+from router.person import *
 
 class ManualIncomeTaxPos(IncomeTaxPos):
     # Object-attributes
@@ -19,19 +20,19 @@ class ManualIncomeTaxPos(IncomeTaxPos):
     # Class-attributes
     instanceDic: ClassVar[dict] = {} 
 
-    # Init-Function and adding to instanceDic
-    def __init__(self, **data):
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
-        self.__class__.instanceDic[self.name] = self
+
 
 #starting router
 router = APIRouter(prefix="/manualIncomeTaxPos", tags=["manualIncomeTaxPos"])
 
-#creating a new manualIncomeTaxPos-object
+#creating a new income-object
 @router.post("/create-manualIncomeTaxPos/")
-def create_manualIncomeTaxPos(new_object: ManualIncomeTaxPos):
-    return new_object.__class__.instanceDic[new_object.name]
+def create_manualIncomeTaxPos(name: str, personName: str, baseValue: Optional[float] = 0):
+    try:
+        new_object = ManualIncomeTaxPos.create(name=name, person=get_person(personName), baseValue=baseValue)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
+    return new_object.model_dump()
 
 # Deleting an existing manualIncomeTaxPos object
 @router.delete("/delete-manualIncomeTaxPos/{object_name}")

@@ -4,12 +4,12 @@ Free assets as liquidity and investments
 not for planning purposes, see AggFreeAsset
 """
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from generalClasses import *
 from utils.nameManager import *
 from generalClasses.planningposition import Planningposition
 from typing import ClassVar, Optional, List
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from generalClasses.monthYear import *
 from router.person import * 
 
@@ -22,21 +22,36 @@ class FreeAsset(BaseModel):
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
 
-    # Init-Function and adding to instanceDic
-    def __init__(self, **data):
-        obj = super().__init__(**data)
-        obj.name = generate_uniqueName(obj.name, obj.__class__.instanceDic)
-        obj.__class__.instanceDic[obj.name] = obj
+    # Validation non-negative baseValue
+    @field_validator('baseValue', mode='after')  
+    @classmethod
+    def is_nonNegative(cls, baseValue: float) -> float:
+        if baseValue < 0:
+            raise ValueError(f'{baseValue} is strict smaller than 0')
+        return baseValue
+    
+    # Create new object with validation and adding to instanceDic
+    @classmethod
+    def create(cls, **data) -> "FreeAsset":
+        obj = cls.model_validate(data) #Creation and validation
+        obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
+        cls.instanceDic[obj.name] = obj #adding to instanceDic
 
         return obj
+
+    
     
 #starting router    
 router = APIRouter(prefix="/freeAsset", tags=["freeAsset"])
 
-#creating a new freeAsset-object
+#creating a new income-object
 @router.post("/create-freeAsset/")
-def create_freeAsset(new_object: FreeAsset):
-    return new_object.__class__.instanceDic[new_object.name]
+def create_freeAsset(name: str, personName: str, baseValue: Optional[float] = 0):
+    try:
+        new_object = FreeAsset.create(name=name, person=get_person(personName), baseValue=baseValue)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
+    return new_object.model_dump()
 
 # Deleting an existing freeAsset object
 @router.delete("/delete-freeAsset/{object_name}")

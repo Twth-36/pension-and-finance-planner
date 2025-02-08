@@ -5,7 +5,7 @@ Objects can't get created via API! see manualExpense
 """
 
 from fastapi import APIRouter
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List
 from generalClasses.planningposition import *
 from router.incomeTaxPos import *
@@ -23,16 +23,17 @@ class Expense(BaseModel):
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
+    
+    # Create new object with validation and adding to instanceDic
+    @classmethod
+    def create(cls, **data) -> "Expense":
+        obj = cls.model_validate(data) #Creation and validation
+        obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
+        cls.instanceDic[obj.name] = obj #adding to instanceDic
 
-    #Init-Function and adding to instanceDic
-    def __init__(self, **data):
-        """
-        not using obj.__class__ since if the object gets created by another class which inherits from this one, 
-        obj.__class__ refers on the class the object gets actually created
-        """
-        obj = super().__init__(**data)
-        obj.name = generate_uniqueName(obj.name, Expense.instanceDic)
-        Expense.instanceDic[obj.name] = obj
+        # if incomeTaxPosition not exisiting, creating one
+        if obj.taxPosition is None:
+            obj.taxPosition = IncomeTaxPos.create(name=obj.name)
 
         return obj
 

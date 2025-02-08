@@ -8,7 +8,7 @@ from fastapi import APIRouter
 from generalClasses import *
 from generalClasses.planningposition import Planningposition
 from typing import ClassVar, Optional, List
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from generalClasses.monthYear import * 
 
 
@@ -33,6 +33,8 @@ class AggFreeAsset(BaseModel):
             "planValue": []
         }
     }
+
+    
  
 
 #starting router

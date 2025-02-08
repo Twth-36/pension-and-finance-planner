@@ -18,22 +18,31 @@ class Income(BaseModel):
     person: Person
     planValue: Optional[List[Planningposition]] = [] 
     taxablePortion: Optional[List[Planningposition]] = []
-    incomeTaxPosition: Optional[IncomeTaxPos] = None
+    taxPosition: Optional[IncomeTaxPos] = None
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
 
-    #Init-Function and adding to instanceDic
-    def __init__(self, **data):
-        """
-        not using self.__class__ sinc if the object gets created by another class which inherits from this one, 
-        self.__class__ refers on the class the object gets actually created
-        """
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, Income.instanceDic)
-        Income.instanceDic[self.name] = self
-        if self.incomeTaxPosition == None:
-            self.incomeTaxPosition = IncomeTaxPos(name=self.name)
+    #create new object with validation and adding to instanceDic
+    @classmethod
+    def create(cls, **data) -> "Income":
+        #Create and validate and add to instanceDic
+        obj = cls.model_validate(data)
+        obj.name = generate_uniqueName(obj.name, cls.instanceDic) 
+        cls.instanceDic[obj.name] = obj
+
+        # if incomeTaxPosition not exisiting, creating one
+        if obj.taxPosition is None:
+            obj.taxPosition = IncomeTaxPos.create(name=obj.name)
+
+        return obj
+
+
+
+
+
+
+
 
 #starting router
 router = APIRouter(prefix="/income", tags=["income"])

@@ -1,10 +1,10 @@
 """ Credit inclusive interest and backpayments"""
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from typing import Optional, List, ClassVar
 from generalClasses import *
 from generalClasses.planningposition import * #issue why necessary?
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from utils.nameManager import *
 from router.expense import *
 from router.scenario import *
@@ -27,38 +27,34 @@ class Credit(BaseModel):
 
     # Init-Function and adding to instanceDic
     def __init__(self, **data):
-        obj = super().__init__(**data)
-        obj.name = generate_uniqueName(obj.name, obj.__class__.instanceDic)
-        obj.__class__.instanceDic[obj.name] = obj
-
+        super().__init__(**data)
+        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
+        self.__class__.instanceDic[self.name] = self
+    
+    @field_validator('baseValue', mode='after')  
+    @classmethod
+    def is_nonNegative(cls, baseValue: float) -> float:
+        if baseValue < 0:
+            raise ValueError(f'{baseValue} may not be negative')
+        return baseValue 
+    
+    # Create new object with validation and adding to instanceDic
+    @classmethod
+    def create(cls, **data) -> "Credit":
+        obj = cls.model_validate(data) #Creation and validation
+        obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
+        cls.instanceDic[obj.name] = obj #adding to instanceDic
         return obj
 
 
 #starting router
 router = APIRouter(prefix="/credit", tags=["credit"])
 
-#creating a new credit-object
+#creating a new cedit-object
 @router.post("/create-credit/")
-def create_credit(new_object: Credit):
-    return new_object.__class__.instanceDic[new_object.name]
-
-# Deleting an existing credit object
-@router.delete("/delete-credit/{object_name}")
-def delete_credit(object_name: str):
-    if object_name not in Credit.instanceDic:
-        return {"Error": "object_name not found"}
-    
-    del Credit.instanceDic[object_name]
-    return {"Success": "Credit deleted"}
-
-# Returns credit position by name
-@router.get("/get-credit/{object_name}")
-def get_credit(object_name: str):
-    if object_name not in Credit.instanceDic:
-        return {"Error": "object_name not found"}
-    return Credit.instanceDic[object_name]
-
-# Returns all Credits
-@router.get("/get-allCredits/")
-def get_allcredits():
-    return Credit.instanceDic
+def create_credit(name: str, personName: str, baseValue: Optional[float] = 0):
+    try:
+        new_object = Credit.create(name=name, person=get_person(personName), baseValue=baseValue)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
+    return new_object.model_dump()

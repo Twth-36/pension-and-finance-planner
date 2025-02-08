@@ -1,7 +1,7 @@
 """ Class ManualIncome for planning all possible incomes, which do not depend on another object (unlike pension etc.)"""
 
-from fastapi import APIRouter
-from pydantic import BaseModel, Field
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List
 from generalClasses.planningposition import *
 from router.income import *
@@ -17,11 +17,20 @@ class ManualIncome(Income):
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
 
-    #Init-Function and adding to instanceDic
-    def __init__(self, **data):
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
-        self.__class__.instanceDic[self.name] = self
+
+    # Validation non-negative baseValue
+    @field_validator('baseValue', mode='after')  
+    @classmethod
+    def is_nonNegative(cls, baseValue: float) -> float:
+        if baseValue < 0:
+            raise ValueError(f'{baseValue} is strict smaller than 0')
+        return baseValue
+    
+
+
+
+
+
 
 
 #starting router
@@ -30,8 +39,11 @@ router = APIRouter(prefix="/manualIncome", tags=["manualIncome"])
 #creating a new income-object
 @router.post("/create-manualIncome/")
 def create_manualIncome(name: str, personName: str, baseValue: Optional[float] = 0):
-    new_object = ManualIncome(name=name, person=get_person(personName), baseValue=baseValue)
-    return new_object
+    try:
+        new_object = ManualIncome.create(name=name, person=get_person(personName), baseValue=baseValue)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
+    return new_object.model_dump()
 
 # Returns all manualIncomes
 @router.get("/get-manualIncomes/")

@@ -1,6 +1,6 @@
 """ Class ManualExpense for planning all possible expenses, which do not depend on another object (unlike mortgagepayments, taxes etc.)"""
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from generalClasses.planningposition import *
@@ -17,19 +17,25 @@ class ManualExpense(Expense):
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
 
-    #Init-Function and adding to instanceDic
-    def __init__(self, **data):
-        super().__init__(**data)
-        self.name = generate_uniqueName(self.name, self.__class__.instanceDic)
-        self.__class__.instanceDic[self.name] = self
+    # Validation non-negative baseValue
+    @field_validator('baseValue', mode='after')  
+    @classmethod
+    def is_nonNegative(cls, baseValue: float) -> float:
+        if baseValue < 0:
+            raise ValueError(f'baseValue: {baseValue} may not be negative')
+        return baseValue 
 
 #starting router
 router = APIRouter(prefix="/manualExpense", tags=["manualExpense"])
 
-#creating a new income-object
+#creating a new manualExpense-object
 @router.post("/create-manualExpense/")
-def create_manualExpense(new_object: ManualExpense):
-    return new_object.__class__.instanceDic[new_object.name]
+def create_manualExpense(name: str, personName: str, baseValue: Optional[float] = 0):
+    try:
+        new_object = ManualExpense.create(name=name, person=get_person(personName), baseValue=baseValue)
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
+    return new_object.model_dump()
 
 # Returns all manualExpenses
 @router.get("/get-manualExpenses/")
