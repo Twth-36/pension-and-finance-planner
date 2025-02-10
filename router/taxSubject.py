@@ -16,6 +16,7 @@ class Canton(Enum):
     "BS" = 2
 
 class taxSubject:
+    name: str
     canton: Canton
     person: Optional[Person] = None
     confession: Optional[Confession] = 0
