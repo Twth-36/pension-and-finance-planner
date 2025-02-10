@@ -8,25 +8,17 @@ from generalClasses.planningposition import *
 from enum import Enum
 from router.expense import *
 
-class Pillar3aType(Enum):
-    account = 0
-    depot = 1
-    police = 2
-
 class Pillar3a(BaseModel):
     # Object-Variables
     name: str
     person: Person
-    type: Pillar3aType
-    baseValue: float
-    fixValue: Optional[List[Planningposition]] = [] #overturns planning value
+    baseValue: Optional[float] = 0
     planValue: Optional[List[Planningposition]] = []
-    endDate: Optional[MonthYear] = None #when it gets withdrawed or the police ends
     returnRate: Optional[List[Planningposition]] = []
     depositExpense: Optional[Expense] = None # expense Position where deposits are accounted
 
     #Class-variables
-    pillar3aDic: ClassVar[dict] = {}
+    instanceDic: ClassVar[dict] = {}
 
     # Validation non-negative baseValue
     @field_validator('baseValue', mode='after')  
@@ -42,18 +34,49 @@ class Pillar3a(BaseModel):
         obj = cls.model_validate(data) #Creation and validation
         obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
         cls.instanceDic[obj.name] = obj #adding to instanceDic
+
         return obj
+
+#Special class for Pillar3a Insurances 
+class Pillar3aInsurance(Pillar3a):
+    fixDeposit: Optional[float] = 0 # p.a.
+    endDate: Optional[MonthYear] = None
+    endValue: Optional[float] = None # fixed "Erlebensfallkapital"
+    fixValue: Optional[List[Planningposition]] = [] #overturns planning value
+
+    #Class-variables
+    instanceDic: ClassVar[dict] = {}
+
+    # Validation non-negative baseValue
+    @field_validator('baseValue', mode='after')  
+    @classmethod
+    def is_nonNegative(cls, baseValue: float) -> float:
+        if baseValue < 0:
+            raise ValueError(f'{baseValue} is strict smaller than 0')
+        return baseValue 
+    
     
     
 
 #starting router
 router = APIRouter(prefix="/pillar3a", tags=["pillar3a"])
 
-#creating a new income-object
+#creating a new pillar3a-object
 @router.post("/create-pillar3a/")
 def create_pillar3a(name: str, personName: str, baseValue: Optional[float] = 0):
     try:
         new_object = Pillar3a.create(name=name, person=get_person(personName), baseValue=baseValue)
+        logger.debug({"New object created": new_object.name})
+    except ValueError as e:
+        raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
+    return new_object.model_dump()
+
+#creating a new pillar3a-object
+@router.post("/create-pillar3aInsurance/")
+def create_pillar3aInsurance(name: str, personName: str, baseValue: Optional[float] = 0):
+    try:
+        new_object = Pillar3aInsurance.create(name=name, person=get_person(personName), baseValue=baseValue)
+        logger.debug({"New object created": new_object.name})
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
     return new_object.model_dump()
@@ -78,3 +101,9 @@ def get_pillar3a(object_name: str):
 @router.get("/get-allPillar3as/")
 def get_allpillar3as():
     return Pillar3a.instanceDic
+
+# Returns all Pillar3as
+@router.get("/get-allPillar3aInsurances/")
+def get_allpillar3aInsurances():
+    return Pillar3aInsurance.instanceDic
+

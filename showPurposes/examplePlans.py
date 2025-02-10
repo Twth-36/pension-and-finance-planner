@@ -6,6 +6,8 @@ from router.manualExpense import *
 from router.manualIncome import *
 from generalClasses import *
 from router.pensionFund import *
+from router.pillar3a import *
+from router.realEstate import *
 
 examplePlans = ["Verheiratetes Paar", "Paar in Konkubinat", "Alleinstehend"]
     
@@ -30,6 +32,13 @@ def examplePlanMarried():
     # PensionFund
     create_pensionFund(name="PK Post", personName="Andy", baseValue=450000)
     create_pensionFund(name="PK SBB", personName="Lou", baseValue=400000)
+
+    # Pillar 3a
+    create_pillar3a(name="Säule 3a Depot UBS", personName="Andy", baseValue=70000)
+    create_pillar3aInsurance(name="Säule 3a Police AXA", personName="Lou", baseValue=90000)
+
+    create_realEstate(name="EFH Biel", baseValue=80000)
+
 
     
     

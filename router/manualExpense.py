@@ -33,7 +33,7 @@ router = APIRouter(prefix="/manualExpense", tags=["manualExpense"])
 def create_manualExpense(name: str, personName: Optional[str] = None, baseValue: Optional[float] = 0):
     try:
         new_object = ManualExpense.create(name=name, person=get_person(personName), baseValue=baseValue)
-        logger.debug({"New object created": new_object})
+        logger.debug({"New object created": new_object.name})
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
     return new_object.model_dump()

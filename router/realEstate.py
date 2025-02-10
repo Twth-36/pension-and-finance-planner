@@ -16,11 +16,11 @@ class RealEstate(BaseModel):
     # Object-variable
     name: str
     person: Optional[Person] = None
-    baseValue: float
+    baseValue: Optional[float] = 0
     fixValue: Optional[List[Planningposition]] = None
     planValue: Optional[List[Planningposition]] = None
 
-    ZIPCode: Optional[int]
+    ZIPCode: Optional[int] = None
     taxValue: Optional[List[Planningposition]] = None
     taxRate: Optional[List[Planningposition]] = None #only for dt: "Liegenschaftssteuer"
 
@@ -55,9 +55,10 @@ router = APIRouter(prefix="/realEstate", tags=["realEstate"])
 
 #creating a new income-object
 @router.post("/create-realEstate/")
-def create_realEstate(name: str, personName: str, baseValue: Optional[float] = 0):
+def create_realEstate(name: str, personName: Optional[str] = None, baseValue: Optional[float] = 0):
     try:
         new_object = RealEstate.create(name=name, person=get_person(personName), baseValue=baseValue)
+        logger.debug({"New object created": new_object.name})
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
     return new_object.model_dump()

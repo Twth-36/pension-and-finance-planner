@@ -58,18 +58,10 @@ class PensionFund(BaseModel):
         obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
         cls.instanceDic[obj.name] = obj #adding to instanceDic
 
-        logger.debug({"in pensionfund init": obj})
-
-        # if no buyin-object is assigned -> generate one
-        if obj.buyinExpense is None:
-            obj.buyinExpense = Expense.create(name="Einkauf - " + obj.name, person=obj.person, taxablePortion=1)
-
-        """#if no pensionIncome-object is assigned -> generate one
+        #if no pensionIncome-object is assigned -> generate one
         if obj.pensionIncome is None:
             obj.pensionIncome = Income.create(name="Rente - " + obj.name, person=obj.person, taxablePortion=1)
-        """
-
-
+        
         return obj
     
 
@@ -84,7 +76,7 @@ router = APIRouter(prefix="/pensionFund", tags=["pensionFund"])
 def create_pensionFund(name: str, personName: str, baseValue: Optional[float] = 0):
     try:
         new_object = PensionFund.create(name=name, person=get_person(personName), baseValue=baseValue)
-        logger.debug({"New object created": new_object})
+        logger.debug({"New object created": new_object.name})
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e)) #422 for "Unprocessable Entity response"
     return new_object.model_dump()
