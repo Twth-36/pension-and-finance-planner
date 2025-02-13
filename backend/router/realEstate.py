@@ -30,6 +30,12 @@ class RealEstate(BaseModel):
     renovations: Optional[List[Planningposition]] = None
     renovationExpense: Optional[Expense] = None
 
+    purchase: Optional[List[Planningposition]] = None
+    purchaseCF: Optional[Cashflow] = None
+
+    sale: Optional[List[Planningposition]] = None
+    saleCF: Optional[Cashflow] = None
+
     # Class-variable
     instanceDic: ClassVar[dict] = {}
 

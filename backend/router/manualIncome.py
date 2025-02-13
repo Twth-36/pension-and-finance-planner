@@ -7,6 +7,7 @@ from generalClasses.planningposition import *
 from router.income import *
 from router.incomeTaxPos import *
 from router.person import *
+from router.cashflow import *
 
 
 class ManualIncome(Income):
@@ -16,6 +17,7 @@ class ManualIncome(Income):
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
+    cashflowPos: ClassVar[Cashflow] #cashlowposition on which the total flows
 
 
     # Validation non-negative baseValue

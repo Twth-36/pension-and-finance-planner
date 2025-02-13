@@ -7,6 +7,7 @@ Objects can't get created via API! see manualIncome
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 from typing import ClassVar, Optional, List
+from router.cashflow import Cashflow
 from utils.nameManager import *
 from generalClasses.planningposition import *
 from router.person import *
@@ -23,6 +24,7 @@ class Income(BaseModel):
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
+    cashflowPos: ClassVar[Cashflow] = None #cashlowposition on which the total flows
 
     #create new object with validation and adding to instanceDic
     @classmethod

@@ -22,6 +22,11 @@ class FreeAsset(BaseModel):
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
 
+    liquidityRes: ClassVar[float] = 0 #liquidity Reserves
+    planValueLiq: ClassVar[Optional[List[Planningposition]]] = [] #positions for aggregated free Assets
+    planValueInvestCap: ClassVar[Optional[List[Planningposition]]] = []
+    returnRateInvestCap: Optional[float] = 0
+
     # Validation non-negative baseValue
     @field_validator('baseValue', mode='after')  
     @classmethod

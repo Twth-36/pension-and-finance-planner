@@ -37,8 +37,9 @@ class PensionFund(BaseModel):
     buyin: Optional[List[Planningposition]] = []
     buyinExpense: Optional[Expense] = None #Expenseobject to make buyins
     
-    payout:  Optional[List[Planningposition]] = []
-    pensionIncome: Optional[Income] = None
+    payout:  Optional[List[PensFundPayoutPos]] = []
+    pensionIncome: Optional[Income] = None # for payout as pension
+    pensionCF: Optional[Cashflow] = None # for capital payout
 
     # Class-attributes
     instanceDic: ClassVar[dict] = {}

@@ -16,10 +16,17 @@ class Credit(BaseModel):
     person: Optional[Person] = None
     endDate: Optional[MonthYear] = Scenario.endDate
     baseValue: Optional[float] = 0
-    fixValue: Optional[List[Planningposition]] = [] #overturns planning value
     planValue: Optional[List[Planningposition]] = []
+
     interestRate: Optional[List[Planningposition]] = [] #p.a.
     interstExpense: Optional[Expense] = None
+    
+    payback: Optional[List[Planningposition]] = []
+    paybackCF: Optional[Cashflow] = None
+
+    increase: Optional[List[Planningposition]] = []
+    increaseCF: Optional[Cashflow] = None
+
     realEstate: Optional[Expense] = None #if mortgage
 
     # Class-attributes

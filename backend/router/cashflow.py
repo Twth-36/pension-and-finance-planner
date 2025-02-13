@@ -1,31 +1,34 @@
 """
 Class for cashflows i.e. not relevant for income tax for example credit back payments etc.
 """
+# for future importing Income due to circular import
+from __future__ import annotations
 
 from fastapi import APIRouter
-from backend.router.income import *
 from generalClasses import *
 from generalClasses.planningposition import Planningposition
-from typing import ClassVar, Optional, List
+from typing import TYPE_CHECKING, ClassVar, Optional, List
 from pydantic import BaseModel
 from generalClasses.monthYear import * 
 from router.scenario import *
 
-
+# import Income only for typechecking due to circular import
+if TYPE_CHECKING:
+    from router.income import Income
 
 ## class for aggregated free assets i.e. liqudity and assets to generate income
 class Cashflow(BaseModel):
     name: str
+    person: Person
     planValue: Optional[List[Planningposition]] = []
     taxablePortion: Optional[float] = 1 #for capital withdrawal tax (Kapitalauszahlungssteuer)
 
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
 
-    # Pot 
     liquidityRes: ClassVar[float] = 0 #liquidity Reserves
     investCapReturnRate: ClassVar[Planningposition]
-    investCapIncome: ClassVar[Income] = None 
+    investCapIncome: ClassVar["Income"] = None # delayed assignment for Income instance due to circular import
     liquidityPlanValue: ClassVar[List[Planningposition]] = []
     investCapPlanValueStart: ClassVar[List[Planningposition]] = [] # == EndValue of previous prediod
     investCapPlanValueEnd: ClassVar[List[Planningposition]] = [] 

@@ -16,6 +16,7 @@ class Pillar3a(BaseModel):
     planValue: Optional[List[Planningposition]] = []
     returnRate: Optional[List[Planningposition]] = []
     depositExpense: Optional[Expense] = None # expense Position where deposits are accounted
+    payoutCFpos: Optional[Cashflow] = None
 
     #Class-variables
     instanceDic: ClassVar[dict] = {}
