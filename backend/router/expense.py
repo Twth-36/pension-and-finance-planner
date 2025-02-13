@@ -7,6 +7,7 @@ Objects can't get created via API! see manualExpense
 from fastapi import APIRouter
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List
+from backend.router.cashflow import *
 from generalClasses.planningposition import *
 from router.incomeTaxPos import *
 from router.person import *
@@ -24,6 +25,8 @@ class Expense(BaseModel):
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
+    cashflowPos: ClassVar[Cashflow]
+
     
     # Create new object with validation and adding to instanceDic
     @classmethod
