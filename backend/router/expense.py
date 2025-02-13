@@ -25,7 +25,7 @@ class Expense(BaseModel):
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
-    cashflowPos: ClassVar[Cashflow] #cashlowposition on which the total flows
+    cashflowPos: ClassVar[Cashflow]
 
     
     # Create new object with validation and adding to instanceDic

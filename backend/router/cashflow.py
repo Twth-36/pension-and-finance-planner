@@ -21,7 +21,7 @@ class Cashflow(BaseModel):
     name: str
     person: Optional[Person] = None
     planValue: Optional[List[Planningposition]] = []
-    taxablePortion: Optional[float] = 1 #for capital withdrawal tax (Kapitalauszahlungssteuer)
+    taxablePortion: Optional[float] = 0 #for capital withdrawal tax (Kapitalauszahlungssteuer)
 
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
@@ -31,7 +31,15 @@ class Cashflow(BaseModel):
     investCapIncome: ClassVar["Income"] = None # delayed assignment for Income instance due to circular import
     liquidityPlanValue: ClassVar[List[Planningposition]] = []
     investCapPlanValueStart: ClassVar[List[Planningposition]] = [] # == EndValue of previous prediod
-    investCapPlanValueEnd: ClassVar[List[Planningposition]] = [] 
+    investCapPlanValueEnd: ClassVar[List[Planningposition]] = []
+
+    # Create new object with validation and adding to instanceDic
+    @classmethod
+    def create(cls, **data) -> "Cashflow":
+        obj = cls.model_validate(data) #Creation and validation
+        obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
+        cls.instanceDic[obj.name] = obj #adding to instanceDic
+        return obj
 
 
    
