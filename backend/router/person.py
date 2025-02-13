@@ -1,5 +1,6 @@
 """ Class for data about the planningperson """
 
+
 from logger_setup import logger
 from fastapi import APIRouter, HTTPException, Path
 from pydantic import BaseModel
@@ -15,6 +16,7 @@ class Person(BaseModel):
 
     #Class-attribute
     instanceDic: ClassVar[dict] = {}
+    place: ClassVar[str] = None
 
     # Create new object with validation and adding to instanceDic
     @classmethod

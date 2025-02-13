@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 ## class for aggregated free assets i.e. liqudity and assets to generate income
 class Cashflow(BaseModel):
     name: str
-    person: Person
+    person: Optional[Person] = None
     planValue: Optional[List[Planningposition]] = []
     taxablePortion: Optional[float] = 1 #for capital withdrawal tax (Kapitalauszahlungssteuer)
 
