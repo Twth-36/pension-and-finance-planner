@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons-->
+    <script src="https://kit.fontawesome.com/a1b2c3d4e5.js" crossorigin="anonymous"></script>
+    <title>Formular</title>
+</head>
+
+<body class="bg-light p-5">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-brands fa-bootstrap"></i> Pension Plan
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Formular</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="container bg-white p-5 rounded shadow mt-4">
+        <h1 class="fw-bold">Formular</h1>
+        <p class="text-muted">Bitte geben Sie die folgenden Angaben ein.</p>
+
+        <!-- Formular -->
+        <form>
+            <h3>Persönliche Angaben</h3>
+            <!-- Person 1 soll auf der linken Seite angezeigt werden, Person 2 auf der rechten Seite.
+             Wenn das Fenster kleiner wird, soll Person 2 unter Person 1 dargestellt werden-->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Name Person 1</label>
+                    <input type="text" class="form-control" placeholder="Name eingeben">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Vorname Person 1</label>
+                    <input type="text" class="form-control" placeholder="Vorname eingeben">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Name Person 2</label>
+                    <input type="text" class="form-control" placeholder="Name eingeben">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Vorname Person 2</label>
+                    <input type="text" class="form-control" placeholder="Vorname eingeben">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Bezeichnung Person 1</label>
+                    <input type="text" class="form-control" placeholder="Bezeichnung eingeben">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Bezeichnung Person 2</label>
+                    <input type="text" class="form-control" placeholder="Bezeichnung eingeben">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Geburtsjahr Person 1</label>
+                    <input type="number" class="form-control" placeholder="Geburtsjahr eingeben">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Geburtsjahr Person 2</label>
+                    <input type="number" class="form-control" placeholder="Geburtsjahr eingeben">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Wohnort</label>
+                    <input type="text" class="form-control" placeholder="Wohnort eingeben">
+                </div>
+            </div>
+
+            <h3>Angaben zum Einkommen</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Einkommensart</th>
+                        <th>Betrag</th>
+                        <th>Rendite</th>
+                        <th>Zugehörigkeit</th>
+                        <th>Zugehörigkeit Bezeichnung</th>
+                        <th></th> <!-- Löschen-Button -->
+                    </tr>
+                </thead>
+                <!-- TODO: IDs einfügen-->
+                <tbody id="tableBody">
+                    <tr>
+
+                        <td><input list="einkommensart" class="form-control" placeholder="Einkommensart auswählen"></td>
+                        <datalist id="einkommensart">
+                            <option value="Einkommen aus Erwerbstätigkeit">
+                            <option value="Einkommen aus Selbstständigkeit">
+                            <option value="Mieteinnahmen">
+                            <option value="Rente aus Pensionskasse">
+                            <option value="AHV-Rente">
+                            <option value="IV-Rente">
+                            <option value="EL-Rente">
+                            <option value="IV-Taggeld">
+                            <option value="ALV-Taggeld">
+                            <option value="Mutterschaftsentschädigung">
+                            <option value="Kinderzulagen">
+                            <option value="Unterhaltsbeiträge">
+                            <option value="Stipendien">
+                            <option value="Steuerrückzahlungen">
+                            <option value="Kapitalleistungen">
+                            <option value="Kapitalvermögen">
+                            <option value="AHV-Ehepaarrente"></option>
+                        </datalist>
+
+                        <td><input type="number" class="form-control" placeholder="Betrag eingeben"></td>
+                        <td><input type="number" min="1" max="100" class="form-control" placeholder="Rendite eingeben">
+                        </td>
+                        <td><input type="text" class="form-control" placeholder="Zugehörigkeit eingeben"></td>
+                        <td><input type="text" class="form-control" placeholder="Zugehörigkeit Bezeichnung eingeben">
+                        </td> <!-- nötig?-->
+
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-success" onclick="addRow()">
+                <i class="fa-solid fa-plus"></i> Zeile hinzufügen
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Hinzufügen einer neuen Zeile
+        function addRow() {
+            let table = document.getElementById("tableBody");
+            let row = document.createElement("tr");
+            row.innerHTML = `
+                <td><input list="einkommensart" class="form-control" placeholder="Einkommensart auswählen"></td>
+                        <datalist id="einkommensart">
+                            <option value="Einkommen aus Erwerbstätigkeit">
+                            <option value="Einkommen aus Selbstständigkeit">
+                            <option value="Mieteinnahmen">
+                            <option value="Rente aus Pensionskasse">
+                            <option value="AHV-Rente">
+                            <option value="IV-Rente">
+                            <option value="EL-Rente">
+                            <option value="IV-Taggeld">
+                            <option value="ALV-Taggeld">
+                            <option value="Mutterschaftsentschädigung">
+                            <option value="Kinderzulagen">
+                            <option value="Unterhaltsbeiträge">
+                            <option value="Stipendien">
+                            <option value="Steuerrückzahlungen">
+                            <option value="Kapitalleistungen">
+                            <option value="Kapitalvermögen">
+                            <option value="AHV-Ehepaarrente"></option>
+                        </datalist>
+
+                        <td><input type="number" class="form-control" placeholder="Betrag eingeben"></td>
+                        <td><input type="number" min="1" max="100" class="form-control" placeholder="Rendite eingeben">
+                        </td>
+                        <td><input type="text" class="form-control" placeholder="Zugehörigkeit eingeben"></td>
+                        <td><input type="text" class="form-control" placeholder="Zugehörigkeit Bezeichnung eingeben">
+                        </td> <!-- nötig?-->
+
+                        <td>
+                            <button type="button" class="btn btn-danger btn-sm" onclick="deleteRow(this)">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+            `;
+            table.appendChild(row);
+        }
+
+        // Löschen einer Zeile
+        function deleteRow(button) {
+            button.closest("tr").remove();
+        }
+    </script>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
