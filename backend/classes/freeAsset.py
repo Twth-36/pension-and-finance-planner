@@ -39,7 +39,7 @@ class FreeAsset(BaseModel):
         return name
 
     # Validation non-negative baseValue
-    @field_validator("baseValue", mode="before")
+    @field_validator("baseValue", mode="after")
     @classmethod
     def is_nonNegative(cls, baseValue: float) -> float:
         if baseValue < 0:
@@ -51,7 +51,6 @@ class FreeAsset(BaseModel):
     def create(cls, **data) -> "FreeAsset":
         obj = cls.model_validate(data)  # Creation and validation
         cls.instanceDic[obj.name] = obj  # adding to instanceDic
-
         return obj
 
     @classmethod

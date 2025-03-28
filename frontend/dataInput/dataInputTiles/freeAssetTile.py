@@ -3,179 +3,189 @@ from backend.classes.freeAsset import *
 from backend.classes.monthYear import *
 from frontend.utils import *
 
-# Global container that will hold either the table or the form.
-main_container = ui.card().classes("q-pa-md ")
-
-
-def show_overview(showdetails=False):
-    main_container.clear()
-    with main_container:
-        with ui.row().classes("justify-center items-center"):
-            ui.label("Freie Vermögenswerte").classes("text-h6")
-            detail_switch = ui.switch("Details:", value=showdetails).props("left-label")
-
-        with ui.column().classes("q-mt-md"):
-
-            # class variables:
-            ## return Rate:
-            def update_returnRate(new_returnRate: float):
-                try:
-                    FreeAsset.returnRateInvestCap = new_returnRate
-                except Exception as e:
-                    ui.notify(f"Upps, etwas passte da nicht: {e}", color="negative")
-                ui.notify("Änderung aktualisiert", color="positive")
-
-            returnRate_input = (
-                ui.number(
-                    label="Erwartete Rendite",
-                    value=(FreeAsset.returnRateInvestCap),
-                    format="%.1f",
-                )
-                .props("suffix=%")
-                .tooltip("Gibt die erwartete Rendite auf dem freien Vermögen p.a. an.")
-                .bind_visibility_from(detail_switch, "value")
-            )
-            returnRate_input.on(
-                "blur", lambda: update_returnRate(returnRate_input.value)
-            )
-
-            ## liquidity reserve
-            def update_liqRes(new_liqRes: float):
-                try:
-                    FreeAsset.liqRes = new_liqRes
-                except Exception as e:
-                    ui.notify(f"Upps, etwas passte da nicht: {e}", color="negative")
-                ui.notify("Änderung aktualisiert", color="positive")
-
-            liqRes_input = (
-                ui.number(
-                    label="Liquidiätsreserve",
-                    value=FreeAsset.liqRes,
-                )
-                .tooltip(
-                    "Gilt als Liquiditätsreserve, welche nicht als investierbares Kapital betrachtet wird."
-                )
-                .bind_visibility_from(detail_switch, "value")
-            )
-            liqRes_input.on("blur", lambda: update_liqRes(liqRes_input.value))
-
-            ## table with items:
-            rows = []
-            for item in FreeAsset.instanceDic.values():
-                rows.append(
-                    {
-                        "Name": item.name,
-                        "Zugehörigkeit": item.person.name if item.person else "",
-                        "Betrag": item.baseValue,
-                    }
-                )
-            col_defs = [
-                {
-                    "name": "Name",
-                    "label": "Name",
-                    "field": "Name",
-                    "align": "center",
-                },
-                {
-                    "name": "Zugehörigkeit",
-                    "label": "Zugehörigkeit",
-                    "field": "Zugehörigkeit",
-                    "align": "center",
-                },
-                {
-                    "name": "Betrag",
-                    "label": "Betrag",
-                    "field": "Betrag",
-                    "align": "center",
-                },
-            ]
-            tbl = ui.table(
-                columns=col_defs, rows=rows, row_key="Name", selection="multiple"
-            ).style("border: none; background-color: transparent;")
-
-            ## buttons for editing
-            with ui.row().classes("items-center q-mb-sm"):
-                ui.button(icon="add", on_click=show_freeAsset_form)
-
-                def edit_action():
-                    if len(tbl.selected) != 1:
-                        ui.notify("Wähle eine Zeile aus.")
-                    else:
-                        show_freeAsset_form(
-                            freeAsset=FreeAsset.get_itemByName(
-                                name=tbl.selected[0]["Name"]
-                            )
-                        )
-
-                ui.button(icon="edit", on_click=edit_action)
-
-                async def del_action():
-                    if len(tbl.selected) == 0:
-                        ui.notify("Wähle mindestens eine Zeile aus.")
-                    else:
-                        if await show_confDialog():
-                            for item in tbl.selected:
-                                FreeAsset.get_itemByName(item["Name"]).delete_item()
-
-                            ui.notify("Gelöscht", color="positive")
-                            show_overview(detail_switch.value)
-
-                ui.button(icon="delete", on_click=del_action)
-
-
-def show_freeAsset_form(freeAsset=None):
-    main_container.clear()
-    with main_container:
-
-        name_input = ui.input(
-            label="Name*",
-            value=freeAsset.name if freeAsset else "",
-            validation={"Darf nicht leer sein": lambda value: len(value) > 0},
-        ).props("autofocus")
-        person_input = ui.select(
-            label="Zugehörigkeit",
-            options=[item.name for item in Person.instanceDic.values()],
-            value=freeAsset.person.name if freeAsset else None,
-            with_input=True,
-        )
-        baseValue_input = ui.number(
-            label="Wert",
-            value=freeAsset.baseValue if freeAsset else None,
-            validation={"Muss grösser oder gleich 0 sein": lambda value: value >= 0},
-        )
-
-        with ui.row().classes("q-mt-md"):
-
-            def save_action():
-                try:
-
-                    if freeAsset:
-                        if freeAsset.name != name_input.value:
-                            freeAsset.update_name(name_input.value)
-                        freeAsset.person = Person.get_itemByName(person_input.value)
-                        freeAsset.baseValue = baseValue_input.value
-                    else:
-                        param = {"name": name_input.value}
-                        if person_input.value not in [None, ""]:
-                            param["person"] = Person.get_itemByName(person_input.value)
-                        if baseValue_input.value not in [None, ""]:
-                            param["baseValue"] = baseValue_input.value
-                        FreeAsset.create(**param)
-                    show_overview()
-                except Exception as e:
-                    ui.notify(f"Upps, etwas passte da nicht: \n {e}", color="negative")
-
-            btn_label = "Aktualisieren" if freeAsset else "Speichern"
-            ui.button(btn_label, on_click=save_action)
-            ui.button("Abbrechen", on_click=show_overview).props("outline")
-
 
 def show_freeAssetTile():
+    # Create a card container for free assets
+    asset_card = ui.card().classes("q-pa-md border hover:!shadow-2xl")
+
+    def show_overview(showdetails=False):
+        asset_card.clear()
+        with asset_card:
+
+            ui.label("Freies Vermögen").classes("text-h6")
+
+            with ui.expansion(icon="tune", value=showdetails) as detail_ext:
+                # **Detail fields (Return Rate and Liquidity Reserve)**
+                def update_returnRate(new_rate: float):
+                    try:
+                        FreeAsset.returnRateInvestCap = new_rate
+                    except Exception as e:
+                        ui.notify(f"Upps, etwas passte da nicht: {e}", color="negative")
+                    ui.notify("Änderung aktualisiert", color="positive")
+
+                rr_input = (
+                    ui.number(
+                        label="Erwartete Rendite",
+                        value=FreeAsset.returnRateInvestCap,
+                        format="%.1f",
+                    )
+                    .props("suffix=%")
+                    .tooltip("Erwartete Rendite auf freies Vermögen p.a.")
+                    .bind_visibility_from(detail_ext, "value")
+                )
+                rr_input.on("blur", lambda: update_returnRate(rr_input.value))
+
+                def update_liqRes(new_reserve: float):
+                    try:
+                        FreeAsset.liqRes = new_reserve
+                    except Exception as e:
+                        ui.notify(f"Upps, etwas passte da nicht: {e}", color="negative")
+                    ui.notify("Änderung aktualisiert", color="positive")
+
+                liq_input = (
+                    ui.number(label="Liquiditätsreserve", value=FreeAsset.liqRes)
+                    .tooltip("Nicht investierbarer Betrag als Reserve")
+                    .bind_visibility_from(detail_ext, "value")
+                )
+                liq_input.on("blur", lambda: update_liqRes(liq_input.value))
+
+            with ui.column():
+                # **Table of FreeAsset entries**
+                rows = [
+                    {
+                        "Name": fa.name,
+                        "Zugehörigkeit": (fa.person.name if fa.person else ""),
+                        "Betrag": fa.baseValue,
+                    }
+                    for fa in FreeAsset.instanceDic.values()
+                ]
+                columns = [
+                    {
+                        "name": "Name",
+                        "label": "Name",
+                        "field": "Name",
+                        "align": "center",
+                    },
+                    {
+                        "name": "Zugehörigkeit",
+                        "label": "Zugehörigkeit",
+                        "field": "Zugehörigkeit",
+                        "align": "center",
+                    },
+                    {
+                        "name": "Betrag",
+                        "label": "Betrag",
+                        "field": "Betrag",
+                        "align": "center",
+                    },
+                ]
+                tbl = ui.table(
+                    columns=columns, rows=rows, row_key="Name", selection="multiple"
+                ).style("border: none; background-color: transparent;")
+
+                # **Action buttons (Add, Edit, Delete, Refresh)**
+                with ui.row().classes("items-center q-mb-sm"):
+                    ui.button(icon="add", on_click=lambda: show_freeAsset_form()).props(
+                        "flat unelevated"
+                    )
+
+                    def edit_action():
+                        if len(tbl.selected) != 1:
+                            ui.notify("Wähle eine Zeile aus.")
+                        else:
+                            sel_name = tbl.selected[0]["Name"]
+                            asset = FreeAsset.get_itemByName(name=sel_name)
+                            show_freeAsset_form(freeAsset=asset)
+
+                    ui.button(icon="edit", on_click=edit_action).props(
+                        "flat unelevated"
+                    )
+
+                    async def del_action():
+                        if len(tbl.selected) == 0:
+                            ui.notify("Wähle mindestens eine Zeile aus.")
+                        else:
+                            if await show_confDialog():
+                                for item in tbl.selected:
+                                    FreeAsset.get_itemByName(item["Name"]).delete_item()
+                                ui.notify("Gelöscht", color="positive")
+                                show_overview(detail_ext.value)  # preserve toggle state
+
+                    ui.button(icon="delete", on_click=del_action).props(
+                        "flat unelevated"
+                    )
+
+                    ui.button(icon="refresh", on_click=show_overview).props(
+                        "flat unelevated"
+                    )
+
+        def show_freeAsset_form(freeAsset=None):
+            asset_card.clear()
+            with asset_card:
+                # Input fields for free asset data
+                name_input = ui.input(
+                    label="Name*",
+                    value=(freeAsset.name if freeAsset else ""),
+                    validation={"Darf nicht leer sein": lambda v: len(v) > 0},
+                ).props("autofocus")
+                # Prefill person selection if editing an existing asset
+                person_prefill = (
+                    freeAsset.person.name if (freeAsset and freeAsset.person) else None
+                )
+                person_input = ui.select(
+                    label="Zugehörigkeit",
+                    options=[p.name for p in Person.instanceDic.values()],
+                    value=person_prefill,
+                    with_input=True,
+                )
+                base_value_input = ui.number(
+                    label="Wert",
+                    value=(freeAsset.baseValue if freeAsset else None),
+                    validation={
+                        "Muss grösser oder gleich 0 sein": lambda v: v is None or v >= 0
+                    },
+                )
+
+                # Form action buttons (Save/Update and Cancel)
+                with ui.row():
+
+                    def save_action():
+                        try:
+                            if freeAsset:  # Update existing asset
+                                if freeAsset.name != name_input.value:
+                                    freeAsset.update_name(name_input.value)
+                                freeAsset.person = (
+                                    Person.get_itemByName(person_input.value)
+                                    if person_input.value
+                                    else None
+                                )
+                                freeAsset.baseValue = base_value_input.value
+                            else:  # Create new asset
+                                params = {"name": name_input.value}
+                                if person_input.value not in [None, ""]:
+                                    params["person"] = Person.get_itemByName(
+                                        person_input.value
+                                    )
+                                if base_value_input.value not in [None, ""]:
+                                    params["baseValue"] = base_value_input.value
+                                FreeAsset.create(**params)
+                            show_overview(detail_ext.value)  # return to overview
+                        except Exception as e:
+                            ui.notify(
+                                f"Upps, etwas passte da nicht:\n{e}", color="negative"
+                            )
+
+                    btn_label = "Aktualisieren" if freeAsset else "Speichern"
+                    ui.button(btn_label, on_click=save_action)
+                    ui.button(
+                        "Abbrechen", on_click=lambda: show_overview(detail_ext.value)
+                    ).props("outline")
+
+    # (Optional) Seed initial data for demonstration
     pong = Person.create(
-        name="Pong", birth=MonthYear(month=1, year=12), conf=Confession.roem_kath
+        name="Pong", birth=MonthYear(month=1, year=2012), conf=Confession.roem_kath
     )
-    FreeAsset.create(
-        name="Konto",
-        person=pong,
-    )
-    show_overview()
+    FreeAsset.create(name="Konto", person=pong)
+    show_overview()  # Show overview by default
+
+    return asset_card

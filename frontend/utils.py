@@ -1,5 +1,5 @@
-
 from nicegui import ui
+
 
 # confirmation dialog box
 def create_confDialog(message: str):
@@ -10,6 +10,7 @@ def create_confDialog(message: str):
             ui.button("Ja", on_click=lambda: dialog.submit(True))
             ui.button("Nein", on_click=lambda: dialog.submit(False)).props("outline")
     return dialog
+
 
 async def show_confDialog(message: str = "Bist du sicher?"):
     dialog = create_confDialog(message)

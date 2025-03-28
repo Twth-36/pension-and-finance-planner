@@ -1,9 +1,7 @@
-""" realEstates inlcusive renovations etc. """
+"""realEstates inlcusive renovations etc."""
 
 from typing import Optional, List
-from generalClasses import *
-from utils.nameManager import *
-from planningposition import * #issue why necessary?
+from planningposition import *  # issue why necessary?
 from pydantic import BaseModel, field_validator
 from monthYear import *
 from expense import *
@@ -21,11 +19,13 @@ class RealEstate(BaseModel):
 
     ZIPCode: Optional[int] = None
     taxValue: Optional[List[Planningposition]] = None
-    taxRate: Optional[List[Planningposition]] = None #only for dt: "Liegenschaftssteuer"
+    taxRate: Optional[List[Planningposition]] = (
+        None  # only for dt: "Liegenschaftssteuer"
+    )
 
     maintCostRate: Optional[List[Planningposition]] = None
     maintenanceExpense: Optional[Expense] = None
-    
+
     renovations: Optional[List[Planningposition]] = None
     renovationExpense: Optional[Expense] = None
 
@@ -39,18 +39,19 @@ class RealEstate(BaseModel):
     instanceDic: ClassVar[dict] = {}
 
     # Validation non-negative baseValue
-    @field_validator('baseValue', mode='after')  
+    @field_validator("baseValue", mode="after")
     @classmethod
     def is_nonNegative(cls, baseValue: float) -> float:
         if baseValue < 0:
-            raise ValueError(f'{baseValue} is strict smaller than 0')
+            raise ValueError(f"{baseValue} is strict smaller than 0")
         return baseValue
-    
+
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "RealEstate":
-        obj = cls.model_validate(data) #Creation and validation
-        obj.name = generate_uniqueName(obj.name, cls.instanceDic) #generate unique name
-        cls.instanceDic[obj.name] = obj #adding to instanceDic
+        obj = cls.model_validate(data)  # Creation and validation
+        obj.name = generate_uniqueName(
+            obj.name, cls.instanceDic
+        )  # generate unique name
+        cls.instanceDic[obj.name] = obj  # adding to instanceDic
         return obj
-

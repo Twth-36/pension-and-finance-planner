@@ -6,16 +6,15 @@ Examples: single-household-deduction (Alleinstehendenabzug), professional expens
 from pydantic import BaseModel, field_validator
 from typing import List, Optional, ClassVar
 from planningposition import *
-from utils.nameManager import *
 from incomeTaxPos import *
 from person import *
 
+
 class ManualIncomeTaxPos(IncomeTaxPos):
     # Object-attributes
-    baseValue: float #YEARLY
-    fixValue: Optional[List[Planningposition]] = [] #overturns planning value
+    baseValue: float  # YEARLY
+    fixValue: Optional[List[Planningposition]] = []  # overturns planning value
     planValue: Optional[List[Planningposition]] = []
 
     # Class-attributes
-    instanceDic: ClassVar[dict] = {} 
-
+    instanceDic: ClassVar[dict] = {}
