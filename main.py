@@ -1,6 +1,12 @@
 from nicegui import ui
 from frontend.dataInput import *
 from frontend.dataInput.dataInput import show_dataInput
+from backend.showPurposes.examplePlans import *
+
+
+####### Load example data for developement purposes
+examplePlanMarried()
+
 
 # Create left drawer (sidebar) with modern styling.
 left_drawer = ui.left_drawer(fixed=False).style(
@@ -33,6 +39,7 @@ with ui.footer().style("background-color: #616161; padding: 16px;"):
 
 # Render the main content by calling your data input form.
 show_dataInput()
+
 
 # Run the NiceGUI application.
 ui.run()

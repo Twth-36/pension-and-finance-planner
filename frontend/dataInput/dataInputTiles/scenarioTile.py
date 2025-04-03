@@ -105,7 +105,7 @@ def show_scenarioTile():
                         if len(tbl.selected) == 0:
                             ui.notify("Wähle mindestens eine Zeile aus.")
                         else:
-                            if await show_confDialog():
+                            if await confDialog():
                                 for item in tbl.selected:
                                     Scenario.get_itemByName(item["Name"]).delete_item()
                                 ui.notify("Gelöscht", color="positive")

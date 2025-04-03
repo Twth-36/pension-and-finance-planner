@@ -105,7 +105,7 @@ def show_freeAssetTile():
                         if len(tbl.selected) == 0:
                             ui.notify("Wähle mindestens eine Zeile aus.")
                         else:
-                            if await show_confDialog():
+                            if await confDialog():
                                 for item in tbl.selected:
                                     FreeAsset.get_itemByName(item["Name"]).delete_item()
                                 ui.notify("Gelöscht", color="positive")
@@ -181,11 +181,6 @@ def show_freeAssetTile():
                         "Abbrechen", on_click=lambda: show_overview(detail_ext.value)
                     ).props("outline")
 
-    # (Optional) Seed initial data for demonstration
-    pong = Person.create(
-        name="Pong", birth=MonthYear(month=1, year=2012), conf=Confession.roem_kath
-    )
-    FreeAsset.create(name="Konto", person=pong)
     show_overview()  # Show overview by default
 
     return asset_card

@@ -1,12 +1,12 @@
 """realEstates inlcusive renovations etc."""
 
 from typing import Optional, List
-from planningposition import *  # issue why necessary?
+from .planningposition import *  # issue why necessary?
 from pydantic import BaseModel, field_validator
-from monthYear import *
-from expense import *
-from person import *
-from scenario import *
+from .monthYear import *
+from .expense import *
+from .person import *
+from .scenario import *
 
 
 class RealEstate(BaseModel):
@@ -14,25 +14,23 @@ class RealEstate(BaseModel):
     name: str
     person: Optional[Person] = None
     baseValue: Optional[float] = 0
-    fixValue: Optional[List[Planningposition]] = None
     planValue: Optional[List[Planningposition]] = None
 
-    ZIPCode: Optional[int] = None
-    taxValue: Optional[List[Planningposition]] = None
-    taxRate: Optional[List[Planningposition]] = (
-        None  # only for dt: "Liegenschaftssteuer"
-    )
+    baseTaxValue: Optional[float] = None
+    taxValue: Optional[List[Planningposition]] = []
+    taxRate: Optional[float] = None
+    taxCF: Optional[Cashflow] = None
 
-    maintCostRate: Optional[List[Planningposition]] = None
+    maintCostRate: float = None
     maintenanceExpense: Optional[Expense] = None
 
-    renovations: Optional[List[Planningposition]] = None
+    renovations: Optional[List[Planningposition]] = []
     renovationExpense: Optional[Expense] = None
 
-    purchase: Optional[List[Planningposition]] = None
+    purchase: Optional[List[Planningposition]] = []
     purchaseCF: Optional[Cashflow] = None
 
-    sale: Optional[List[Planningposition]] = None
+    sale: Optional[List[Planningposition]] = []
     saleCF: Optional[Cashflow] = None
 
     # Class-variable
@@ -50,8 +48,17 @@ class RealEstate(BaseModel):
     @classmethod
     def create(cls, **data) -> "RealEstate":
         obj = cls.model_validate(data)  # Creation and validation
-        obj.name = generate_uniqueName(
-            obj.name, cls.instanceDic
-        )  # generate unique name
         cls.instanceDic[obj.name] = obj  # adding to instanceDic
         return obj
+
+    @classmethod
+    def get_itemByName(cls, name: str) -> "RealEstate":
+        return cls.instanceDic[name]
+
+    def update_name(self, newname: str):
+        self.__class__.check_uniquename(name=newname)
+        self.__class__.instanceDic[newname] = self.__class__.instanceDic.pop(self.name)
+        self.name = newname
+
+    def delete_item(self):
+        del self.__class__.instanceDic[self.name]

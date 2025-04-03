@@ -2,6 +2,8 @@
 
 from typing import Optional, List, ClassVar
 from pydantic import BaseModel, field_validator
+
+from backend.classes.realEstate import *
 from .expense import *
 from .scenario import *
 from .person import *
@@ -13,7 +15,7 @@ class Credit(BaseModel):
     # Object-attributes
     name: str
     person: Optional[Person] = None
-    endDate: Optional[MonthYear] = Scenario.endDate
+    endDate: Optional[MonthYear] = None
     baseValue: Optional[float] = 0
     baseInterestRate: Optional[float] = 0
     planValue: Optional[List[Planningposition]] = []
@@ -27,7 +29,7 @@ class Credit(BaseModel):
     increase: Optional[List[Planningposition]] = []
     increaseCF: Optional[Cashflow] = None
 
-    realEstate: Optional[Expense] = None  # if mortgage
+    realEstate: Optional[RealEstate] = None  # if mortgage
 
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
@@ -67,8 +69,6 @@ class Credit(BaseModel):
         self.name = newname
 
     def delete_item(self):
-        # check first if objects is still used anywhere
-        ##TODO
         del self.__class__.instanceDic[self.name]
 
 

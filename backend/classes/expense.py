@@ -18,7 +18,6 @@ class Expense(BaseModel):
     person: Optional[Person] = None
     planValue: Optional[List[Planningposition]] = []
     taxablePortion: Optional[float] = 0
-    inflationRate: Optional[List[Planningposition]] = []
     taxPosition: Optional[IncomeTaxPos] = None
 
     # Class-attribute

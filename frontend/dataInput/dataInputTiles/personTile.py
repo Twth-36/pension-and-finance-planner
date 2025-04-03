@@ -97,7 +97,7 @@ def show_personTile():
                         if len(tbl.selected) == 0:
                             ui.notify("Wähle mindestens eine Zeile aus.")
                         else:
-                            if await show_confDialog():
+                            if await confDialog():
                                 for item in tbl.selected:
                                     Person.get_itemByName(item["Name"]).delete_item()
                                 ui.notify("Gelöscht", color="positive")
@@ -126,7 +126,9 @@ def show_personTile():
                     label="Geburtsmonat*",
                     placeholder="MM.JJJJ",
                     validation={
-                        "Format nicht korrekt": lambda v: validate_dateFormat(v)
+                        "Format nicht korrekt": lambda v: MonthYear.validate_dateFormat(
+                            v
+                        )
                     },
                     value=person.birth.dateToString() if person else None,
                 )
@@ -148,12 +150,12 @@ def show_personTile():
                             if person:  # Update existing person
                                 if person.name != name_input.value:
                                     person.update_name(name_input.value)
-                                person.birth = stringToDate(birth_input.value)
+                                person.birth = MonthYear.stringToDate(birth_input.value)
                                 person.conf = Confession(conf_input.value)
                             else:  # Create new person
                                 Person.create(
                                     name=name_input.value,
-                                    birth=stringToDate(birth_input.value),
+                                    birth=MonthYear.stringToDate(birth_input.value),
                                     conf=Confession(conf_input.value),
                                 )
                             show_overview(
@@ -170,13 +172,6 @@ def show_personTile():
                         "Abbrechen", on_click=lambda: show_overview(detail_ext.value)
                     ).props("outline")
 
-    # Seed initial data (if any) and show the overview by default
-    Person.create(
-        name="tim", birth=MonthYear(month=11, year=1997), conf=Confession.ev_rev
-    )
-    Person.create(
-        name="Lena", birth=MonthYear(month=10, year=1997), conf=Confession.roem_kath
-    )
     show_overview()  # Display the overview in the card initially
 
     return person_card
