@@ -1,9 +1,14 @@
 from enum import Enum
 
+from backend.tax.BE.dataManagerBE import get_placeNamesBE
+
 
 class Canton(Enum):
     BE = "Bern"
-    BS = "Basel Stadt"
+
+    def get_placeNames(self):
+        if self == Canton.BE:
+            return get_placeNamesBE()
 
 
 class Confession(Enum):

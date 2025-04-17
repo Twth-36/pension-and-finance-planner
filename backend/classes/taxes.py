@@ -5,13 +5,27 @@ from backend.tax.taxproperties import Canton, Taxation
 
 
 class Taxes(BaseModel):
-    canton: ClassVar[Canton] = None
-    place: ClassVar[str] = None
+    canton: ClassVar[Canton] = Canton.BE
     place: ClassVar[str] = None
     taxation: ClassVar[Taxation] = Taxation.single
 
-    taxRateCanton: ClassVar[float] = 0
-    taxRateCom: ClassVar[float] = 0
-    taxRateRoem_kath: ClassVar[float] = 0
-    taxRateEv_ref: ClassVar[float] = 0
-    baseYearTaxCalc: int = 2025
+    taxRateCanton: ClassVar[float] = None
+    taxRateCom: ClassVar[float] = None
+    taxRateRoem_kath: ClassVar[float] = None
+    taxRateEv_ref: ClassVar[float] = None
+    taxRateChrist_kath: ClassVar[float] = None
+    baseYearTaxCalc: ClassVar[int] = 2025
+
+    @classmethod
+    def update_canton(cls, new_canton: Canton):
+        cls.canton = new_canton
+        cls.taxRateCanton = None
+
+        cls.place = None
+        cls.taxRateRoem_kath = None
+        cls.taxRateEv_ref = None
+        cls.taxRateChrist_kath = None
+
+    @classmethod
+    def update_place(cls, new_place: str):
+        cls.place = new_place
