@@ -15,8 +15,6 @@ class Person(BaseModel):
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
-    place: ClassVar[str] = None
-    taxation: ClassVar[Taxation] = Taxation.single
 
     # Validation for unique name
     @field_validator("name", mode="after")

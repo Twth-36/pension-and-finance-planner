@@ -1,0 +1,361 @@
+﻿STJ;BFS-Nr.;Gde Name;Anlage Gde NP;Anlage Gde JP;LSt;Mischsatz JP;reformiert;römisch-katholisch;christ-katholisch;gültig von;gültig bis;provisorisch/ definitiv;KG_Bezeichnung;Verwaltungskreis/ Amtsbezirk
+2025;301;Aarberg;1.75;1.75;1;0.1676;0.161;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;302;Bargen;1.84;1.84;1.2;0.2257;0.23;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;303;Grossaffoltern;1.69;1.69;1;0.1858;0.184;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;304;Kallnach (Golaten);1.45;1.45;1.5;0.2147;0.2185;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;304;Kallnach (Kallnach/Niederried);1.45;1.45;1.5;0.1657;0.161;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;305;Kappelen;1.6;1.6;1.2;0.164;0.16;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;306;Lyss (Busswil BE);1.6;1.6;1;0.2001;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;306;Lyss (Lyss);1.6;1.6;1;0.1887;0.184;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;307;Meikirch;1.54;1.54;1;0.1944;0.195;0.19;0.28;01.01.2025;31.12.9999;definitiv;KG Wohlen;Bern-Mittelland
+2025;309;Radelfingen;1.69;1.69;1.3;0.2271;0.23;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;310;Rapperswil (Rapp./Bangerten);1.68;1.68;1;0.195;0.1955;0.19;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;310;Rapperswil (Ruppoldsried);1.68;1.68;1;0.1858;0.185;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;311;Schüpfen;1.74;1.74;1;0.2088;0.21;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;312;Seedorf;1.74;1.74;1;0.2065;0.207;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;321;Aarwangen;1.57;1.57;1;0.1858;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;322;Auswil;1.75;1.75;1.25;0.1847;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;323;Bannwil;1.8;1.8;1.5;0.1858;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;324;Bleienbach;1.45;1.45;1;0.1769;0.175;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;325;Busswil B. M.;1.6;1.6;1.2;0.19;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;326;Gondiswil;1.84;1.84;1.2;0.19;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;329;Langenthal (Langent./Unterst.);1.44;1.44;1;0.1596;0.1484;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;329;Langenthal (Obersteckholz);1.44;1.44;1;0.1767;0.175;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;331;Lotzwil;1.7;1.7;1.2;0.1785;0.175;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;332;Madiswil (Kleind.-Leimiswil);1.65;1.65;1;0.1846;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;332;Madiswil (Madiswil);1.65;1.65;1;0.1847;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;333;Melchnau;1.74;1.74;1.5;0.1909;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;335;Oeschenbach;2;2;1;0.2273;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;336;Reisiswil;1.79;1.79;1;0.19;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;337;Roggwil;1.61;1.61;1.2;0.1905;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;338;Rohrbach;1.35;1.35;1.1;0.1849;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;339;Rohrbachgraben;1.94;1.94;1.2;0.1843;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;340;Rütschelen;1.6;1.6;1;0.1768;0.175;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;341;Schwarzhäusern;1.6;1.6;1;0.1846;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;342;Thunstetten;1.7;1.7;1;0.1857;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;344;Ursenbach;1.75;1.75;1.5;0.2265;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;345;Wynau;1.8;1.8;1.2;0.1971;0.2;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;351;Bern;1.54;1.54;1.5;0.1871;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Bern;Bern-Mittelland
+2025;352;Bolligen;1.6;1.6;1.2;0.1861;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;353;Bremgarten;1.49;1.49;1;0.186;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Wohlen;Bern-Mittelland
+2025;354;Kirchlindach;1.55;1.55;1;0.1856;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Wohlen;Bern-Mittelland
+2025;355;Köniz;1.58;1.58;1.2;0.2175;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;356;Muri;1.14;1.14;0.7;0.18;0.176;0.19;0.276;01.01.2025;31.12.9999;provisorisch;KG Muri;Bern-Mittelland
+2025;357;Oberbalm;1.75;1.75;1.4;0.2269;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;358;Stettlen;1.57;1.57;1.2;0.2031;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;359;Vechigen;1.54;1.54;1;0.196;0.197;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;360;Wohlen;1.54;1.54;1;0.1945;0.1955;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Wohlen;Bern-Mittelland
+2025;361;Zollikofen;1.4;1.4;1;0.1871;0.185;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;362;Ittigen;1.23;1.23;1.1;0.1862;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;363;Ostermundigen;1.69;1.69;1.5;0.187;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ostermundigen;Bern-Mittelland
+2025;371;Biel/Bienne;1.63;1.63;1.5;0.2306;0.23;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;372;Evilard (Leubringen);1.52;1.52;1;0.2307;0.23;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;381;Arch;1.75;1.75;0.8;0.153;0.14;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;382;Büetigen;1.55;1.85;1.2;0.2003;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;383;Büren an der Aare;1.64;1.64;1;0.198;0.197;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;385;Diessbach;1.8;1.8;1.2;0.2007;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;386;Dotzigen;1.85;1.85;1.2;0.201;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;387;Lengnau;1.49;1.49;1.1;0.2279;0.22;0.2415;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;388;Leuzigen;1.79;1.79;1;0.1829;0.18;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;389;Meienried;1;1;1;0.1974;0.197;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;390;Meinisberg;1.95;1.95;1.2;0.2255;0.22;0.2415;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;391;Oberwil b. Büren;1.87;1.87;0.8;0.1822;0.18;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;392;Pieterlen;1.75;1.75;1.2;0.2291;0.22;0.2415;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;393;Rüti b. Büren;1.85;1.85;1;0.2669;0.279;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;394;Wengi b. Büren;1.85;1.85;1.1;0.1961;0.1955;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;401;Aefligen;1.95;1.95;1;0.1647;0.16;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;402;Alchenstorf;1.75;1.75;1;0.2182;0.22;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;403;Bäriswil;1.64;1.64;1.2;0.2096;0.21;0.207;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;404;Burgdorf;1.63;1.63;1;0.1887;0.184;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;405;Ersigen;1.7;1.7;1.2;0.1629;0.16;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;406;Hasle;1.79;1.79;1.2;0.219;0.22;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;407;Heimiswil;1.84;1.84;1.2;0.229;0.23;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;408;Hellsau;1.8;1.8;1;0.2183;0.22;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;409;Hindelbank;1.59;1.59;1;0.2096;0.21;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;410;Höchstetten;1.75;1.75;1;0.2178;0.22;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;411;Kernenried;1.5;1.5;1;0.162;0.16;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;412;Kirchberg;1.59;1.59;1.3;0.1662;0.16;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;413;Koppigen;1.65;1.65;1;0.2166;0.22;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;414;Krauchthal;1.79;1.79;1.2;0.1965;0.195;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;415;Lyssach;1.39;1.39;1.3;0.166;0.16;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;418;Oberburg;1.88;1.88;1.1;0.2372;0.242;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;420;Rüdtligen-Alchenflüh;1.45;1.45;1.2;0.1666;0.16;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;421;Rumendingen;1;1;1;0.207;0.207;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;422;Rüti b. Lyssach;1.79;1.79;1.2;0.1616;0.16;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;423;Willadingen;1.59;1.59;1;0.2177;0.22;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;424;Wynigen;1.75;1.75;1;0.2071;0.207;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;431;Corgémont;1.79;1.79;1.3;0.2091;0.2142;0.197;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;432;Cormoret;2.04;2.04;1.3;0.2345;0.25;0.197;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;433;Cortébert;1.99;1.99;1.3;0.2087;0.2142;0.197;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;434;Courtelary;2.14;2.14;1.1;0.2319;0.25;0.197;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;435;La Ferrière;1.94;1.94;1.5;0.2505;0.253;0.2448;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;437;Mont-Tramelan;2.04;2.04;1.3;0.25;0.25;0.25;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;438;Orvin;1.88;1.88;1.2;0.1954;0.18;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;441;Renan;2.04;2.04;1.5;0.2711;0.306;0.197;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;442;Romont;1.6;1.6;1.1;0.2002;0.18;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;443;Saint-Imier;1.75;1.75;1.2;0.2224;0.256;0.197;0.306;01.01.2025;31.12.9999;provisorisch;KG Court;Berner Jura
+2025;444;Sonceboz-Sombeval;1.72;1.72;1.1;0.2004;0.202;0.197;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;445;Sonvilier;2.07;2.07;1.16;0.2185;0.23;0.197;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;446;Tramelan;1.94;1.94;1.3;0.2501;0.25;0.25;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;448;Villeret;1.79;1.79;1.3;0.211;0.2185;0.197;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;449;Sauge;1.9;1.9;1.25;0.1935;0.18;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;450;Péry-La Heutte;1.55;1.55;1.2;0.2025;0.18;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;491;Brüttelen;1.9;1.9;1.5;0.1856;0.18;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;492;Erlach;1.5;1.5;1.2;0.2058;0.207;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;493;Finsterhennen;1.8;1.8;1.5;0.222;0.23;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;494;Gals;1.39;1.39;1.2;0.1549;0.135;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;495;Gampelen;1.39;1.39;1.4;0.1571;0.135;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;496;Ins;1.63;1.63;1.2;0.1855;0.18;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;497;Lüscherz;1.5;1.5;1.2;0.1863;0.184;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;498;Müntschemier;1.79;1.79;1.2;0.1879;0.18;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;499;Siselen;1.8;1.8;1.2;0.2254;0.23;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;500;Treiten;1.4;1.4;1;0.1843;0.18;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;501;Tschugg;1.59;1.59;1;0.2056;0.207;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;502;Vinelz;1.69;1.69;1.2;0.1868;0.184;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;533;Bätterkinden;1.8;1.8;1.2;0.2069;0.21;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;535;Deisswil b. M.;0.89;0.89;1.3;0.1949;0.1955;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;538;Fraubrunnen;1.75;1.75;1;0.1852;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;538;Fraubrunnen (Etzelkof/Mülchi);1.75;1.75;1;0.186;0.185;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;540;Jegenstorf (Jegenstorf);1.53;1.53;1;0.2127;0.218;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;540;Jegenstorf (Scheunen);1.53;1.53;1;0.1852;0.185;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;541;Iffwil;1.4;1.4;1;0.2146;0.218;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;543;Mattstetten;1.48;1.48;1.5;0.2135;0.218;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;544;Moosseedorf;1.38;1.38;1.5;0.1944;0.1955;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;546;Münchenbuchsee;1.64;1.64;1.2;0.1942;0.1955;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;551;Urtenen-Schönbühl;1.5;1.5;1.5;0.2103;0.218;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;552;Utzenstorf;1.72;1.72;1;0.1903;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;553;Wiggiswil;1.4;1.4;1.2;0.1951;0.1955;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;554;Wiler b. Utzenstorf;1.7;1.7;1.2;0.1902;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;556;Zielebach;1.5;1.5;1.2;0.19;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;557;Zuzwil;1.64;1.64;1;0.2148;0.218;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Ittigen;Bern-Mittelland
+2025;561;Adelboden;1.99;1.99;1.5;0.1894;0.184;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Frutigen;Frutigen-Niedersimmental
+2025;562;Aeschi;1.79;1.79;1.3;0.2482;0.25;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Frutigen-Niedersimmental
+2025;563;Frutigen;1.85;1.85;1.5;0.2119;0.21;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Frutigen;Frutigen-Niedersimmental
+2025;564;Kandergrund;1.85;1.85;1.5;0.2483;0.25;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Frutigen;Frutigen-Niedersimmental
+2025;565;Kandersteg;1.8;1.8;1.5;0.2454;0.25;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Frutigen;Frutigen-Niedersimmental
+2025;566;Krattigen;1.75;1.75;1.5;0.2475;0.25;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Frutigen-Niedersimmental
+2025;567;Reichenbach-1;1.77;1.77;1.2;0.23;0.23;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Frutigen;Frutigen-Niedersimmental
+2025;567;Reichenbach-9;1.77;1.77;1.2;0.2107;0.21;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Frutigen;Frutigen-Niedersimmental
+2025;571;Beatenberg;1.98;1.98;1.5;0.2374;0.2415;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;572;Bönigen;1.9;1.9;1.2;0.1878;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;573;Brienz;1.75;1.75;1.5;0.2248;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;574;Brienzwiler;1.64;1.64;1.5;0.2247;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;575;Därligen;1.85;1.85;1.5;0.1585;0.15;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;576;Grindelwald;1.69;1.69;1.5;0.1901;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;577;Gsteigwiler;1.93;1.93;1.5;0.1878;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;578;Gündlischwand;2;2;1.5;0.1889;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;579;Habkern;1.85;1.85;1.5;0.2283;0.23;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;580;Hofstetten;1.7;1.7;1.5;0.2264;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;581;Interlaken;1.77;1.77;1.5;0.1924;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;582;Iseltwald;1.85;1.85;1.5;0.1862;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;584;Lauterbrunnen;1.84;1.84;1.5;0.2235;0.23;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;585;Leissigen;1.9;1.9;1.5;0.1594;0.15;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;586;Lütschental;1.5;1.5;1.5;0.1868;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;587;Matten bei Interlaken;1.88;1.88;1.5;0.1899;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;588;Niederried b. I.;1.94;1.94;1.5;0.1919;0.19;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;589;Oberried;1.94;1.94;1.5;0.225;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;590;Ringgenberg;1.8;1.8;1.5;0.1929;0.19;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;591;Saxeten;1.69;1.69;1.5;0.1877;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;592;Schwanden;1.75;1.75;1.5;0.2258;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;593;Unterseen;1.7;1.7;1.2;0.1894;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;594;Wilderswil;1.69;1.69;1.5;0.1886;0.184;0.207;0.23;01.01.2025;31.12.9999;definitiv;KG Interlaken;Interlaken-Oberhasli
+2025;602;Arni BE;1.74;1.74;1.2;0.2282;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;603;Biglen;1.9;1.9;1.2;0.225;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;605;Bowil;1.84;1.84;1.1;0.2062;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;606;Brenzikofen;1.86;1.86;1.2;0.1846;0.184;0.19;0.23;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;607;Freimettigen;1.8;1.8;1.5;0.1847;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;608;Grosshöchstetten (Grosshöchs.);1.62;1.62;1;0.2047;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;608;Grosshöchstetten (Schlosswil);1.62;1.62;1;0.2656;0.27;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;609;Häutligen;1.45;1.45;1.5;0.2059;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;610;Herbligen;1.9;1.9;1.2;0.1845;0.184;0.19;0.23;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;611;Kiesen;1.54;1.54;1;0.1836;0.184;0.18;0.23;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;612;Konolfingen;1.59;1.59;1.5;0.2047;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;613;Landiswil;1.85;1.85;1.3;0.229;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;614;Linden;1.8;1.8;1.2;0.2667;0.27;0.19;0.23;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;615;Mirchel;1.79;1.79;1.2;0.2061;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;616;Münsingen;1.58;1.58;1;0.1834;0.184;0.18;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;617;Niederhünigen;1.7;1.7;1.2;0.2058;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;619;Oberdiessbach;1.64;1.64;1.1;0.1846;0.184;0.19;0.23;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;620;Oberthal;1.87;1.87;1.2;0.2065;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;622;Oppligen;1.5;1.5;1.2;0.1844;0.184;0.19;0.23;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;623;Rubigen;1.44;1.44;1;0.1837;0.184;0.18;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;626;Walkringen;1.87;1.87;1.1;0.2691;0.276;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;627;Worb;1.7;1.7;1.3;0.2214;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;628;Zäziwil;1.89;1.89;1.3;0.2054;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;629;Oberhünigen;1.88;1.88;1.3;0.268;0.27;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;630;Allmendingen b. Bern;1.25;1.25;1;0.1833;0.184;0.18;0.276;01.01.2025;31.12.9999;definitiv;KG Muri;Bern-Mittelland
+2025;632;Wichtrach;1.64;1.64;1;0.1835;0.184;0.18;0.23;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;662;Ferenbalm;1.75;1.75;1;0.1859;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;663;Frauenkappelen;1.6;1.6;1.2;0.1819;0.18;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Wohlen;Bern-Mittelland
+2025;665;Gurbrü;1.9;1.9;1.4;0.2106;0.2185;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;666;Kriechenwil;1.79;1.79;1.2;0.19;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;667;Laupen;1.74;1.74;1.5;0.1905;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Wohlen;Bern-Mittelland
+2025;668;Mühleberg;1.4;1.4;1.5;0.1902;0.19;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Wohlen;Bern-Mittelland
+2025;669;Münchenwiler;1.5;1.5;1;0.2024;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;670;Neuenegg;1.49;1.49;1;0.1768;0.1725;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;671;Wileroltigen;1.6;1.6;1.2;0.2155;0.2185;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;681;Belprahon;1.93;1.93;1;0.2169;0.23;0.207;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;683;Champoz;1.7;1.7;1;0.23;0.23;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;687;Corcelles;1.94;1.94;1.5;0.2368;0.25;0.207;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;690;Court;1.94;1.94;1.5;0.2439;0.253;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;691;Crémines;1.94;1.94;1.3;0.2304;0.25;0.207;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;692;Eschert;1.94;1.94;1;0.2307;0.25;0.207;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;694;Grandval;1.74;1.74;1.2;0.2319;0.25;0.207;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;696;Loveresse;1.94;1.94;1.1;0.23;0.23;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;700;Moutier;1.94;1.94;1.5;0.2138;0.23;0.207;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;701;Perrefitte;2;2;1.2;0.2161;0.23;0.207;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;703;Reconvilier;1.97;1.97;1.5;0.2303;0.23;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;704;Roches;1.94;1.94;1.1;0.216;0.23;0.207;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;706;Saicourt;1.95;1.95;1.4;0.2302;0.23;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;707;Saules;1.94;1.94;1.4;0.23;0.23;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;708;Schelten;2.2;2.2;1.5;0.2472;0.23;0.2764;0.306;01.01.2025;31.12.9999;definitiv;Kanton Bern;Berner Jura
+2025;709;Seehof;1.74;1.74;1.2;0.2498;0.23;0.322;0.306;01.01.2025;31.12.9999;definitiv;Kanton Bern;Berner Jura
+2025;711;Sorvilier;1.8;1.8;1.5;0.2448;0.253;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;713;Tavannes;1.92;1.92;1.5;0.2306;0.23;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;715;Rebévelier;2;2;1.2;0.3144;0.32;0.3116;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;716;Petit-Val (Chât/Mon/Sorn/Soub);1.79;1.79;1.2;0.3009;0.32;0.2415;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;716;Petit-Val (Châtelat/Fornet-d.);1.79;1.79;1.2;0.3172;0.32;0.3116;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;717;Valbirse;2;2;1.5;0.2301;0.23;0.23;0.306;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;723;La Neuveville;1.65;1.65;1.2;0.1759;0.207;0.138;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Berner Jura
+2025;724;Nods;1.64;1.64;1.5;0.2109;0.23;0.138;0.28;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;726;Plateau de Diesse;1.85;1.85;1.3;0.1729;0.184;0.138;0.28;01.01.2025;31.12.9999;definitiv;KG Court;Berner Jura
+2025;731;Aegerten;1.79;1.79;1;0.2003;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;732;Bellmund;1.3;1.3;1;0.2149;0.21;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;733;Brügg;1.69;1.69;1;0.2101;0.2;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;734;Bühl;1.55;1.55;0;0.1859;0.1836;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;735;Epsach;1.7;1.7;1.5;0.166;0.161;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;736;Hagneck;1.5;1.5;1.5;0.168;0.161;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;737;Hermrigen;1.8;1.8;1;0.1673;0.161;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;738;Jens;1.9;1.9;1;0.2002;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;739;Ipsach;1.59;1.59;1.5;0.2165;0.21;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;740;Ligerz;1.68;1.68;1.5;0.1782;0.1683;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;741;Merzligen;1.45;1.45;0.6;0.2;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;742;Mörigen;1.25;1.25;1;0.169;0.161;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;743;Nidau;1.7;1.7;1.5;0.2181;0.21;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;744;Orpund;1.85;1.85;1;0.2032;0.19;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;745;Port;1.69;1.69;1;0.2164;0.21;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;746;Safnern;1.4;1.4;1;0.199;0.19;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;747;Scheuren;1.78;1.78;1.2;0.1924;0.19;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;748;Schwadernau;1.85;1.85;1;0.2;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;749;Studen (BE);1.72;1.72;1;0.2003;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;750;Sutz-Lattrigen;1.7;1.7;1;0.2301;0.23;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;751;Täuffelen;1.59;1.59;1.25;0.1688;0.161;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;754;Walperswil;1.65;1.65;0.6;0.1865;0.1836;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;755;Worben;1.7;1.7;1.2;0.2002;0.2;0.2;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Seeland
+2025;756;Twann-Tüscherz;1.65;1.65;1.5;0.1835;0.1683;0.23;0.28;01.01.2025;31.12.9999;definitiv;Kanton Bern;Biel/Bienne
+2025;761;Därstetten;1.6;1.6;1.2;0.1643;0.16;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Frutigen-Niedersimmental
+2025;762;Diemtigen;1.8;1.8;1.5;0.23;0.23;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Frutigen-Niedersimmental
+2025;763;Erlenbach i.S.;1.64;1.64;1.5;0.23;0.23;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Frutigen-Niedersimmental
+2025;766;Oberwil i. S.;1.64;1.64;1.5;0.23;0.23;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Frutigen-Niedersimmental
+2025;767;Reutigen (Reutigen);1.75;1.75;1.2;0.23;0.23;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Thun
+2025;767;Reutigen (Zwieselberg);1.75;1.75;1.2;0.2446;0.246;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Thun
+2025;768;Spiez;1.65;1.65;0.9;0.1839;0.174;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Frutigen-Niedersimmental
+2025;769;Wimmis;1.57;1.57;1.5;0.23;0.23;0.23;0.23;01.01.2025;31.12.9999;definitiv;KG Spiez;Frutigen-Niedersimmental
+2025;770;Stocken-Höfen (Höfen);1.79;1.79;1.2;0.2415;0.246;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;770;Stocken-Höfen (Ober-/Niederst);1.79;1.79;1.2;0.23;0.23;0.23;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;782;Guttannen;1.65;1.65;1.5;0.2208;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;783;Hasliberg;2.1;2.1;1.5;0.2254;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;784;Innertkirchen (Gadmen);1.6;1.6;1.5;0.2621;0.276;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;784;Innertkirchen (Innertkirchen);1.6;1.6;1.5;0.2249;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;785;Meiringen;1.8;1.8;1.3;0.2213;0.23;0.2;0.23;01.01.2025;31.12.9999;provisorisch;KG Meiringen;Interlaken-Oberhasli
+2025;786;Schattenhalb;1.94;1.94;1.5;0.225;0.23;0.2;0.23;01.01.2025;31.12.9999;definitiv;KG Meiringen;Interlaken-Oberhasli
+2025;791;Boltigen;1.9;1.9;1.5;0.2227;0.23;0.1377;0.23;01.01.2025;31.12.9999;definitiv;KG Saanen;Obersimmental-Saanen
+2025;792;Lenk;1.79;1.79;1.5;0.209;0.22;0.1377;0.23;01.01.2025;31.12.9999;definitiv;KG Saanen;Obersimmental-Saanen
+2025;793;St. Stephan;1.84;1.84;1.5;0.2207;0.23;0.1377;0.23;01.01.2025;31.12.9999;definitiv;KG Saanen;Obersimmental-Saanen
+2025;794;Zweisimmen;1.8;1.8;1.5;0.1873;0.195;0.1377;0.23;01.01.2025;31.12.9999;definitiv;KG Saanen;Obersimmental-Saanen
+2025;841;Gsteig;1.3;1.3;0.8;0.1508;0.153;0.1377;0.23;01.01.2025;31.12.9999;definitiv;KG Saanen;Obersimmental-Saanen
+2025;842;Lauenen;1.7;1.7;0.6;0.221;0.23;0.1377;0.23;01.01.2025;31.12.9999;definitiv;KG Saanen;Obersimmental-Saanen
+2025;843;Saanen;1.1;1.1;0.5;0.1495;0.153;0.1377;0.23;01.01.2025;31.12.9999;definitiv;KG Saanen;Obersimmental-Saanen
+2025;852;Guggisberg;1.89;1.89;1.5;0.2265;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;853;Rüschegg;1.74;1.74;1.5;0.2059;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;855;Schwarzenburg;1.86;1.86;1.4;0.2258;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;861;Belp;1.4;1.4;1;0.1853;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;863;Burgistein;1.95;1.95;1.2;0.185;0.184;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;866;Gerzensee;1.54;1.54;1.5;0.2058;0.207;0.195;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;867;Gurzelen;1.83;1.83;1.2;0.2497;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;868;Jaberg;1.49;1.49;1;0.1864;0.185;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Münsingen;Bern-Mittelland
+2025;869;Kaufdorf;1.88;1.88;1.5;0.1851;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;870;Kehrsatz;1.64;1.64;1;0.2191;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;872;Kirchdorf (Gelterfingen);1.51;1.51;1;0.1855;0.185;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;872;Kirchdorf (Kirchdorf);1.51;1.51;1;0.186;0.185;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;872;Kirchdorf (Mühledorf);1.51;1.51;1;0.1855;0.185;0.195;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;872;Kirchdorf (Noflen);1.51;1.51;1;0.1859;0.185;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;877;Niedermuhlern;1.79;1.79;1.2;0.2698;0.275;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;879;Riggisberg (Riggisberg/Rüti);1.8;1.8;1.4;0.2063;0.207;0.195;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;879;Riggisberg (Rümligen);1.8;1.8;1.4;0.1851;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;880;Rüeggisberg;1.85;1.85;1.2;0.2613;0.265;0.195;0.276;01.01.2025;31.12.9999;definitiv;KG Köniz;Bern-Mittelland
+2025;883;Seftigen;1.74;1.74;1;0.2467;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;884;Toffen;1.6;1.6;1;0.185;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;885;Uttigen;1.63;1.63;1;0.1862;0.185;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;886;Wattenwil;1.94;1.94;1.2;0.2254;0.228;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;888;Wald BE;1.59;1.59;1.3;0.2652;0.275;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;889;Thurnen (Kirchenthurnen);1.85;1.85;1.4;0.1846;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;889;Thurnen (Lohnstorf/Mühleth.);1.85;1.85;1.4;0.1851;0.184;0.195;0.276;01.01.2025;31.12.9999;definitiv;KG Belp;Bern-Mittelland
+2025;901;Eggiwil;1.8;1.8;1.5;0.1872;0.184;0.27;0.276;01.01.2025;31.12.9999;definitiv;KG Langnau;Emmental
+2025;902;Langnau;1.94;1.94;1.5;0.1928;0.184;0.27;0.276;01.01.2025;31.12.9999;definitiv;KG Langnau;Emmental
+2025;903;Lauperswil;1.85;1.85;1;0.1888;0.184;0.27;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;904;Röthenbach i. E.;2;2;1.3;0.2312;0.23;0.27;0.276;01.01.2025;31.12.9999;definitiv;KG Langnau;Emmental
+2025;905;Rüderswil;1.74;1.74;1;0.1876;0.184;0.27;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;906;Schangnau;2.1;2.1;1.5;0.232;0.23;0.27;0.276;01.01.2025;31.12.9999;definitiv;KG Langnau;Emmental
+2025;907;Signau;1.94;1.94;1.2;0.1892;0.184;0.27;0.276;01.01.2025;31.12.9999;definitiv;KG Langnau;Emmental
+2025;908;Trub;1.84;1.84;1.4;0.2315;0.23;0.27;0.276;01.01.2025;31.12.9999;definitiv;KG Langnau;Emmental
+2025;908;Trub (Kröschenbrunnen);1.84;1.84;1.4;0.197;0.184;0.27;0.276;01.01.2025;31.12.9999;definitiv;KG Langnau;Emmental
+2025;909;Trubschachen;1.99;1.99;1.5;0.1933;0.184;0.27;0.276;01.01.2025;31.12.9999;definitiv;KG Langnau;Emmental
+2025;921;Amsoldingen;1.85;1.85;1.2;0.2407;0.246;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;922;Blumenstein;1.75;1.75;1.2;0.2281;0.23;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;923;Buchholterberg;1.8;1.8;1.2;0.2505;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;924;Eriz;1.78;1.78;1.2;0.2513;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;925;Fahrni;1.78;1.78;1.2;0.2392;0.2415;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;927;Heiligenschwendi;1.89;1.89;1.5;0.1994;0.2;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;928;Heimberg;1.6;1.6;1.2;0.1991;0.2;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;929;Hilterfingen;1.55;1.55;0.8;0.1991;0.2;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;931;Homberg;1.84;1.84;1.1;0.25;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;932;Horrenbach-Buchen (Buchen);1.7;1.7;1.5;0.2523;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;932;Horrenbach-Buchen (Schwarzen.);1.7;1.7;1.5;0.253;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;934;Oberhofen;1.54;1.54;1;0.1994;0.2;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;935;Oberlangenegg;1.95;1.95;1.3;0.2518;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;936;Pohlern;1.72;1.72;1;0.2266;0.23;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;938;Sigriswil;1.66;1.66;1.5;0.1857;0.184;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;938;Sigriswil (Reust);1.66;1.66;1.5;0.2503;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;939;Steffisburg (Schwendibach);1.62;1.62;1.2;0.2062;0.207;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;939;Steffisburg (Steffisburg);1.62;1.62;1.2;0.2336;0.2415;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;940;Teuffenthal;1.8;1.8;1.2;0.2513;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;941;Thierachern;1.81;1.81;1.2;0.1994;0.2;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;942;Thun;1.66;1.66;1.2;0.2046;0.207;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Thun;Thun
+2025;943;Uebeschi;1.9;1.9;1.2;0.1998;0.2;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;944;Uetendorf;1.48;1.48;1.1;0.1994;0.2;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;945;Unterlangenegg;1.85;1.85;1;0.2495;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;946;Wachseldorn;1.84;1.84;1.5;0.2519;0.253;0.195;0.23;01.01.2025;31.12.9999;definitiv;KG Steffisburg;Thun
+2025;948;Forst-Längenbühl (Forst);1.7;1.7;1.2;0.2264;0.228;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;948;Forst-Längenbühl (Längenbühl);1.7;1.7;1.2;0.2424;0.246;0.195;0.23;01.01.2025;31.12.9999;definitiv;Kanton Bern;Thun
+2025;951;Affoltern;1.86;1.86;1.2;0.2347;0.238;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;952;Dürrenroth;1.89;1.89;1.25;0.2277;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;953;Eriswil;1.79;1.79;1.2;0.2259;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;954;Huttwil;1.69;1.69;1.2;0.1982;0.2;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;955;Lützelflüh;1.74;1.74;1;0.1858;0.184;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;956;Rüegsau;1.79;1.79;1;0.163;0.16;0.207;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;957;Sumiswald;1.79;1.79;1;0.2273;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;957;Sumiswald (Wasen);1.79;1.79;1;0.2279;0.2301;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;958;Trachselwald;1.88;1.88;1.2;0.228;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;Kanton Bern;Emmental
+2025;959;Walterswil;1.86;1.86;1;0.2277;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;960;Wyssachen;1.9;1.9;1.5;0.2259;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Langenthal;Oberaargau
+2025;971;Attiswil;1.64;1.64;1;0.203;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;972;Berken;1.1;1.1;1.2;0.1721;0.17;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;973;Bettenhausen;1.55;1.55;1;0.1728;0.17;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;975;Farnern;1.79;1.79;1.5;0.2052;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;976;Graben;1.8;1.8;1.2;0.1734;0.17;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;977;Heimenhausen;1.55;1.55;1.2;0.1727;0.17;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;979;Herzogenbuchsee;1.65;1.65;1;0.1744;0.17;0.19;0.276;01.01.2025;31.12.9999;provisorisch;KG Herzogenbuchsee;Oberaargau
+2025;980;Inkwil;1.75;1.75;1;0.1731;0.17;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;981;Niederbipp (Niederbipp);1.65;1.65;1.3;0.1868;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;981;Niederbipp (Wolfisberg);1.65;1.65;1.3;0.2043;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;982;Niederönz;1.65;1.65;1;0.1746;0.17;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;983;Oberbipp;1.59;1.59;1.5;0.203;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;985;Ochlenberg;1.6;1.6;1.2;0.1716;0.17;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;987;Rumisberg;1.89;1.89;1.5;0.2032;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;988;Seeberg;1.75;1.75;1.2;0.2261;0.23;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;989;Thörigen;1.75;1.75;1.5;0.173;0.17;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;990;Walliswil-Bipp;0.9;0.9;1;0.1857;0.184;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;991;Walliswil-Wangen;1.5;1.5;1.2;0.1949;0.1955;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;992;Wangen;1.63;1.63;1.5;0.1947;0.1955;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau
+2025;995;Wiedlisbach;1.82;1.82;1.2;0.2028;0.207;0.19;0.276;01.01.2025;31.12.9999;definitiv;KG Herzogenbuchsee;Oberaargau

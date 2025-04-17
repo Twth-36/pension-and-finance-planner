@@ -14,12 +14,12 @@ class RealEstate(BaseModel):
     name: str
     person: Optional[Person] = None
     baseValue: Optional[float] = 0
-    planValue: Optional[List[Planningposition]] = None
+    planValue: Optional[List[Planningposition]] = []
 
     baseTaxValue: Optional[float] = None
     taxValue: Optional[List[Planningposition]] = []
     taxRate: Optional[float] = None
-    taxCF: Optional[Cashflow] = None
+    taxExpense: Optional[Expense] = None
 
     maintCostRate: float = None
     maintenanceExpense: Optional[Expense] = None
@@ -49,6 +49,37 @@ class RealEstate(BaseModel):
     def create(cls, **data) -> "RealEstate":
         obj = cls.model_validate(data)  # Creation and validation
         cls.instanceDic[obj.name] = obj  # adding to instanceDic
+
+        if obj.taxExpense is None:
+            param = {"name": "Liegenschaftssteuer: " + obj.name, "taxablePortion": 0}
+            if obj.person:
+                param["person"] = obj.person
+            obj.taxExpense = Expense.create(**param)
+
+        if obj.maintenanceExpense is None:
+            param = {"name": "Unterhaltskosten: " + obj.name, "taxablePortion": 0}
+            if obj.person:
+                param["person"] = obj.person
+            obj.maintenanceExpense = Expense.create(**param)
+
+        if obj.renovationExpense is None:
+            param = {"name": "Renovationen: " + obj.name, "taxablePortion": 0}
+            if obj.person:
+                param["person"] = obj.person
+            obj.renovationExpense = Expense.create(**param)
+
+        if obj.purchaseCF is None:
+            param = {"name": "Kauf / Investition: " + obj.name}
+            if obj.person:
+                param["person"] = obj.person
+            obj.purchaseCF = Cashflow.create(**param)
+
+        if obj.saleCF is None:
+            param = {"name": "Verkauf: " + obj.name}
+            if obj.person:
+                param["person"] = obj.person
+            obj.saleCF = Cashflow.create(**param)
+
         return obj
 
     @classmethod
@@ -62,3 +93,7 @@ class RealEstate(BaseModel):
 
     def delete_item(self):
         del self.__class__.instanceDic[self.name]
+
+
+# rebuild model to ensure other classes are loaded
+RealEstate.model_rebuild()

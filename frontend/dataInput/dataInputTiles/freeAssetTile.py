@@ -2,6 +2,8 @@ from nicegui import ui
 from backend.classes.freeAsset import *
 from backend.classes.monthYear import *
 from frontend.utils import *
+from frontend.utils.confDialog import show_confDialog
+from frontend.utils.format import formatswiss
 
 
 def show_freeAssetTile():
@@ -55,7 +57,7 @@ def show_freeAssetTile():
                     {
                         "Name": fa.name,
                         "Zugehörigkeit": (fa.person.name if fa.person else ""),
-                        "Betrag": fa.baseValue,
+                        "Betrag": formatswiss(fa.baseValue),
                     }
                     for fa in FreeAsset.instanceDic.values()
                 ]
@@ -105,7 +107,7 @@ def show_freeAssetTile():
                         if len(tbl.selected) == 0:
                             ui.notify("Wähle mindestens eine Zeile aus.")
                         else:
-                            if await confDialog():
+                            if await show_confDialog():
                                 for item in tbl.selected:
                                     FreeAsset.get_itemByName(item["Name"]).delete_item()
                                 ui.notify("Gelöscht", color="positive")

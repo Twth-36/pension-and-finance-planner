@@ -66,3 +66,7 @@ class FreeAsset(BaseModel):
         # check first if objects is still used anywhere
         ##TODO
         del self.__class__.instanceDic[self.name]
+
+
+# rebuild model to ensure other classes are loaded
+FreeAsset.model_rebuild()

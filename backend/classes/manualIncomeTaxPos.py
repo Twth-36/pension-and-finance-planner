@@ -5,9 +5,9 @@ Examples: single-household-deduction (Alleinstehendenabzug), professional expens
 
 from pydantic import BaseModel, field_validator
 from typing import List, Optional, ClassVar
-from planningposition import *
-from incomeTaxPos import *
-from person import *
+from .planningposition import *
+from .incomeTaxPos import *
+from .person import *
 
 
 class ManualIncomeTaxPos(IncomeTaxPos):
@@ -18,3 +18,7 @@ class ManualIncomeTaxPos(IncomeTaxPos):
 
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
+
+
+# rebuild model to ensure other classes are loaded
+ManualIncomeTaxPos.model_rebuild()

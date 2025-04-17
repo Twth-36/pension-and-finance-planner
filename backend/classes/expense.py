@@ -24,17 +24,42 @@ class Expense(BaseModel):
     instanceDic: ClassVar[dict] = {}
     cashflowPos: ClassVar[Cashflow]
 
+    # Validation for unique name
+    @field_validator("name", mode="after")
+    @classmethod
+    def check_uniquename(cls, name: str) -> str:
+        if name == "":
+            raise ValueError(f"May not be empty")
+        if name in cls.instanceDic:
+            raise ValueError(f"An object with name '{name}' already exists")
+        return name
+
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "Expense":
         obj = cls.model_validate(data)  # Creation and validation
-        obj.name = generate_uniqueName(
-            obj.name, cls.instanceDic
-        )  # generate unique name
         cls.instanceDic[obj.name] = obj  # adding to instanceDic
 
-        # if incomeTaxPosition not exisiting, creating one
         if obj.taxPosition is None:
-            obj.taxPosition = IncomeTaxPos.create(name=obj.name, person=obj.person)
+            param = {"name": obj.name, "type": TaxPositionType.deduction}
+            if obj.person:
+                param["person"] = obj.person
+            obj.taxPosition = IncomeTaxPos.create(**param)
 
         return obj
+
+    @classmethod
+    def get_itemByName(cls, name: str) -> "Expense":
+        return cls.instanceDic[name]
+
+    def update_name(self, newname: str):
+        self.__class__.check_uniquename(name=newname)
+        self.__class__.instanceDic[newname] = self.__class__.instanceDic.pop(self.name)
+        self.name = newname
+
+    def delete_item(self):
+        del self.__class__.instanceDic[self.name]
+
+
+# rebuild model to ensure other classes are loaded
+Expense.model_rebuild()

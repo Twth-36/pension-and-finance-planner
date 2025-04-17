@@ -1,9 +1,10 @@
 from backend.classes.credit import *
 from backend.classes.freeAsset import *
+from backend.classes.manualExpense import ManualExpense
+from backend.classes.manualIncome import ManualIncome
+from backend.classes.manualIncomeTaxPos import ManualIncomeTaxPos
+from backend.classes.pensionFund import PensionFund
 from backend.classes.realEstate import *
-
-
-plans = ["Verheiratetes Paar", "Paar in Konkubinat", "Alleinstehend"]
 
 
 def examplePlanMarried():
@@ -19,33 +20,28 @@ def examplePlanMarried():
     Scenario.create(name="Testszenario 1")
     Scenario.create(name="Testzenario 2")
 
-    # # Incomes
-    # ManualIncome.create(
-    #     name="Erwerbseinkommen Post", personName="Andy", baseValue=50000
-    # )
-    # ManualIncome.create(name="Erwerbseinkommen SBB", personName="Lou", baseValue=80000)
+    # Incomes
+    ManualIncome.create(name="Erwerbseinkommen Post", person=andy, baseValue=8000)
+    ManualIncome.create(name="Erwerbseinkommen SBB", person=lou, baseValue=4000)
 
-    # # Expenses
-    # ManualExpense.create(
-    #     name="Lebenshaltungskosten", baseValue=45000
-    # )  # work on without personName
+    # Expenses
+    ManualExpense.create(name="Lebenshaltungskosten", baseValue=45000)
+    ManualExpense.create(name="Miete Zweitwohnung", baseValue=1000, person=lou)
 
     # Free Assets
-    FreeAsset.create(name="Sparkonto UBS", person=andy, baseValue=40000)
-    FreeAsset.create(name="Sparkonto PostFinance", person=lou, baseValue=40000)
+    FreeAsset.create(name="Sparkonto UBS", person=andy, baseValue=100000)
+    FreeAsset.create(name="Sparkonto PostFinance", person=lou, baseValue=150000)
     FreeAsset.create(name="Haushaltskonto Valiant", baseValue=10000)
 
-    # # PensionFund
-    # PensionFund.create(name="PK Post", personName="Andy", baseValue=450000)
-    # PensionFund.create(name="PK SBB", personName="Lou", baseValue=400000)
+    # PensionFund
+    PensionFund.create(name="PK Post", person=andy, baseValue=450000)
+    PensionFund.create(name="PK SBB", person=lou, baseValue=400000)
 
     # # Pillar 3a
     # Pillar3a.create(name="Säule 3a Depot UBS", personName="Andy", baseValue=70000)
     # Pillar3aInsurance.create(
     #     name="Säule 3a Police AXA", personName="Lou", baseValue=90000
     # )
-
-    # RealEstate.create(name="EFH Biel", baseValue=80000)
 
     Credit.create(
         name="Darlehen",
@@ -59,3 +55,7 @@ def examplePlanMarried():
     )
 
     RealEstate.create(name="EFH", baseValue=1000000)
+
+    ManualIncomeTaxPos.create(
+        name="Alleinstehendenabzug", baseValue=4000, type=TaxPositionType.deduction
+    )

@@ -2,6 +2,7 @@ from nicegui import ui
 from backend.classes.scenario import *
 from backend.classes.monthYear import *
 from frontend.utils import *
+from frontend.utils.confDialog import show_confDialog
 
 
 def show_scenarioTile():
@@ -32,14 +33,18 @@ def show_scenarioTile():
                     value=Scenario.baseDate.dateToString() or "",
                     placeholder="MM.JJJJ",
                     validation={
-                        "Format nicht korrekt": lambda v: validate_dateFormat(v)
+                        "Format nicht korrekt": lambda v: MonthYear.validate_dateFormat(
+                            v
+                        )
                     },
                 ).tooltip(
                     "Der Basismonat in welchem der Status quo erfasst wurde und ab welchem die Planung startet."
                 )
                 baseDate_input.on(
                     "blur",
-                    lambda: update_baseDate(stringToDate(baseDate_input.value)),
+                    lambda: update_baseDate(
+                        MonthYear.stringToDate(baseDate_input.value)
+                    ),
                 )
 
                 def update_endDate(new_endDate: MonthYear):
@@ -53,18 +58,20 @@ def show_scenarioTile():
                     ui.notify("Änderung aktualisiert", color="positive")
 
                 endDate_input = ui.input(
-                    label="Basismonat",
+                    label="Planungsende",
                     value=Scenario.endDate.dateToString() or "",
                     placeholder="MM.JJJJ",
                     validation={
-                        "Format nicht korrekt": lambda v: validate_dateFormat(v)
+                        "Format nicht korrekt": lambda v: MonthYear.validate_dateFormat(
+                            v
+                        )
                     },
                 ).tooltip(
-                    "Der Basismonat in welchem der Status quo erfasst wurde und ab welchem die Planung startet."
+                    "Definiert bis zu welchem Enddatum die Planung erfolgen soll."
                 )
                 endDate_input.on(
                     "blur",
-                    lambda: update_endDate(stringToDate(endDate_input.value)),
+                    lambda: update_endDate(MonthYear.stringToDate(endDate_input.value)),
                 )
 
             # Content column (table and controls)
@@ -105,7 +112,7 @@ def show_scenarioTile():
                         if len(tbl.selected) == 0:
                             ui.notify("Wähle mindestens eine Zeile aus.")
                         else:
-                            if await confDialog():
+                            if await show_confDialog():
                                 for item in tbl.selected:
                                     Scenario.get_itemByName(item["Name"]).delete_item()
                                 ui.notify("Gelöscht", color="positive")

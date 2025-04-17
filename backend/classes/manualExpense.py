@@ -2,18 +2,18 @@
 
 from pydantic import BaseModel, Field
 from typing import Optional, List
-from planningposition import *
-from expense import *
-from incomeTaxPos import *
-from person import *
-from cashflow import *
+from .planningposition import *
+from .expense import *
+from .incomeTaxPos import *
+from .person import *
+from .cashflow import *
 
 
 class ManualExpense(Expense):
     # Object-attributes
     baseValue: Optional[float] = 0  # per month
     fixValue: Optional[List[Planningposition]] = []  # overturns planning value
-    inflationRate: Optional[List[Planningposition]] = []
+    inflationRate: float = 0
     repetitive: Optional[bool] = True
 
     # Class-attribute
@@ -27,3 +27,7 @@ class ManualExpense(Expense):
         if baseValue < 0:
             raise ValueError(f"baseValue: {baseValue} may not be negative")
         return baseValue
+
+
+# rebuild model to ensure other classes are loaded
+ManualExpense.model_rebuild()

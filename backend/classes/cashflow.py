@@ -5,6 +5,8 @@ Class for cashflows i.e. not relevant for income tax for example credit back pay
 # for future importing Income due to circular import
 from __future__ import annotations
 
+from backend.classes.person import Person
+
 from .planningposition import Planningposition
 from typing import TYPE_CHECKING, ClassVar, Optional, List
 from pydantic import BaseModel
@@ -28,23 +30,35 @@ class Cashflow(BaseModel):
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
 
-    liquidityRes: ClassVar[float] = 0  # liquidity Reserves
-    investCapReturnRate: ClassVar[Planningposition]
-    investCapIncome: ClassVar["Income"] = (
-        None  # delayed assignment for Income instance due to circular import
-    )
-    liquidityPlanValue: ClassVar[List[Planningposition]] = []
-    investCapPlanValueStart: ClassVar[List[Planningposition]] = (
-        []
-    )  # == EndValue of previous prediod
-    investCapPlanValueEnd: ClassVar[List[Planningposition]] = []
+    # Validation for unique name
+    @field_validator("name", mode="after")
+    @classmethod
+    def check_uniquename(cls, name: str) -> str:
+        if name == "":
+            raise ValueError(f"May not be empty")
+        if name in cls.instanceDic:
+            raise ValueError(f"An object with name '{name}' already exists")
+        return name
 
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "Cashflow":
         obj = cls.model_validate(data)  # Creation and validation
-        obj.name = generate_uniqueName(
-            obj.name, cls.instanceDic
-        )  # generate unique name
         cls.instanceDic[obj.name] = obj  # adding to instanceDic
         return obj
+
+    @classmethod
+    def get_itemByName(cls, name: str) -> "Cashflow":
+        return cls.instanceDic[name]
+
+    def update_name(self, newname: str):
+        self.__class__.check_uniquename(name=newname)
+        self.__class__.instanceDic[newname] = self.__class__.instanceDic.pop(self.name)
+        self.name = newname
+
+    def delete_item(self):
+        del self.__class__.instanceDic[self.name]
+
+
+# rebuild model to ensure other classes are loaded
+Cashflow.model_rebuild()

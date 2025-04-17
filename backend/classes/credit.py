@@ -21,7 +21,7 @@ class Credit(BaseModel):
     planValue: Optional[List[Planningposition]] = []
 
     interestRate: Optional[List[Planningposition]] = []  # p.a.
-    interstExpense: Optional[Expense] = None
+    interestExpense: Optional[Expense] = None
 
     payback: Optional[List[Planningposition]] = []
     paybackCF: Optional[Cashflow] = None
@@ -44,7 +44,7 @@ class Credit(BaseModel):
             raise ValueError(f"An object with name '{name}' already exists")
         return name
 
-    # Validation non-negative baseValueh
+    # Validation non-negative baseValue
     @field_validator("baseValue", mode="after")
     @classmethod
     def is_nonNegative(cls, baseValue: float) -> float:
@@ -57,6 +57,25 @@ class Credit(BaseModel):
     def create(cls, **data) -> "Credit":
         obj = cls.model_validate(data)  # Creation and validation
         cls.instanceDic[obj.name] = obj  # adding to instanceDic
+
+        if obj.interestExpense is None:
+            param = {"name": "Zinszahlung: " + obj.name, "taxablePortion": 100}
+            if obj.person:
+                param["person"] = obj.person
+            obj.interestExpense = Expense.create(**param)
+
+        if obj.increaseCF is None:
+            param = {"name": "Krediterhöhung: " + obj.name}
+            if obj.person:
+                param["person"] = obj.person
+            obj.increaseCF = Cashflow.create(**param)
+
+        if obj.paybackCF is None:
+            param = {"name": "Amortisation: " + obj.name}
+            if obj.person:
+                param["person"] = obj.person
+            obj.paybackCF = Cashflow.create(**param)
+
         return obj
 
     @classmethod
