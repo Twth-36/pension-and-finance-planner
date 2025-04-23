@@ -1,6 +1,6 @@
 from nicegui import ui
 from backend.classes.scenario import *
-from backend.classes.monthYear import *
+from backend.utils.monthYear import *
 from frontend.utils import *
 from frontend.utils.confDialog import show_confDialog
 
@@ -23,7 +23,7 @@ def show_scenarioTile():
                         Scenario.baseDate = new_baseDate
                     except Exception as e:
                         ui.notify(
-                            f"Upps, etwas passte da nicht: {e}",
+                            f"Upps, etwas passte da nicht:  \n{e}",
                             color="negative",
                         )
                     ui.notify("Änderung aktualisiert", color="positive")
@@ -52,7 +52,7 @@ def show_scenarioTile():
                         Scenario.endDate = new_endDate
                     except Exception as e:
                         ui.notify(
-                            f"Upps, etwas passte da nicht: {e}",
+                            f"Upps, etwas passte da nicht:  \n{e}",
                             color="negative",
                         )
                     ui.notify("Änderung aktualisiert", color="positive")
@@ -167,8 +167,7 @@ def show_scenarioTile():
                                 color="negative",
                             )
 
-                    btn_label = "Aktualisieren" if scenario else "Speichern"
-                    ui.button(btn_label, on_click=save_action)
+                    ui.button("Speichern", on_click=save_action)
                     ui.button(
                         "Abbrechen",
                         on_click=lambda: show_overview(detail_ext.value),

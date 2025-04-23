@@ -2,7 +2,7 @@
 
 from pydantic import BaseModel, field_validator
 from typing import ClassVar, List, Optional
-from .monthYear import *
+from ..utils.monthYear import *
 
 
 class Scenario(BaseModel):

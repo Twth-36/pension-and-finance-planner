@@ -24,7 +24,7 @@ def show_pensionFundDetail(
                     pensionFund.buyinExpense = Expense.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -39,7 +39,7 @@ def show_pensionFundDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -55,7 +55,7 @@ def show_pensionFundDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -88,7 +88,7 @@ def show_pensionFundDetail(
                     pensionFund.pensionCF = Cashflow.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -103,7 +103,7 @@ def show_pensionFundDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -119,7 +119,7 @@ def show_pensionFundDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -153,7 +153,7 @@ def show_pensionFundDetail(
                     pensionFund.pensionIncome = Income.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -168,7 +168,7 @@ def show_pensionFundDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -184,7 +184,7 @@ def show_pensionFundDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 

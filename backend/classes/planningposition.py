@@ -1,7 +1,7 @@
 """Class for general planningposition"""
 
 from pydantic import BaseModel
-from .monthYear import MonthYear
+from ..utils.monthYear import MonthYear
 from typing import Optional
 from .scenario import *
 

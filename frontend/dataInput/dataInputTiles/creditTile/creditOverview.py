@@ -1,6 +1,6 @@
 from nicegui import ui
 from backend.classes.credit import Credit, Person
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from frontend.utils import *
 from frontend.utils.confDialog import show_confDialog
 from frontend.utils.format import formatswiss

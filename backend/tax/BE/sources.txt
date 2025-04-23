@@ -1,0 +1,5 @@
+taxRateBE: https://www.sv.fin.be.ch/de/start/themen/steuern-berechnen/steueranlagen.html
+
+Einfache Steuer: https://www.belex.sites.be.ch/app/de/texts_of_law/661.11 Art 42
+Kapitalauszahlungssteur: https://www.belex.sites.be.ch/app/de/texts_of_law/661.11 Art 44
+Vermögenssteuer: https://www.belex.sites.be.ch/app/de/texts_of_law/661.11 Art 65

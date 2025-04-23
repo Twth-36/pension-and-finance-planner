@@ -1,5 +1,5 @@
 from nicegui import ui
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from backend.classes.person import Person
 from backend.classes.pensionFund import PensionFund
 from backend.classes.scenario import Scenario
@@ -109,8 +109,7 @@ def show_pensionFundForm(pensionFund_card, pensionFund=None):
                                 f"Upps, etwas passte da nicht:\n{e}", color="negative"
                             )
 
-                    btn_label = "Aktualisieren" if pensionFund else "Speichern"
-                    ui.button(btn_label, on_click=save_action)
+                    ui.button("Speichern", on_click=save_action)
                     # Use local import to avoid circular dependency
                     from .pensionFundOverview import show_pensionFundOverview
 

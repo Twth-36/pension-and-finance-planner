@@ -1,5 +1,5 @@
 from nicegui import ui
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from backend.classes.person import Person
 from backend.classes.manualExpense import ManualExpense
 from backend.classes.scenario import Scenario
@@ -32,13 +32,19 @@ def show_manualExpenseForm(manualExpense_card, manualExpense=None):
                     ),
                     with_input=True,
                 )
-                base_val_input = ui.number(
-                    label="Betrag (pro Monat)",
-                    value=(manualExpense.baseValue if manualExpense else None),
-                    validation={
-                        "Muss grösser oder gleich 0 sein": lambda v: v is None or v >= 0
-                    },
-                )
+                with ui.row().classes("justify-center items-center"):
+                    base_val_input = ui.number(
+                        label="Betrag",
+                        value=(manualExpense.baseValue if manualExpense else None),
+                        validation={
+                            "Muss grösser oder gleich 0 sein": lambda v: v is None
+                            or v >= 0
+                        },
+                    )
+
+                    MJ_toggle = ui.toggle({1: "M", 12: "J"}, value=1).tooltip(
+                        "M: Monatswert, J: Jahreswert"
+                    )
 
                 inflationRate_input = ui.number(
                     label="Inflationsrate (p.a.)",
@@ -92,7 +98,9 @@ def show_manualExpenseForm(manualExpense_card, manualExpense=None):
                                 )
 
                                 if base_val_input.value:
-                                    manualExpense.baseValue = base_val_input.value
+                                    manualExpense.baseValue = (
+                                        base_val_input.value / MJ_toggle.value
+                                    )
                                 if inflationRate_input.value:
                                     manualExpense.inflationRate = (
                                         inflationRate_input.value
@@ -110,7 +118,9 @@ def show_manualExpenseForm(manualExpense_card, manualExpense=None):
                                         person_input.value
                                     )
                                 if base_val_input.value:
-                                    params["baseValue"] = base_val_input.value
+                                    params["baseValue"] = (
+                                        base_val_input.value / MJ_toggle.value
+                                    )
                                 if inflationRate_input.value:
                                     params["inflationRate"] = inflationRate_input.value
                                 if taxablePortion_input.value:
@@ -134,8 +144,7 @@ def show_manualExpenseForm(manualExpense_card, manualExpense=None):
                                 f"Upps, etwas passte da nicht:\n{e}", color="negative"
                             )
 
-                    btn_label = "Aktualisieren" if manualExpense else "Speichern"
-                    ui.button(btn_label, on_click=save_action)
+                    ui.button("Speichern", on_click=save_action)
                     # Use local import to avoid circular dependency
                     from .manualExpenseOverview import show_manualExpenseOverview
 
@@ -161,7 +170,7 @@ def show_manualExpenseForm(manualExpense_card, manualExpense=None):
                         value=next(s.name for s in Scenario.instanceDic.values()),
                         with_input=False,
                         on_change=lambda e: show_manualExpenseChips(
-                            card=chip_card,  # ← this works because chip_card is defined in the same scope
+                            card=chip_card,
                             manualExpense=manualExpense,
                             scenario=Scenario.get_itemByName(e.value),
                         ),

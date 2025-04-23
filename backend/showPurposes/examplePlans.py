@@ -4,6 +4,7 @@ from backend.classes.manualExpense import ManualExpense
 from backend.classes.manualIncome import ManualIncome
 from backend.classes.manualIncomeTaxPos import ManualIncomeTaxPos
 from backend.classes.pensionFund import PensionFund
+from backend.classes.pillar3a import Pillar3a
 from backend.classes.realEstate import *
 
 
@@ -37,24 +38,22 @@ def examplePlanMarried():
     PensionFund.create(name="PK Post", person=andy, baseValue=450000)
     PensionFund.create(name="PK SBB", person=lou, baseValue=400000)
 
-    # # Pillar 3a
-    # Pillar3a.create(name="Säule 3a Depot UBS", personName="Andy", baseValue=70000)
-    # Pillar3aInsurance.create(
-    #     name="Säule 3a Police AXA", personName="Lou", baseValue=90000
-    # )
+    # Pillar 3a
+    Pillar3a.create(name="Säule 3a Depot UBS", person=andy, baseValue=70000)
+
+    home = RealEstate.create(name="EFH", baseValue=1000000)
 
     Credit.create(
         name="Darlehen",
         person=andy,
         baseValue=20000,
     )
-    hypo = Credit.create(
+    Credit.create(
         name="Hypothek",
         baseValue=100000,
         endDate=MonthYear(month=8, year=2030),
+        realEstate=home,
     )
-
-    RealEstate.create(name="EFH", baseValue=1000000)
 
     ManualIncomeTaxPos.create(
         name="Alleinstehendenabzug", baseValue=4000, type=TaxPositionType.deduction

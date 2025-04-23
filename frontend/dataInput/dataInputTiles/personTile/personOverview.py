@@ -1,5 +1,5 @@
 from nicegui import ui
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from backend.classes.person import Person
 from backend.tax.taxproperties import Taxation
 from frontend.utils import *

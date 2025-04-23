@@ -1,5 +1,5 @@
 from nicegui import ui
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from backend.classes.person import Person
 from backend.classes.manualIncome import ManualIncome
 from backend.classes.scenario import Scenario
@@ -32,15 +32,23 @@ def show_manualIncomeForm(manualIncome_card, manualIncome=None):
                     ),
                     with_input=True,
                 )
-                base_val_input = ui.number(
-                    label="Betrag (pro Monat)",
-                    value=(manualIncome.baseValue if manualIncome else None),
-                    validation={
-                        "Muss grösser oder gleich 0 sein": lambda v: v is None or v >= 0
-                    },
-                ).tooltip(
-                    "Beim Erwerbseinkommen soll ebenfalls ein 13. Monatslohn miteinberechnet werden."
-                )
+
+                with ui.row().classes("justify-center items-center"):
+                    base_val_input = ui.number(
+                        label="Betrag",
+                        value=(manualIncome.baseValue if manualIncome else None),
+                        validation={
+                            "Muss grösser oder gleich 0 sein": lambda v: v is None
+                            or v >= 0
+                        },
+                    ).tooltip(
+                        "Beim Erwerbseinkommen soll ebenfalls ein 13. Monatslohn miteinberechnet werden."
+                    )
+
+                    MJ_toggle = ui.toggle({1: "M", 12: "J"}, value=1).tooltip(
+                        "M: Monatswert, J: Jahreswert"
+                    )
+
                 taxablePortion_input = ui.number(
                     label="Steuerbar",
                     value=(
@@ -73,7 +81,9 @@ def show_manualIncomeForm(manualIncome_card, manualIncome=None):
                                 )
 
                                 if base_val_input.value:
-                                    manualIncome.baseValue = base_val_input.value
+                                    manualIncome.baseValue = (
+                                        base_val_input.value / MJ_toggle.value
+                                    )
                                 if taxablePortion_input.value:
                                     manualIncome.taxablePortion = (
                                         taxablePortion_input.value
@@ -85,7 +95,9 @@ def show_manualIncomeForm(manualIncome_card, manualIncome=None):
                                         person_input.value
                                     )
                                 if base_val_input.value:
-                                    params["baseValue"] = base_val_input.value
+                                    params["baseValue"] = (
+                                        base_val_input.value / MJ_toggle.value
+                                    )
                                 if taxablePortion_input.value:
                                     params["taxablePortion"] = (
                                         taxablePortion_input.value
@@ -103,8 +115,7 @@ def show_manualIncomeForm(manualIncome_card, manualIncome=None):
                                 f"Upps, etwas passte da nicht:\n{e}", color="negative"
                             )
 
-                    btn_label = "Aktualisieren" if manualIncome else "Speichern"
-                    ui.button(btn_label, on_click=save_action)
+                    ui.button("Speichern", on_click=save_action)
                     # Use local import to avoid circular dependency
                     from .manualIncomeOverview import show_manualIncomeOverview
 

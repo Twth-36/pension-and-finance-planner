@@ -1,5 +1,5 @@
 from nicegui import ui
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from backend.classes.pensionFund import PensionFund
 from frontend.utils import *
 from frontend.utils.confDialog import show_confDialog

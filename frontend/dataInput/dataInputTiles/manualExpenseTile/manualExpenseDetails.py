@@ -23,7 +23,7 @@ def show_manualExpenseDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -38,7 +38,7 @@ def show_manualExpenseDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -54,7 +54,7 @@ def show_manualExpenseDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 

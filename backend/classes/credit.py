@@ -7,7 +7,7 @@ from backend.classes.realEstate import *
 from .expense import *
 from .scenario import *
 from .person import *
-from .monthYear import *
+from ..utils.monthYear import *
 from .planningposition import *
 
 

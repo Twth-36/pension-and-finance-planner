@@ -13,6 +13,7 @@ def dialog_planPos(
     valueTooltip: str = None,
     valueFormat: str = None,
     valueProps: str = None,
+    showValue: bool = True,
 ):
     with ui.dialog() as dialog, ui.card():
 
@@ -46,15 +47,20 @@ def dialog_planPos(
             .props("autofocus")
         )
 
+        value_prefill = None
+        if planPos:
+            if planPos.value:
+                value_prefill = planPos.value
         value_input = (
             ui.number(
                 label=valueLabel,
-                value=planPos.value if planPos else 0,
+                value=value_prefill,
                 format=valueFormat,
             )
             .props(valueProps)
             .tooltip(valueTooltip)
         )
+        value_input.set_visibility(showValue)
 
         desc_input = ui.input(
             label="Beschreibung", value=planPos.description if planPos else None
@@ -95,7 +101,7 @@ def dialog_planPos(
                         color="negative",
                     )
 
-            ui.button("Aktualisieren" if planPos else "Speichern", on_click=save_action)
+            ui.button("Speichern", on_click=save_action)
 
             ui.button("Abbrechen", on_click=lambda: dialog.submit(None)).props(
                 "outline"

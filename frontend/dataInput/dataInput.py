@@ -18,12 +18,24 @@ from frontend.dataInput.dataInputTiles.pensionFundTile.pensionFundTile import (
 from frontend.dataInput.dataInputTiles.personTile import *
 
 from frontend.dataInput.dataInputTiles.personTile.personTile import show_personTile
+from frontend.dataInput.dataInputTiles.pillar3aTile.pillar3aTile import (
+    show_pillar3aTile,
+)
+from frontend.dataInput.dataInputTiles.pillar3aPoliceTile.pillar3aPoliceTile import (
+    show_pillar3aPoliceTile,
+)
+from frontend.dataInput.dataInputTiles.pillar3bPoliceTile.pillar3bPoliceTile import (
+    show_pillar3bPoliceTile,
+)
 from frontend.dataInput.dataInputTiles.realEstateTile import *
 from frontend.dataInput.dataInputTiles.realEstateTile.realEstateTile import (
     show_realEstateTile,
 )
 from frontend.dataInput.dataInputTiles.scenarioTile import *
 from frontend.dataInput.dataInputTiles.taxesTile.taxesTile import show_taxesTile
+from frontend.dataInput.dataInputTiles.vestedBenefitTile.vestedBenefitTile import (
+    show_vestedBenefitTile,
+)
 
 
 def show_dataInput(main_content):
@@ -38,10 +50,14 @@ def show_dataInput(main_content):
         # "Vermögen und Schulden" Part
         ui.label("Vermögen und Schulden").classes("text-h6 font-bold q-mt-md")
         with ui.row():
-            show_freeAssetTile()  # place free assets card
+            show_freeAssetTile()
             show_realEstateTile()
-            show_creditTile()  # place credits card
+            show_creditTile()
             show_pensionFundTile()
+            show_vestedBenefitTile()
+            show_pillar3aTile()
+            show_pillar3aPoliceTile()
+            show_pillar3bPoliceTile()
 
         # "Einkommen und Ausgaben" Part
         ui.label("Einkommen und Ausgaben").classes("text-h6 font-bold q-mt-md")

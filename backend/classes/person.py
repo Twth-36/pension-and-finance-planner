@@ -4,7 +4,7 @@ from backend.logger_setup import logger
 from pydantic import BaseModel, ConfigDict, field_validator
 from typing import ClassVar, Optional
 from backend.tax.taxproperties import *
-from .monthYear import *
+from ..utils.monthYear import *
 
 
 class Person(BaseModel):

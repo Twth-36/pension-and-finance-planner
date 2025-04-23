@@ -22,7 +22,7 @@ def show_realEstateDetail(
                     realEstate.maintenanceExpense = Expense.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -37,7 +37,7 @@ def show_realEstateDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -53,7 +53,7 @@ def show_realEstateDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -86,7 +86,7 @@ def show_realEstateDetail(
                     realEstate.taxExpense = Expense.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -101,7 +101,7 @@ def show_realEstateDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -117,7 +117,7 @@ def show_realEstateDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -151,7 +151,7 @@ def show_realEstateDetail(
                     realEstate.renovationExpense = Expense.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -166,7 +166,7 @@ def show_realEstateDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -182,7 +182,7 @@ def show_realEstateDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -216,7 +216,7 @@ def show_realEstateDetail(
                     realEstate.purchaseCF = Cashflow.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -231,7 +231,7 @@ def show_realEstateDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -247,7 +247,7 @@ def show_realEstateDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -281,7 +281,7 @@ def show_realEstateDetail(
                     realEstate.saleCF = Cashflow.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -296,7 +296,7 @@ def show_realEstateDetail(
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -312,7 +312,7 @@ def show_realEstateDetail(
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 

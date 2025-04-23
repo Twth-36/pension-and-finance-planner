@@ -8,11 +8,7 @@ def show_taxesOverview(taxes_card):
     taxes_card.clear()
     with taxes_card:
         # Header
-        with ui.row().classes("justify-center items-center"):
-            ui.label("Steuergrundlagen").classes("text-h6")
-            ui.label(f"Basisjahr: {Taxes.baseYearTaxCalc}").classes(
-                "italic text-sm text-gray-600"
-            )
+        ui.label("Steuergrundlagen").classes("text-h6")
 
         with ui.column():
 
@@ -35,7 +31,7 @@ def show_taxesOverview(taxes_card):
             # **Place**
             def update_place(change):
                 try:
-                    Taxes.update_place(new_place=change.value)
+                    Taxes.place = change.value
                     show_taxesOverview(taxes_card)
                     ui.notify("Änderung aktualisiert", color="positive")
                 except Exception as e:
@@ -74,30 +70,4 @@ def show_taxesOverview(taxes_card):
             ).tooltip(
                 "Bei einzelner Besteuerung werden sämtliche Personen individuell zum Alleinstehenden-Satz besteuert."
                 "Positionen ohne Personenzuweisung werden je hälftig berücksichtigt. Andernfalls werden die Steuern kumuliert zum verheirateten-Satz berechnet."
-            )
-
-            # **taxRate Canton
-
-            # TODO
-
-            # **taxRateCom
-            # **Taxation**
-            def update_taxRateCom(new_taxRate: float):
-                try:
-                    Taxes.taxRateCom = new_taxRate
-                    ui.notify("Änderung aktualisiert", color="positive")
-                except Exception as e:
-                    ui.notify(f"Upps, etwas passte da nicht:\n{e}", color="negative")
-
-            taxRateCom_input = (
-                ui.number(
-                    label="Steuersatz Gemeinde",
-                    value=(Taxes.taxRateCom if Taxes.taxRateCom else None),
-                    format="%.2f",
-                )
-                .props("suffix=%")
-                .tooltip("Steuersatz zur Berechnung der Liegenschaftssteuer.")
-            )
-            taxRateCom_input.on(
-                "blur", lambda: update_taxRateCom(new_taxRate=taxRateCom_input.value)
             )

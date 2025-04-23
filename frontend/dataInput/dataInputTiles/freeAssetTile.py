@@ -1,6 +1,6 @@
 from nicegui import ui
 from backend.classes.freeAsset import *
-from backend.classes.monthYear import *
+from backend.utils.monthYear import *
 from frontend.utils import *
 from frontend.utils.confDialog import show_confDialog
 from frontend.utils.format import formatswiss
@@ -22,7 +22,9 @@ def show_freeAssetTile():
                     try:
                         FreeAsset.returnRateInvestCap = new_rate
                     except Exception as e:
-                        ui.notify(f"Upps, etwas passte da nicht: {e}", color="negative")
+                        ui.notify(
+                            f"Upps, etwas passte da nicht:  \n{e}", color="negative"
+                        )
                     ui.notify("Änderung aktualisiert", color="positive")
 
                 rr_input = (
@@ -41,7 +43,9 @@ def show_freeAssetTile():
                     try:
                         FreeAsset.liqRes = new_reserve
                     except Exception as e:
-                        ui.notify(f"Upps, etwas passte da nicht: {e}", color="negative")
+                        ui.notify(
+                            f"Upps, etwas passte da nicht:  \n{e}", color="negative"
+                        )
                     ui.notify("Änderung aktualisiert", color="positive")
 
                 liq_input = (
@@ -177,8 +181,7 @@ def show_freeAssetTile():
                                 f"Upps, etwas passte da nicht:\n{e}", color="negative"
                             )
 
-                    btn_label = "Aktualisieren" if freeAsset else "Speichern"
-                    ui.button(btn_label, on_click=save_action)
+                    ui.button("Speichern", on_click=save_action)
                     ui.button(
                         "Abbrechen", on_click=lambda: show_overview(detail_ext.value)
                     ).props("outline")

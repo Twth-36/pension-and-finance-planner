@@ -10,7 +10,6 @@ __all__ = [
     "manualExpense",
     "manualIncome",
     "manualIncomeTaxPos",
-    "monthYear",
     "pensionFund",
     "person",
     "pillar3a",

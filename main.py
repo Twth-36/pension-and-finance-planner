@@ -2,9 +2,8 @@ from nicegui import ui
 from frontend.dataInput import *
 from frontend.dataInput.dataInput import show_dataInput
 from backend.showPurposes.examplePlans import *
-from frontend.incomeAndWealthOverview.incomeAndWealthOverview import (
-    show_incomeAndWealthOverview,
-)
+from frontend.taxOverview.taxOverview import show_taxOverview
+from frontend.wealthOverview.wealthOverview import show_wealthOverview
 
 
 ####### Load example data for developement purposes
@@ -22,8 +21,16 @@ with left_drawer:
         "w-full text-left bg-gray-200 text-black normal-case transition-shadow duration-300 hover:shadow-lg q-pa-sm"
     ).props("flat")
     ui.button(
-        "Einkommens- und Vermögensübersicht",
-        on_click=lambda: show_incomeAndWealthOverview(main_content),
+        "Vermögensübersicht",
+        on_click=lambda: show_wealthOverview(main_content),
+    ).classes(
+        "w-full text-left bg-gray-200 text-black normal-case transition-shadow duration-300 hover:shadow-lg q-pa-sm"
+    ).props(
+        "flat"
+    )
+    ui.button(
+        "Steuerübersicht",
+        on_click=lambda: show_taxOverview(main_content),
     ).classes(
         "w-full text-left bg-gray-200 text-black normal-case transition-shadow duration-300 hover:shadow-lg q-pa-sm"
     ).props(
@@ -45,7 +52,7 @@ with ui.header(elevated=True).style(
                 "flat color=white"
             )
             # Title using text-h3 for a slightly smaller heading; white text for contrast.
-            ui.markdown("Finanz- und Pensionierungsplaner *by Tim*").classes(
+            ui.markdown("Ich plane meine Pensionierung").classes(
                 "text-h3 q-ml-md"
             ).style("color: white;")
 
@@ -69,11 +76,10 @@ with ui.header(elevated=True).style(
 
 
 with ui.footer().style("background-color: #616161; padding: 16px;"):
-    with ui.row().classes("items-center"):
+    with ui.column().classes():
         ui.markdown(
-            "Jegliche gewerbliche Verwendung von Dritten ist untersagt. Sämtliche Angaben sind ohne Gewähr."
+            "Jegliche gewerbliche Verwendung von Dritten ist untersagt. Sämtliche Angaben sind ohne Gewähr.  \nErstellt durch Tim Wüthrich"
         ).classes("text-body2 q-ml-md")
-        # Optionally, add elements on the right side here (e.g. user avatar).
 
 
 # Main Content Area

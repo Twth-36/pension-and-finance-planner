@@ -1,5 +1,5 @@
 from nicegui import ui
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from backend.classes.person import Person
 from backend.classes.manualIncomeTaxPos import ManualIncomeTaxPos
 from backend.classes.scenario import Scenario
@@ -105,8 +105,7 @@ def show_manualIncomeTaxPosForm(manualIncomeTaxPos_card, manualIncomeTaxPos=None
                                 f"Upps, etwas passte da nicht:\n{e}", color="negative"
                             )
 
-                    btn_label = "Aktualisieren" if manualIncomeTaxPos else "Speichern"
-                    ui.button(btn_label, on_click=save_action)
+                    ui.button("Speichern", on_click=save_action)
                     # Use local import to avoid circular dependency
                     from .manualIncomeTaxPosOverview import (
                         show_manualIncomeTaxPosOverview,

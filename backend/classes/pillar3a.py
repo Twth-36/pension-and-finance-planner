@@ -12,11 +12,16 @@ class Pillar3a(BaseModel):
     person: Person
     baseValue: Optional[float] = 0
     planValue: Optional[List[Planningposition]] = []
-    returnRate: Optional[List[Planningposition]] = []
+    returnRate: Optional[float] = 0
+    deposit: Optional[List[Planningposition]] = []
+    payoutDate: Optional[List[Planningposition]] = (
+        []
+    )  # Value not used (only scenario and month)
+
     depositExpense: Optional[Expense] = (
         None  # expense Position where deposits are accounted
     )
-    payoutCFpos: Optional[Cashflow] = None
+    payoutCF: Optional[Cashflow] = None
 
     # Class-variables
     instanceDic: ClassVar[dict] = {}
@@ -44,6 +49,19 @@ class Pillar3a(BaseModel):
     def create(cls, **data) -> "Pillar3a":
         obj = cls.model_validate(data)  # Creation and validation
         cls.instanceDic[obj.name] = obj  # adding to instanceDic
+
+        if obj.depositExpense is None:
+            param = {"name": "Einzahlung: " + obj.name, "taxablePortion": 100}
+            if obj.person:
+                param["person"] = obj.person
+            obj.depositExpense = Expense.create(**param)
+
+        if obj.payoutCF is None:
+            param = {"name": "Auszahlung: " + obj.name, "taxablePortion": 100}
+            if obj.person:
+                param["person"] = obj.person
+            obj.payoutCF = Cashflow.create(**param)
+
         return obj
 
     @classmethod

@@ -1,5 +1,5 @@
 from nicegui import ui
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from backend.classes.person import Person
 from backend.classes.person import Person
 from backend.tax.taxproperties import Confession
@@ -57,11 +57,10 @@ def show_personForm(person_card, person=None):
                             )  # Return to overview after saving
                         except Exception as e:
                             ui.notify(
-                                f"Upps, etwas passte da nicht: {e}", color="negative"
+                                f"Upps, etwas passte da nicht:  \n{e}", color="negative"
                             )
 
-                    btn_label = "Aktualisieren" if person else "Speichern"
-                    ui.button(btn_label, on_click=save_action)
+                    ui.button("Speichern", on_click=save_action)
                     # Use local import to avoid circular dependency
                     from .personOverview import show_personOverview
 

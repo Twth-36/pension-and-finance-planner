@@ -8,7 +8,7 @@ from backend.utils.nameManager import *
 from .planningposition import *
 from typing import ClassVar, Optional, List
 from pydantic import BaseModel, field_validator
-from .monthYear import *
+from ..utils.monthYear import *
 from .person import *
 
 

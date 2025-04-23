@@ -20,7 +20,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                     credit.interestExpense = Expense.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -35,7 +35,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -51,7 +51,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -64,8 +64,6 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                     on_change=update_interestExpense,
                 ).tooltip(
                     "Ausgabeposition über welche die Zinszahlungen verrechnet werden."
-                ).classes(
-                    "w-full"
                 )
 
                 ui.button(
@@ -86,7 +84,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                     credit.paybackCF = Cashflow.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -101,7 +99,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -117,7 +115,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -131,8 +129,6 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                     on_change=update_paybackCF,
                 ).tooltip(
                     "Cashflow-Position über welche eine Amortisation verrechnet werden."
-                ).classes(
-                    "w-full"
                 )
 
                 ui.button(
@@ -153,7 +149,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                     credit.increaseCF = Cashflow.get_itemByName(change.value)
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
                 ui.notify("Änderung gespeichert", color="positive")
@@ -168,7 +164,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                         )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -184,7 +180,7 @@ def show_creditDetail(card, credit: Credit = None, show_details: bool = False):
                     )
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 

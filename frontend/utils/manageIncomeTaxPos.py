@@ -51,9 +51,7 @@ def dialog_IncomeTaxPos(incomeTaxPos: IncomeTaxPos = None):
                     ui.notify(f"Upps, etwas passte da nicht:\n{e}", color="negative")
                     dialog.submit(None)
 
-            ui.button(
-                "Aktualisieren" if incomeTaxPos else "Speichern", on_click=save_action
-            )
+            ui.button("Speichern", on_click=save_action)
 
             ui.button("Abbrechen", on_click=lambda: dialog.submit(None)).props(
                 "outline"

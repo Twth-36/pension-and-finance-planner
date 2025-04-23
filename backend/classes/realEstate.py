@@ -3,7 +3,7 @@
 from typing import Optional, List
 from .planningposition import *  # issue why necessary?
 from pydantic import BaseModel, field_validator
-from .monthYear import *
+from ..utils.monthYear import *
 from .expense import *
 from .person import *
 from .scenario import *

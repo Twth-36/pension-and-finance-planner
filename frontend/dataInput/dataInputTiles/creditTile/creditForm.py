@@ -1,6 +1,6 @@
 from nicegui import ui
 from backend.classes.credit import Credit, Person
-from backend.classes.monthYear import MonthYear
+from backend.utils.monthYear import MonthYear
 from backend.classes.realEstate import *
 from frontend.dataInput.dataInputTiles.creditTile.creditDetails import show_creditDetail
 from .creditChips import show_creditChips
@@ -118,11 +118,10 @@ def show_creditForm(credit_card, credit=None):
                                 show_creditForm(credit_card, credit=new_credit)
                         except Exception as e:
                             ui.notify(
-                                f"Upps, etwas passte da nicht: ", color="negative"
+                                f"Upps, etwas passte da nicht:  \n{e}", color="negative"
                             )
 
-                    btn_label = "Aktualisieren" if credit else "Speichern"
-                    ui.button(btn_label, on_click=save_action)
+                    ui.button("Speichern", on_click=save_action)
                     # Use local import to avoid circular dependency
                     from .creditOverview import show_creditOverview
 

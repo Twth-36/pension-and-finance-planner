@@ -10,7 +10,7 @@ from backend.classes.person import Person
 from .planningposition import Planningposition
 from typing import TYPE_CHECKING, ClassVar, Optional, List
 from pydantic import BaseModel
-from .monthYear import *
+from ..utils.monthYear import *
 from .scenario import *
 
 # import Income only for typechecking due to circular import

@@ -60,7 +60,7 @@ def dialog_Income(income: Income = None):
                         incomeTaxPos_input.value = changed_taxPos.name
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
@@ -77,7 +77,7 @@ def dialog_Income(income: Income = None):
 
                 except Exception as e:
                     ui.notify(
-                        f"Upps, etwas passte da nicht: {e}",
+                        f"Upps, etwas passte da nicht:  \n{e}",
                         color="negative",
                     )
 
