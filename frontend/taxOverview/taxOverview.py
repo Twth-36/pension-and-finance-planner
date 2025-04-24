@@ -4,8 +4,9 @@ from nicegui import ui
 from backend.classes.person import Person
 from backend.classes.taxes import Taxes
 from backend.tax.taxproperties import Confession, Taxation
-from frontend.taxOverview.incometaxChart import show_incometaxChart
-from frontend.taxOverview.wealthtaxChart import show_wealthChart
+from frontend.taxOverview.capPayoutTaxChart import show_capPayoutTaxChart
+from frontend.taxOverview.incomeTaxChart import show_incomeTaxChart
+from frontend.taxOverview.wealthTaxChart import show_wealthTaxChart
 
 
 async def show_taxOverview(main_content):
@@ -45,7 +46,7 @@ async def show_taxOverview(main_content):
             capTax = ui.tab("Kapitalauszahlungssteuer")
         with ui.tab_panels(tabs, value=incomeTax).classes("w-full"):
             with ui.tab_panel(incomeTax) as incomeTaxPanel:
-                await show_incometaxChart(
+                await show_incomeTaxChart(
                     canton=Taxes.canton,
                     place=Taxes.place,
                     taxation=Taxes.taxation,
@@ -54,7 +55,7 @@ async def show_taxOverview(main_content):
                 )
 
             with ui.tab_panel(wealthTax):
-                await show_wealthChart(
+                await show_wealthTaxChart(
                     canton=Taxes.canton,
                     place=Taxes.place,
                     taxation=Taxes.taxation,
@@ -62,4 +63,10 @@ async def show_taxOverview(main_content):
                     childrenCnt=Taxes.childrenCnt if Taxes.childrenCnt else 0,
                 )
             with ui.tab_panel(capTax):
-                ui.label("Kapitalauszahlung")
+                await show_capPayoutTaxChart(
+                    canton=Taxes.canton,
+                    place=Taxes.place,
+                    taxation=Taxes.taxation,
+                    conf=conf,
+                    childrenCnt=Taxes.childrenCnt if Taxes.childrenCnt else 0,
+                )

@@ -1,8 +1,8 @@
 import asyncio
 from nicegui import ui
 
-from backend.classes.taxes import Taxes
-from backend.tax.incomeTax import clc_incomeTax
+
+from backend.tax.capPayoutTax import clc_capPayoutTax
 from backend.tax.taxproperties import Canton, Confession, Taxation
 
 
@@ -10,16 +10,16 @@ def clc_chartData(
     canton: Canton, place: str, taxation: Taxation, conf: Confession, childrenCnt: int
 ):
     minValue = 1
-    maxValue = 250001
-    stp = int((maxValue - minValue) / 200)
+    maxValue = 500001
+    stp = int((maxValue - minValue) / 500)
 
     x = list(range(minValue, maxValue, stp))
     taxes = [
         [
-            inc,
+            payout,
             round(
-                clc_incomeTax(
-                    income=inc,
+                clc_capPayoutTax(
+                    payoutValue=payout,
                     canton=canton,
                     place=place,
                     taxation=taxation,
@@ -29,18 +29,18 @@ def clc_chartData(
                 )
             ),
         ]
-        for inc in x
+        for payout in x
     ]
-    percTaxes = [[inc, round(tax / inc * 100, 2)] for inc, tax in taxes]
+    percTaxes = [[payout, round(tax / payout * 100, 2)] for payout, tax in taxes]
 
     marginTaxes = [
-        [inc, round((tax - tax_prev) / stp * 100, 2)]
-        for (inc_prev, tax_prev), (inc, tax) in zip(taxes, taxes[1:])
+        [payout, round((tax - tax_prev) / stp * 100, 2)]
+        for (payout_prev, tax_prev), (payout, tax) in zip(taxes, taxes[1:])
     ]
     return taxes, percTaxes, marginTaxes, stp
 
 
-async def show_incomeTaxChart(
+async def show_capPayoutTaxChart(
     canton: Canton,
     place: str,
     taxation: Taxation,
@@ -61,7 +61,7 @@ async def show_incomeTaxChart(
     ui.echart(
         {
             "title": {
-                "text": "Einkommenssteuer abhängig vom steuerbaren Einkommen",
+                "text": "Kapitalauszahlungssteuer abhängig vom Auszahlungsbetrag",
                 "subtext": "Der Grenzsteuersatz (%) wurde mit einer Schrittlänge von "
                 + str(stp)
                 + " approximiert.",
@@ -92,7 +92,7 @@ async def show_incomeTaxChart(
             ],
             "series": [
                 {
-                    "name": "Einkommenssteuer",
+                    "name": "Kapitalauszahlungssteuer",
                     "type": "line",
                     "data": taxes,
                     "showSymbol": False,
@@ -102,7 +102,7 @@ async def show_incomeTaxChart(
                     "yAxisIndex": 0,
                 },
                 {
-                    "name": "Einkommenssteuer (%)",
+                    "name": "Kapitalauszahlungssteuer (%)",
                     "type": "line",
                     "data": percTaxes,
                     "showSymbol": False,

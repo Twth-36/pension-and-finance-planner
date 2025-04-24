@@ -1,9 +1,10 @@
-from backend.tax.BE.wealthTaxBE import clc_wealthTaxBE
+from backend.tax.BE.capPayoutTaxBE import clc_capPayoutTaxBE
+from backend.tax.CH.capPayoutTaxCH import clc_capPayoutTaxCH
 from backend.tax.taxproperties import Canton, Confession, Taxation
 
 
-def clc_wealthTax(
-    wealth: float,
+def clc_capPayoutTax(
+    payoutValue: float,
     canton: Canton,
     place: str,
     taxation: Taxation,
@@ -15,16 +16,17 @@ def clc_wealthTax(
     if taxation == Taxation.single and conf2 is not None:
         raise Exception("For single taxation conf2 needs to be None")
 
-    taxes = 0
+    taxes = clc_capPayoutTaxCH(
+        payoutValue=payoutValue, taxation=taxation, childrenCnt=childrenCnt
+    )
     match canton:
         case Canton.BE:
-            taxes += clc_wealthTaxBE(
-                wealth=wealth,
+            taxes += clc_capPayoutTaxBE(
+                payoutValue=payoutValue,
                 place=place,
                 taxation=taxation,
                 conf1=conf1,
                 conf2=conf2,
-                childrenCnt=childrenCnt,
             )
 
     return taxes

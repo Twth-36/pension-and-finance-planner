@@ -68,8 +68,7 @@ def show_taxesOverview(taxes_card):
                 value=Taxes.taxation.value,
                 on_change=update_taxation,
             ).tooltip(
-                "Bei einzelner Besteuerung werden sämtliche Personen individuell zum Alleinstehenden-Satz besteuert."
-                "Positionen ohne Personenzuweisung werden je hälftig berücksichtigt. Andernfalls werden die Steuern kumuliert zum verheirateten-Satz berechnet."
+                "Bei mehreren Personen und der Auswahl Alleinstehenden-Satz werden die Steuern je Person einzeln berechnet. Nicht zugeordnete Positionen werden je hälftig berücksichtigt."
             )
 
             # **childrenCnt**

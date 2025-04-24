@@ -11,7 +11,7 @@ def clc_chartData(
 ):
     minValue = 1
     maxValue = 1000001
-    stp = int((maxValue - minValue) / 200)
+    stp = int((maxValue - minValue) / 500)
 
     x = list(range(minValue, maxValue, stp))
     taxes = [
@@ -40,7 +40,7 @@ def clc_chartData(
     return taxes, percTaxes, marginTaxes, stp
 
 
-async def show_wealthChart(
+async def show_wealthTaxChart(
     canton: Canton,
     place: str,
     taxation: Taxation,
@@ -92,7 +92,7 @@ async def show_wealthChart(
             ],
             "series": [
                 {
-                    "name": "Einkommenssteuer",
+                    "name": "Vermögenssteuer",
                     "type": "line",
                     "data": taxes,
                     "showSymbol": False,
@@ -102,7 +102,7 @@ async def show_wealthChart(
                     "yAxisIndex": 0,
                 },
                 {
-                    "name": "Einkommenssteuer (%)",
+                    "name": "Vermögenssteuer (%)",
                     "type": "line",
                     "data": percTaxes,
                     "showSymbol": False,

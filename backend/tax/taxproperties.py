@@ -19,8 +19,8 @@ class Confession(Enum):
 
 
 class Taxation(Enum):
-    single = "Einzelne Besteuerung"  # includes ledig, getrennt, geschieden, verwitwet
-    together = "Gemeinsame Besteuerung"
+    single = "Alleinstehenden-Satz"  # includes ledig, getrennt, geschieden, verwitwet
+    together = "Verheirateten-Satz"  # includes ledig, geschieden with kids and eingetr. Partnerschaft
 
 
 class TaxPositionType(Enum):
