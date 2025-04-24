@@ -1,12 +1,15 @@
+import asyncio
 from nicegui import ui
 
 from backend.classes.person import Person
 from backend.classes.taxes import Taxes
-from backend.tax.taxproperties import Confession
+from backend.tax.taxproperties import Confession, Taxation
 from frontend.taxOverview.incometaxChart import show_incometaxChart
+from frontend.taxOverview.wealthtaxChart import show_wealthChart
 
 
-def show_taxOverview(main_content):
+async def show_taxOverview(main_content):
+
     main_content.clear()
     with main_content:
         with ui.column():
@@ -31,20 +34,32 @@ def show_taxOverview(main_content):
                     ui.label(Taxes.taxation).classes(
                         "text-body1 font-semibold text-right"
                     )
+                    ui.label("Anzahl Kinder:").classes("text-body1 font-medium")
+                    ui.label(Taxes.childrenCnt).classes(
+                        "text-body1 font-semibold text-right"
+                    )
 
         with ui.tabs().classes("w-full") as tabs:
             incomeTax = ui.tab("Einkommenssteuer")
             wealthTax = ui.tab("Vemögenssteuer")
             capTax = ui.tab("Kapitalauszahlungssteuer")
         with ui.tab_panels(tabs, value=incomeTax).classes("w-full"):
-            with ui.tab_panel(incomeTax):
-                show_incometaxChart(
+            with ui.tab_panel(incomeTax) as incomeTaxPanel:
+                await show_incometaxChart(
                     canton=Taxes.canton,
                     place=Taxes.place,
                     taxation=Taxes.taxation,
                     conf=conf,
+                    childrenCnt=Taxes.childrenCnt if Taxes.childrenCnt else 0,
                 )
+
             with ui.tab_panel(wealthTax):
-                ui.label("Second tab")
+                await show_wealthChart(
+                    canton=Taxes.canton,
+                    place=Taxes.place,
+                    taxation=Taxes.taxation,
+                    conf=conf,
+                    childrenCnt=Taxes.childrenCnt if Taxes.childrenCnt else 0,
+                )
             with ui.tab_panel(capTax):
                 ui.label("Kapitalauszahlung")

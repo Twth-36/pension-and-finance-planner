@@ -1,25 +1,25 @@
 import asyncio
 from nicegui import ui
 
-from backend.classes.taxes import Taxes
-from backend.tax.incomeTax import clc_incomeTax
+
 from backend.tax.taxproperties import Canton, Confession, Taxation
+from backend.tax.wealthTax import clc_wealthTax
 
 
 def clc_chartData(
     canton: Canton, place: str, taxation: Taxation, conf: Confession, childrenCnt: int
 ):
     minValue = 1
-    maxValue = 250001
+    maxValue = 1000001
     stp = int((maxValue - minValue) / 200)
 
     x = list(range(minValue, maxValue, stp))
     taxes = [
         [
-            inc,
+            wlth,
             round(
-                clc_incomeTax(
-                    income=inc,
+                clc_wealthTax(
+                    wealth=wlth,
                     canton=canton,
                     place=place,
                     taxation=taxation,
@@ -29,18 +29,18 @@ def clc_chartData(
                 )
             ),
         ]
-        for inc in x
+        for wlth in x
     ]
-    percTaxes = [[inc, round(tax / inc * 100, 2)] for inc, tax in taxes]
+    percTaxes = [[wlth, round(tax / wlth * 100, 2)] for wlth, tax in taxes]
 
     marginTaxes = [
-        [inc, round((tax - tax_prev) / stp * 100, 2)]
-        for (inc_prev, tax_prev), (inc, tax) in zip(taxes, taxes[1:])
+        [wlth, round((tax - tax_prev) / stp * 100, 2)]
+        for (wlth_prev, tax_prev), (wlth, tax) in zip(taxes, taxes[1:])
     ]
     return taxes, percTaxes, marginTaxes, stp
 
 
-async def show_incometaxChart(
+async def show_wealthChart(
     canton: Canton,
     place: str,
     taxation: Taxation,
@@ -61,7 +61,7 @@ async def show_incometaxChart(
     ui.echart(
         {
             "title": {
-                "text": "Einkommenssteuer abhängig vom steuerbaren Einkommen",
+                "text": "Vermögenssteuer abhängig vom Reinvermögen",
                 "subtext": "Der Grenzsteuersatz (%) wurde mit einer Schrittlänge von "
                 + str(stp)
                 + " approximiert.",

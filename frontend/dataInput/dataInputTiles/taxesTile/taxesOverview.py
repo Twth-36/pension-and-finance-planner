@@ -71,3 +71,33 @@ def show_taxesOverview(taxes_card):
                 "Bei einzelner Besteuerung werden sämtliche Personen individuell zum Alleinstehenden-Satz besteuert."
                 "Positionen ohne Personenzuweisung werden je hälftig berücksichtigt. Andernfalls werden die Steuern kumuliert zum verheirateten-Satz berechnet."
             )
+
+            # **childrenCnt**
+            def update_childrenCnt(new_value):
+                try:
+                    Taxes.childrenCnt = new_value
+                    show_taxesOverview(taxes_card)
+                    ui.notify("Änderung aktualisiert", color="positive")
+                except Exception as e:
+                    ui.notify(f"Upps, etwas passte da nicht:\n{e}", color="negative")
+
+            childrenCnt_prefill = None
+            if Taxes.childrenCnt:
+                childrenCnt_prefill = Taxes.childrenCnt
+            childrenCnt_input = (
+                ui.number(
+                    label="Anzahl Kinder",
+                    value=childrenCnt_prefill,
+                    min=0,
+                    precision=0,
+                    validation={
+                        "Muss grösser oder gleich 0 sein": lambda v: v is None or v >= 0
+                    },
+                )
+                .classes("w-full")
+                .tooltip("Nur steuerlich relevante Kinder angeben")
+            )
+
+            childrenCnt_input.on(
+                "blur", lambda: update_childrenCnt(childrenCnt_input.value)
+            )

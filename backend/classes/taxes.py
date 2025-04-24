@@ -7,9 +7,9 @@ from backend.tax.taxproperties import Canton, Taxation
 
 class Taxes(BaseModel):
     canton: ClassVar[Canton] = Canton.BE
-    place: ClassVar[str] = "Bern"
+    place: ClassVar[str] = "Biel/Bienne"
     taxation: ClassVar[Taxation] = Taxation.single
-    baseYearTaxCalc: ClassVar[int] = 2025
+    childrenCnt: ClassVar[int] = 0
 
     @classmethod
     def update_canton(cls, new_canton: Canton):

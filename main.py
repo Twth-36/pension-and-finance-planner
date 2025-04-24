@@ -1,3 +1,4 @@
+import asyncio
 from nicegui import ui
 from frontend.dataInput import *
 from frontend.dataInput.dataInput import show_dataInput
@@ -88,4 +89,5 @@ show_dataInput(main_content)
 
 
 # Run the NiceGUI application.
-ui.run()
+app = ui.run()
+ui.linear_progress
