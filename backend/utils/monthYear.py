@@ -1,5 +1,6 @@
 """Class for simple date format month, year"""
 
+from typing import List
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -50,3 +51,28 @@ class MonthYear(BaseModel):
 
     def dateToString(self) -> "str":
         return str(self.month).zfill(2) + "." + str(self.year)
+
+    def nextMonth(self, n: int = 1) -> "MonthYear":
+        # returns n-next (or previous if n <0 month)
+        total_mnths = self.year * 12 + (self.month - 1) + n
+        new_year = total_mnths // 12  # floor division
+        new_month = (total_mnths % 12) + 1
+        return MonthYear(month=new_month, year=new_year)
+
+    @classmethod
+    def create_range(
+        cls, startDate: "MonthYear", endDate: "MonthYear"
+    ) -> List["MonthYear"]:
+
+        # Return a list of MonthYear from startDate up to endDate inclusive.
+
+        if (startDate.year, startDate.month) > (endDate.year, endDate.month):
+            raise ValueError("startDate must be before or equal to endDate")
+
+        result: List[MonthYear] = []
+        current = startDate
+        # keep going until we pass endDate
+        while (current.year, current.month) <= (endDate.year, endDate.month):
+            result.append(current)
+            current = current.next()
+        return result

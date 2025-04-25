@@ -9,12 +9,10 @@ from .person import *
 from .scenario import *
 
 
-class RealEstate(BaseModel):
+class RealEstate(Planningobject):
     # Object-variable
-    name: str
-    person: Optional[Person] = None
+
     baseValue: Optional[float] = 0
-    planValue: Optional[List[Planningposition]] = []
 
     baseTaxValue: Optional[float] = None
     taxValue: Optional[List[Planningposition]] = []
@@ -47,8 +45,7 @@ class RealEstate(BaseModel):
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "RealEstate":
-        obj = cls.model_validate(data)  # Creation and validation
-        cls.instanceDic[obj.name] = obj  # adding to instanceDic
+        obj = super().create(**data)  # Creation in Planningobjectclass
 
         if obj.taxExpense is None:
             param = {"name": "Liegenschaftssteuer: " + obj.name, "taxablePortion": 0}
@@ -81,18 +78,6 @@ class RealEstate(BaseModel):
             obj.saleCF = Cashflow.create(**param)
 
         return obj
-
-    @classmethod
-    def get_itemByName(cls, name: str) -> "RealEstate":
-        return cls.instanceDic[name]
-
-    def update_name(self, newname: str):
-        self.__class__.check_uniquename(name=newname)
-        self.__class__.instanceDic[newname] = self.__class__.instanceDic.pop(self.name)
-        self.name = newname
-
-    def delete_item(self):
-        del self.__class__.instanceDic[self.name]
 
 
 # rebuild model to ensure other classes are loaded

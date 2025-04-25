@@ -55,3 +55,13 @@ class Planningposition(BaseModel):
             self.inDoc = new_inDoc
         if new_description is not None and new_description != self.description:
             self.description = new_description
+
+    @classmethod
+    def get_item(
+        cls, period: MonthYear, scenario: Scenario, list: List["Planningposition"]
+    ):
+        for p in list:
+            if p.scenario.name == scenario.name and p.period == period:
+                return p
+
+        return None

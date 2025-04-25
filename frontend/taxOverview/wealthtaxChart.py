@@ -33,11 +33,7 @@ def clc_chartData(
     ]
     percTaxes = [[wlth, round(tax / wlth * 100, 2)] for wlth, tax in taxes]
 
-    marginTaxes = [
-        [wlth, round((tax - tax_prev) / stp * 100, 2)]
-        for (wlth_prev, tax_prev), (wlth, tax) in zip(taxes, taxes[1:])
-    ]
-    return taxes, percTaxes, marginTaxes, stp
+    return taxes, percTaxes, stp
 
 
 async def show_wealthTaxChart(
@@ -52,7 +48,7 @@ async def show_wealthTaxChart(
         message="Computing...", spinner=True, type="ongoing", timeout=None
     )
 
-    taxes, percTaxes, marginTaxes, stp = await asyncio.to_thread(
+    taxes, percTaxes, stp = await asyncio.to_thread(
         clc_chartData, canton, place, taxation, conf, childrenCnt
     )
     n.dismiss()
@@ -65,8 +61,10 @@ async def show_wealthTaxChart(
                 "subtext": "Der Grenzsteuersatz (%) wurde mit einer Schrittlänge von "
                 + str(stp)
                 + " approximiert.",
+                "top": "5%",
             },
-            "legend": {},
+            "legend": {"top": "15%"},
+            "grid": {"top": "25%", "containLabel": True},
             "tooltip": {"trigger": "axis"},
             "toolbox": {
                 "show": True,
@@ -110,15 +108,6 @@ async def show_wealthTaxChart(
                     "lineStyle": {"color": "black"},
                     "yAxisIndex": 1,
                 },
-                {
-                    "name": "Grenzsteuer (%)",
-                    "type": "line",
-                    "data": marginTaxes,
-                    "showSymbol": False,
-                    "itemStyle": {"color": "black"},
-                    "lineStyle": {"type": "dashed", "color": "black"},
-                    "yAxisIndex": 1,
-                },
             ],
         }
-    )
+    ).classes("h-96")

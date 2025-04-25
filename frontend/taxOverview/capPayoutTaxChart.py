@@ -65,8 +65,10 @@ async def show_capPayoutTaxChart(
                 "subtext": "Der Grenzsteuersatz (%) wurde mit einer Schrittlänge von "
                 + str(stp)
                 + " approximiert.",
+                "top": "5%",
             },
-            "legend": {},
+            "legend": {"top": "15%"},
+            "grid": {"top": "25%", "containLabel": True},
             "tooltip": {"trigger": "axis"},
             "toolbox": {
                 "show": True,
@@ -121,4 +123,4 @@ async def show_capPayoutTaxChart(
                 },
             ],
         }
-    )
+    ).classes("h-96")

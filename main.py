@@ -3,6 +3,7 @@ from nicegui import ui
 from frontend.dataInput import *
 from frontend.dataInput.dataInput import show_dataInput
 from backend.showPurposes.examplePlans import *
+from frontend.finPlan.finPlan import show_finPlan
 from frontend.taxOverview.taxOverview import show_taxOverview
 from frontend.wealthOverview.wealthOverview import show_wealthOverview
 
@@ -37,6 +38,12 @@ with left_drawer:
     ).props(
         "flat"
     )
+    ui.button(
+        "Finanzplan",
+        on_click=lambda: show_finPlan(main_content),
+    ).classes(
+        "w-full text-left bg-gray-200 text-black normal-case transition-shadow duration-300 hover:shadow-lg q-pa-sm"
+    ).props("flat")
 
 
 # Header
@@ -60,8 +67,10 @@ with ui.header(elevated=True).style(
         # right side
         with ui.row().classes("items-center"):
             ui.button(
-                icon="upload", on_click=lambda: ui.notify("Funktion kommt bald")
-            ).props("flat color=white")
+                icon="rocket", on_click=lambda: ui.notify("Funktion kommt bald")
+            ).props("flat color=white").tooltip(
+                "Starte die Berechnung deines Finanzplanes"
+            )
             ui.button(
                 icon="save", on_click=lambda: ui.notify("Funktion kommt bald")
             ).props("flat color=white")

@@ -52,13 +52,10 @@ class PensFundPayoutPos(Planningposition):
             self.conversionRate = new_conversionRate
 
 
-class PensionFund(BaseModel):
+class PensionFund(Planningobject):
     # Object-attributes
-    name: str
-    person: Person
     baseValue: Optional[float] = 0
     fixValue: Optional[List[Planningposition]] = []  # overturns planning value
-    planValue: Optional[List[Planningposition]] = []
     returnRate: Optional[float] = 0
     baseSavingContribution: float = 0
     savingContribution: Optional[List[Planningposition]] = (
@@ -75,16 +72,6 @@ class PensionFund(BaseModel):
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
 
-    # Validation for unique name
-    @field_validator("name", mode="after")
-    @classmethod
-    def check_uniquename(cls, name: str) -> str:
-        if name == "":
-            raise ValueError(f"May not be empty")
-        if name in cls.instanceDic:
-            raise ValueError(f"An object with name '{name}' already exists")
-        return name
-
     # Validation non-negative baseValue
     @field_validator("baseValue", mode="after")
     @classmethod
@@ -96,8 +83,7 @@ class PensionFund(BaseModel):
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "PensionFund":
-        obj = cls.model_validate(data)  # Creation and validation
-        cls.instanceDic[obj.name] = obj  # adding to instanceDic
+        obj = super().create(**data)  # Creation in Planningobjectclass
 
         if obj.buyinExpense is None:
             param = {"name": "PK-Einkauf: " + obj.name, "taxablePortion": 100}
@@ -118,18 +104,6 @@ class PensionFund(BaseModel):
             obj.pensionCF = Cashflow.create(**param)
 
         return obj
-
-    @classmethod
-    def get_itemByName(cls, name: str) -> "PensionFund":
-        return cls.instanceDic[name]
-
-    def update_name(self, newname: str):
-        self.__class__.check_uniquename(name=newname)
-        self.__class__.instanceDic[newname] = self.__class__.instanceDic.pop(self.name)
-        self.name = newname
-
-    def delete_item(self):
-        del self.__class__.instanceDic[self.name]
 
 
 # rebuild model to ensure other classes are loaded

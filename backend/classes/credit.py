@@ -11,14 +11,11 @@ from ..utils.monthYear import *
 from .planningposition import *
 
 
-class Credit(BaseModel):
+class Credit(Planningobject):
     # Object-attributes
-    name: str
-    person: Optional[Person] = None
     endDate: Optional[MonthYear] = None
     baseValue: Optional[float] = 0
     baseInterestRate: Optional[float] = 0
-    planValue: Optional[List[Planningposition]] = []
 
     interestRate: Optional[List[Planningposition]] = []  # p.a.
     interestExpense: Optional[Expense] = None
@@ -31,18 +28,8 @@ class Credit(BaseModel):
 
     realEstate: Optional[RealEstate] = None  # if mortgage
 
-    # Class-attributes
+    # Class-attribute
     instanceDic: ClassVar[dict] = {}
-
-    # Validation for unique name
-    @field_validator("name", mode="after")
-    @classmethod
-    def check_uniquename(cls, name: str) -> str:
-        if name == "":
-            raise ValueError(f"May not be empty")
-        if name in cls.instanceDic:
-            raise ValueError(f"An object with name '{name}' already exists")
-        return name
 
     # Validation non-negative baseValue
     @field_validator("baseValue", mode="after")
@@ -55,8 +42,8 @@ class Credit(BaseModel):
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "Credit":
-        obj = cls.model_validate(data)  # Creation and validation
-        cls.instanceDic[obj.name] = obj  # adding to instanceDic
+
+        obj = super().create(**data)
 
         if obj.interestExpense is None:
             param = {"name": "Zinszahlung: " + obj.name, "taxablePortion": 100}
@@ -77,18 +64,6 @@ class Credit(BaseModel):
             obj.paybackCF = Cashflow.create(**param)
 
         return obj
-
-    @classmethod
-    def get_itemByName(cls, name: str) -> "Credit":
-        return cls.instanceDic[name]
-
-    def update_name(self, newname: str):
-        self.__class__.check_uniquename(name=newname)
-        self.__class__.instanceDic[newname] = self.__class__.instanceDic.pop(self.name)
-        self.name = newname
-
-    def delete_item(self):
-        del self.__class__.instanceDic[self.name]
 
 
 # rebuild model to ensure other classes are loaded
