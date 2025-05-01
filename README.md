@@ -18,7 +18,7 @@ python3 -m venv plannerVenv
 source plannerVenv/bin/activate
 pip install -r requirements.txt
 ```
-Starting server (after plannerVenv activated):
+Starting app (after plannerVenv activated):
 ```python
 python main.py
 ```
