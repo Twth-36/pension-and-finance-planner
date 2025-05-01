@@ -31,7 +31,7 @@ def show_realEstateForm(realEstate_card, realEstate=None):
                     options=[p.name for p in Person.instanceDic.values()],
                     value=person_prefill,
                     with_input=True,
-                )
+                ).props("clearable")
                 base_val_input = ui.number(
                     label="Wert",
                     value=(realEstate.baseValue if realEstate else None),
@@ -49,11 +49,28 @@ def show_realEstateForm(realEstate_card, realEstate=None):
                 taxRate_input = (
                     ui.number(
                         label="Steuersatz",
-                        value=(realEstate.baseTaxValue if realEstate else None),
+                        value=(realEstate.taxRate if realEstate else None),
                         format="%.2f",
                     )
                     .props("suffix=%")
                     .tooltip("Steuersatz zur Berechnung der Liegenschaftssteuer.")
+                )
+                imputedRental_input = ui.number(
+                    label="Eigenmietwert",
+                    value=(realEstate.baseImputedRentalValue if realEstate else None),
+                    validation={
+                        "Muss grösser oder gleich 0 sein": lambda v: v is None or v >= 0
+                    },
+                )
+
+                maintCostRate_input = (
+                    ui.number(
+                        label="Unterhaltskosten",
+                        value=(realEstate.maintCostRate if realEstate else None),
+                        format="%.2f",
+                    )
+                    .props("suffix=%")
+                    .tooltip("Satz (p.a.) zur Berechnung der Unterhaltskosten")
                 )
 
                 with ui.row():
@@ -75,6 +92,12 @@ def show_realEstateForm(realEstate_card, realEstate=None):
                                     realEstate.baseTaxValue = taxValue_input.value
                                 if taxRate_input.value:
                                     realEstate.taxRate = taxRate_input.value
+                                if imputedRental_input.value:
+                                    realEstate.baseImputedRentalValue = (
+                                        imputedRental_input.value
+                                    )
+                                if maintCostRate_input.value:
+                                    realEstate.maintCostRate = maintCostRate_input.value
                             else:  # Create new object
                                 params = {"name": name_input.value}
                                 if person_input.value not in [None, ""]:
@@ -87,6 +110,12 @@ def show_realEstateForm(realEstate_card, realEstate=None):
                                     params["baseTaxValue"] = taxValue_input.value
                                 if taxRate_input.value:
                                     params["taxRate"] = taxRate_input.value
+                                if imputedRental_input.value:
+                                    params["baseImputedRentalValue"] = (
+                                        imputedRental_input.value
+                                    )
+                                if maintCostRate_input.value:
+                                    params["maintCostRate"] = maintCostRate_input.value
                                 new_realEstate = RealEstate.create(**params)
                             # Refresh the form with updated object
                             if realEstate:
@@ -95,10 +124,12 @@ def show_realEstateForm(realEstate_card, realEstate=None):
                                 show_realEstateForm(
                                     realEstate_card, realEstate=new_realEstate
                                 )
+
                         except Exception as e:
                             ui.notify(
                                 f"Upps, etwas passte da nicht:\n{e}", color="negative"
                             )
+                        ui.notify("Änderung gespeichert", color="positive")
 
                     ui.button("Speichern", on_click=save_action)
                     # Use local import to avoid circular dependency
@@ -116,6 +147,9 @@ def show_realEstateForm(realEstate_card, realEstate=None):
                     ).props("flat unelevated")
 
             if realEstate and Scenario.instanceDic:
+
+                # vertical line for separation
+                ui.separator().props("vertical")
 
                 with ui.column():
 
@@ -144,5 +178,9 @@ def show_realEstateForm(realEstate_card, realEstate=None):
 
             # Detail-options
             if realEstate:
+
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 detail_card = ui.column()
                 show_realEstateDetail(card=detail_card, realEstate=realEstate)

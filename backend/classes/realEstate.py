@@ -14,12 +14,18 @@ class RealEstate(Planningobject):
 
     baseValue: Optional[float] = 0
 
-    baseTaxValue: Optional[float] = None
-    taxValue: Optional[List[Planningposition]] = []
-    taxRate: Optional[float] = None
+    baseTaxValue: Optional[float] = 0
+    taxFixValue: Optional[List[Planningposition]] = []
+    taxPlanValue: Optional[List[Planningposition]] = []
+    taxRate: Optional[float] = 0
     taxExpense: Optional[Expense] = None
 
-    maintCostRate: float = None
+    baseImputedRentalValue: Optional[float] = 0  # dt Eigenmietwert
+    imputedRentalFixValue: Optional[List[Planningposition]] = []
+    imputedRentalPlanValue: Optional[List[Planningposition]] = []
+    imputedRentalValueIncomeTaxPos: Optional[IncomeTaxPos] = None
+
+    maintCostRate: float = 0
     maintenanceExpense: Optional[Expense] = None
 
     renovations: Optional[List[Planningposition]] = []
@@ -77,7 +83,28 @@ class RealEstate(Planningobject):
                 param["person"] = obj.person
             obj.saleCF = Cashflow.create(**param)
 
+        if obj.imputedRentalValueIncomeTaxPos is None:
+            param = {"name": "Eigenmietwert: " + obj.name}
+            if obj.person:
+                param["person"] = obj.person
+            obj.imputedRentalValueIncomeTaxPos = IncomeTaxPos.create(**param)
+
         return obj
+
+    # overwrite super-function since not only planValue needs to be reset
+    def reset_planValue(self, scenario: Scenario):
+        # delets all planValue of an object with a specific scenario
+        if not self.planValue:
+            return
+        super().reset_planValue(
+            scenario=scenario
+        )  # call super-function for resetting planValue
+
+        # additionally reset taxValuePlanValue and imputedRentPlanValue
+        self.taxPlanValue = [p for p in self.taxPlanValue if p.scenario != scenario]
+        self.imputedRentalPlanValue = [
+            p for p in self.imputedRentalPlanValue if p.scenario != scenario
+        ]
 
 
 # rebuild model to ensure other classes are loaded

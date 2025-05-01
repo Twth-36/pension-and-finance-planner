@@ -134,6 +134,7 @@ def show_creditForm(credit_card, credit=None):
                     ).props("flat unelevated")
 
             if credit and Scenario.instanceDic:
+                ui.separator().props("vertical")
 
                 with ui.column():
 
@@ -162,5 +163,8 @@ def show_creditForm(credit_card, credit=None):
 
             # Detail-options
             if credit:
+
+                ui.separator().props("vertical")
+
                 detail_card = ui.column()
                 show_creditDetail(card=detail_card, credit=credit)

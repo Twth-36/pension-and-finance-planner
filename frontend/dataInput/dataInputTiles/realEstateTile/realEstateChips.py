@@ -81,7 +81,7 @@ def show_realEstateChips(card, realEstate: RealEstate, scenario: Scenario):
                     "periodLabel": "Monat",
                     "periodTooltip": "Zeitpunkt des Verkaufs der Liegenschaft",
                     "valueLabel": "Verkaufserlös",
-                    "valueTooltip": "Dieser Betrag wird dem freien Vermögen gutgeschrieben. Der Liegenschafts- und Steuerwert wird auf 0 gesetzt.",
+                    "valueTooltip": "Dieser Betrag wird dem freien Vermögen gutgeschrieben. Der Liegenschafts-, Steuer- und Eigenmietwert wird auf 0 gesetzt. (Falls nichts anderes gepflegt)",
                 }
                 ui.chip(
                     text="Verkauf",
@@ -106,7 +106,7 @@ def show_realEstateChips(card, realEstate: RealEstate, scenario: Scenario):
                                     "periodLabel": "Monat",
                                     "periodTooltip": "Zeitpunkt des Verkaufs der Liegenschaft",
                                     "valueLabel": "Verkaufserlös",
-                                    "valueTooltip": "Dieser Betrag wird dem freien Vermögen gutgeschrieben. Der Liegenschafts- und Steuerwert wird auf 0 gesetzt.",
+                                    "valueTooltip": "Dieser Betrag wird dem freien Vermögen gutgeschrieben. Der Liegenschafts-, Steuer- und Eigenmietwert wird auf 0 gesetzt. (Falls nichts anderes gepflegt)",
                                 }
                             ),
                         ).on(
@@ -182,7 +182,7 @@ def show_realEstateChips(card, realEstate: RealEstate, scenario: Scenario):
                         )
 
                 params_new = {
-                    "planPosList": realEstate.taxValue,
+                    "planPosList": realEstate.taxFixValue,
                     "scenario": scenario,
                     "periodLabel": "Monat",
                     "periodTooltip": "Monat ab welchem der neue Steuerwert berücksichtigt werden soll.",
@@ -197,10 +197,10 @@ def show_realEstateChips(card, realEstate: RealEstate, scenario: Scenario):
                     on_click=lambda param=params_new: edit_planPos(param),
                 )
 
-                filtered_taxValue = [
-                    p for p in realEstate.taxValue if p.scenario == scenario
+                filtered_taxFixValue = [
+                    p for p in realEstate.taxFixValue if p.scenario == scenario
                 ]
-                for planPos in filtered_taxValue:
+                for planPos in filtered_taxFixValue:
 
                     def create_chip(planPos):
                         ui.chip(
@@ -209,7 +209,7 @@ def show_realEstateChips(card, realEstate: RealEstate, scenario: Scenario):
                             removable=True,
                             on_click=lambda p=planPos: edit_planPos(
                                 {
-                                    "planPosList": realEstate.taxValue,
+                                    "planPosList": realEstate.taxFixValue,
                                     "planPos": p,
                                     "periodLabel": "Monat",
                                     "periodTooltip": "Monat ab welchem der neue Steuerwert berücksichtigt werden soll.",
@@ -219,7 +219,65 @@ def show_realEstateChips(card, realEstate: RealEstate, scenario: Scenario):
                             ),
                         ).on(
                             "remove",
-                            lambda p=planPos: realEstate.taxValue.remove(p),
+                            lambda p=planPos: realEstate.taxFixValue.remove(p),
+                        ).props(
+                            "outline"
+                        )
+
+                    create_chip(planPos)
+
+            # Chip for new imputedRentalFixValue
+            with ui.column():
+
+                async def edit_planPos(params):
+                    if await dialog_planPos(**params):
+                        show_realEstateChips(
+                            card=card, realEstate=realEstate, scenario=scenario
+                        )
+
+                params_new = {
+                    "planPosList": realEstate.imputedRentalFixValue,
+                    "scenario": scenario,
+                    "periodLabel": "Monat",
+                    "periodTooltip": "Monat ab welchem der neue Eigenmietwert berücksichtigt werden soll. (Stichtag: Jahresende)",
+                    "valueLabel": "Eigenmietwert",
+                    "valueTooltip": "Neuer Eigenmietwert zur Berechnung des steuerbaren Einkommens.",
+                }
+                ui.chip(
+                    text="Neuer Eigenmietwert",
+                    icon="add",
+                    color="green",
+                    removable=False,
+                    on_click=lambda param=params_new: edit_planPos(param),
+                )
+
+                filtered_imputedRentalFixValue = [
+                    p
+                    for p in realEstate.imputedRentalFixValue
+                    if p.scenario == scenario
+                ]
+                for planPos in filtered_imputedRentalFixValue:
+
+                    def create_chip(planPos):
+                        ui.chip(
+                            text=f"{planPos.period.dateToString()}: {formatswiss(planPos.value)}",
+                            color="green",
+                            removable=True,
+                            on_click=lambda p=planPos: edit_planPos(
+                                {
+                                    "planPosList": realEstate.imputedRentalFixValue,
+                                    "planPos": p,
+                                    "periodLabel": "Monat",
+                                    "periodTooltip": "Monat ab welchem der neue Eigenmietwert berücksichtigt werden soll. (Stichtag: Jahresende)",
+                                    "valueLabel": "Eigenmietwert",
+                                    "valueTooltip": "Neuer Eigenmietwert zur Berechnung des steuerbaren Einkommens.",
+                                }
+                            ),
+                        ).on(
+                            "remove",
+                            lambda p=planPos: realEstate.imputedRentalFixValue.remove(
+                                p
+                            ),
                         ).props(
                             "outline"
                         )

@@ -20,19 +20,19 @@ def exe_manualExpensePlanning(period: MonthYear, scenario: Scenario):
         if obj.repetitive == False:
             new_pos.value = 0
         elif prev_pos is None:  # case if first planningMonth
-            new_pos.value = obj.baseValue
-            new_pos.description = "Übernahme Basiswert"
+            new_pos.value = -obj.baseValue
         else:
             new_pos.value = prev_pos.value
-            new_pos.description = "Fortführung Vormonatswert"
 
         # searched for fixValue
-        fixValue = Planningposition.get_item(
-            period=period, scenario=Scenario, list=obj.fixValue
+        fixValue_pos = Planningposition.get_item(
+            period=period, scenario=scenario, list=obj.fixValue
         )
 
         # if fixValue available overwrite PlanPosition
-        if fixValue:
-            new_pos.value = fixValue.value
-            new_pos.inDoc = fixValue.inDoc
-            new_pos.description = fixValue.description
+        if fixValue_pos:
+            new_pos.value = -fixValue_pos.value
+            new_pos.description = fixValue_pos.description
+
+        # add new position planValue
+        new_pos.add_toList(obj.planValue)

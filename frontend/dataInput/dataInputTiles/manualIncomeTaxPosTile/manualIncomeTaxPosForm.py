@@ -126,6 +126,9 @@ def show_manualIncomeTaxPosForm(manualIncomeTaxPos_card, manualIncomeTaxPos=None
 
             if manualIncomeTaxPos and Scenario.instanceDic:
 
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 with ui.column():
 
                     # Scenario-Selection for chips

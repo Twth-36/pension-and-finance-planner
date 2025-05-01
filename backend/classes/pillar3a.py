@@ -10,14 +10,15 @@ class Pillar3a(Planningobject):
     # Object-Variables
     baseValue: Optional[float] = 0
     returnRate: Optional[float] = 0
-    deposit: Optional[List[Planningposition]] = []
-    payoutDate: Optional[List[Planningposition]] = (
-        []
-    )  # Value not used (only scenario and month)
 
+    deposit: Optional[List[Planningposition]] = []
     depositExpense: Optional[Expense] = (
         None  # expense Position where deposits are accounted
     )
+
+    payoutDate: Optional[List[Planningposition]] = (
+        []
+    )  # Value not used (only scenario and month)
     payoutCF: Optional[Cashflow] = None
 
     # Class-variables

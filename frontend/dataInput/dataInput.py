@@ -48,6 +48,7 @@ def show_dataInput(main_content):
             show_scenarioTile()
 
         # "Vermögen und Schulden" Part
+        ui.separator()
         ui.label("Vermögen und Schulden").classes("text-h6 font-bold q-mt-md")
         with ui.row():
             show_freeAssetTile()
@@ -60,10 +61,14 @@ def show_dataInput(main_content):
             show_pillar3bPoliceTile()
 
         # "Einkommen und Ausgaben" Part
+        ui.separator()
         ui.label("Einkommen und Ausgaben").classes("text-h6 font-bold q-mt-md")
         with ui.row():
             show_manualIncomeTile()
             show_manualExpenseTile()
+
+        # "Steuern" Part
+        ui.separator()
         ui.label("Steuern").classes("text-h6 font-bold q-mt-md")
         with ui.row():
             show_taxesTile()

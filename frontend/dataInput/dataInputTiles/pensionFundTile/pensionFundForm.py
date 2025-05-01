@@ -126,6 +126,9 @@ def show_pensionFundForm(pensionFund_card, pensionFund=None):
 
             if pensionFund and Scenario.instanceDic:
 
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 with ui.column():
 
                     # Scenario-Selection for chips
@@ -153,5 +156,9 @@ def show_pensionFundForm(pensionFund_card, pensionFund=None):
 
             # Detail-options
             if pensionFund:
+
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 detail_card = ui.column()
                 show_pensionFundDetail(card=detail_card, pensionFund=pensionFund)

@@ -161,6 +161,9 @@ def show_manualExpenseForm(manualExpense_card, manualExpense=None):
 
             if manualExpense and Scenario.instanceDic:
 
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 with ui.column():
 
                     # Scenario-Selection for chips
@@ -187,6 +190,10 @@ def show_manualExpenseForm(manualExpense_card, manualExpense=None):
                     )
 
             if manualExpense:
+
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 detail_card = ui.column()
 
                 show_manualExpenseDetail(card=detail_card, manualExpense=manualExpense)

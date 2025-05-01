@@ -3,9 +3,11 @@ from nicegui import ui
 
 from backend.classes.cashflow import Cashflow
 from backend.classes.expense import Expense
+from backend.classes.incomeTaxPos import IncomeTaxPos
 from backend.classes.realEstate import RealEstate
 from frontend.utils.manageCashflow import dialog_Cashflow
 from frontend.utils.manageExpense import dialog_Expense
+from frontend.utils.manageIncomeTaxPos import dialog_IncomeTaxPos
 
 
 def show_realEstateDetail(
@@ -338,3 +340,72 @@ def show_realEstateDetail(
                 ui.button(icon="add", on_click=new_saleCF).props(
                     "flat unelevated"
                 ).tooltip("Neue Cashflow-Position erstellen")
+
+            # IncomeTax-Position for imputedRental
+            # needed functions
+            def update_imputedRentalIncomeTaxPos(change):
+                try:
+                    realEstate.imputedRentalValueIncomeTaxPos = (
+                        IncomeTaxPos.get_itemByName(change.value)
+                    )
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+                ui.notify("Änderung gespeichert", color="positive")
+
+            async def edit_imputedRentalIncomeTaxPos():
+                try:
+                    if await dialog_IncomeTaxPos(
+                        realEstate.imputedRentalValueIncomeTaxPos
+                    ):
+                        show_realEstateDetail(
+                            card=card,
+                            realEstate=realEstate,
+                            show_details=detail_ext.value,
+                        )
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+
+            async def new_imputedRentalIncomeTaxPos():
+                try:
+                    new_incomeTaxPos = await dialog_IncomeTaxPos()
+                    if new_incomeTaxPos:
+                        realEstate.imputedRentalValueIncomeTaxPos = new_incomeTaxPos
+                    show_realEstateDetail(
+                        card=card,
+                        realEstate=realEstate,
+                        show_details=detail_ext.value,
+                    )
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+
+            with ui.row().classes("items-center gap-2"):
+
+                ui.select(
+                    label="Eigenmietwert",
+                    options=[e.name for e in IncomeTaxPos.instanceDic.values()],
+                    value=realEstate.imputedRentalValueIncomeTaxPos.name,
+                    with_input=True,
+                    on_change=update_imputedRentalIncomeTaxPos,
+                ).tooltip(
+                    "Einkommenssteuer-Position über welche ein Verkauf verrechnet werden."
+                )
+
+                ui.button(
+                    icon="edit",
+                    on_click=edit_imputedRentalIncomeTaxPos,
+                ).props(
+                    "flat unelevated"
+                ).tooltip("Einkommenssteuer-Position bearbeiten")
+
+                ui.button(icon="add", on_click=new_imputedRentalIncomeTaxPos).props(
+                    "flat unelevated"
+                ).tooltip("Neue Einkommenssteuer-Position erstellen")

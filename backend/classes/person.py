@@ -45,3 +45,21 @@ class Person(BaseModel):
         # check first if objects is still used anywhere
         ##TODO
         del self.__class__.instanceDic[self.name]
+
+    def get_age(self, date: MonthYear) -> int:
+        """
+        Calculate the age in whole years at the given MonthYear `date`.
+        Raises ValueError if `date` is before the birth date.
+        """
+        # Ensure date isn’t before birth
+        if (date.year, date.month) < (self.birth.year, self.birth.month):
+            raise ValueError(
+                f"Date {date.dateToString()} is before birth {self.birth.dateToString()}"
+            )
+
+        # Basic year difference
+        age = date.year - self.birth.year
+        # If we haven’t reached the birth month yet this year, subtract one
+        if date.month < self.birth.month:
+            age -= 1
+        return age

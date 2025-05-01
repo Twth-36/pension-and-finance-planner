@@ -1,10 +1,11 @@
-import asyncio
 from nicegui import ui
 from frontend.dataInput import *
 from frontend.dataInput.dataInput import show_dataInput
 from backend.showPurposes.examplePlans import *
 from frontend.finPlan.finPlan import show_finPlan
 from frontend.taxOverview.taxOverview import show_taxOverview
+from frontend.utils.planningProcess import show_planningProcess
+from frontend.utils.storageManager import handle_upload, save_all_classes
 from frontend.wealthOverview.wealthOverview import show_wealthOverview
 
 
@@ -66,14 +67,12 @@ with ui.header(elevated=True).style(
 
         # right side
         with ui.row().classes("items-center"):
-            ui.button(
-                icon="rocket", on_click=lambda: ui.notify("Funktion kommt bald")
-            ).props("flat color=white").tooltip(
-                "Starte die Berechnung deines Finanzplanes"
-            )
-            ui.button(
-                icon="save", on_click=lambda: ui.notify("Funktion kommt bald")
-            ).props("flat color=white")
+            ui.button(icon="rocket", on_click=lambda: show_planningProcess()).props(
+                "flat color=white"
+            ).tooltip("Starte die Berechnung deines Finanzplanes")
+
+            ui.button(icon="save", on_click=save_all_classes).props("flat color=white")
+            ui.upload(label="Upload", on_upload=handle_upload)
 
             fs = ui.fullscreen()
             fs_button = ui.button(
@@ -88,7 +87,7 @@ with ui.header(elevated=True).style(
 with ui.footer().style("background-color: #616161; padding: 16px;"):
     with ui.column().classes():
         ui.markdown(
-            "Jegliche gewerbliche Verwendung von Dritten ist untersagt. Sämtliche Angaben sind ohne Gewähr.  \nErstellt durch Tim Wüthrich"
+            "Jegliche gewerbliche Verwendung ist untersagt. Sämtliche Angaben sind ohne Gewähr.  \nErstellt durch Tim Wüthrich"
         ).classes("text-body2 q-ml-md")
 
 
@@ -99,4 +98,3 @@ show_dataInput(main_content)
 
 # Run the NiceGUI application.
 app = ui.run()
-ui.linear_progress

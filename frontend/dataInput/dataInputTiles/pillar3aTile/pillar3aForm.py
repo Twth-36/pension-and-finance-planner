@@ -99,6 +99,9 @@ def show_pillar3aForm(pillar3a_card, pillar3a=None):
 
             if pillar3a and Scenario.instanceDic:
 
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 with ui.column():
 
                     # Scenario-Selection for chips
@@ -126,5 +129,9 @@ def show_pillar3aForm(pillar3a_card, pillar3a=None):
 
             # Detail-options
             if pillar3a:
+
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 detail_card = ui.column()
                 show_pillar3aDetail(card=detail_card, pillar3a=pillar3a)

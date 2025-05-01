@@ -5,6 +5,16 @@ from backend.classes.person import Person
 from backend.classes.planningposition import Planningposition
 from backend.classes.scenario import Scenario
 
+import json
+import os
+
+# If using a GUI environment (like desktop), we might use tkinter for file dialogs:
+try:
+    import tkinter as tk
+    from tkinter import filedialog
+except ImportError:
+    tk = None  # tkinter might not be available (e.g., in some web/server contexts)
+
 
 class Planningobject(BaseModel):
     # Object-attributes

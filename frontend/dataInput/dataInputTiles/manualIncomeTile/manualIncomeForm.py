@@ -132,6 +132,9 @@ def show_manualIncomeForm(manualIncome_card, manualIncome=None):
 
             if manualIncome and Scenario.instanceDic:
 
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 with ui.column():
 
                     # Scenario-Selection for chips
@@ -158,5 +161,9 @@ def show_manualIncomeForm(manualIncome_card, manualIncome=None):
                     )
 
             if manualIncome:
+
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 detail_card = ui.row()
                 show_manualIncomeDetail(card=detail_card, manualIncome=manualIncome)

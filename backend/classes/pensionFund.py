@@ -66,6 +66,9 @@ class PensionFund(Planningobject):
     buyinExpense: Optional[Expense] = None  # Expenseobject to make buyins
 
     payout: Optional[List[PensFundPayoutPos]] = []
+    monthlyPensionPlanValue: Optional[List[Planningposition]] = (
+        []
+    )  # help-variable to calculate the monthly pension
     pensionIncome: Optional[Income] = None  # for payout as pension
     pensionCF: Optional[Cashflow] = None  # for capital payout
 
@@ -104,6 +107,20 @@ class PensionFund(Planningobject):
             obj.pensionCF = Cashflow.create(**param)
 
         return obj
+
+    # overwrite super-function since not only planValue needs to be reset
+    def reset_planValue(self, scenario: Scenario):
+        # delets all planValue of an object with a specific scenario
+        if not self.planValue:
+            return
+        super().reset_planValue(
+            scenario=scenario
+        )  # call super-function for resetting planValue
+
+        # additionally reset monthlyPensionPlanValue
+        self.monthlyPensionPlanValue = [
+            p for p in self.monthlyPensionPlanValue if p.scenario != scenario
+        ]
 
 
 # rebuild model to ensure other classes are loaded

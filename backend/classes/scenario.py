@@ -13,8 +13,8 @@ class Scenario(BaseModel):
     # classvariable
     baseDate: ClassVar[MonthYear] = MonthYear.get_lastYearLastMonth()
     endDate: ClassVar[MonthYear] = MonthYear(
-        month=MonthYear.get_currentDate().month,
-        year=MonthYear.get_currentDate().year + 10,
+        month=MonthYear.get_lastYearLastMonth().month,
+        year=MonthYear.get_lastYearLastMonth().year + 10,
     )
     instanceDic: ClassVar[dict] = {}
 

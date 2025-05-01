@@ -181,6 +181,10 @@ def show_pillar3bPoliceForm(pillar3bPolice_card, pillar3bPolice=None):
 
             # Detail-options
             if pillar3bPolice:
+
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 detail_card = ui.column()
                 show_pillar3bPoliceDetail(
                     card=detail_card, pillar3bPolice=pillar3bPolice

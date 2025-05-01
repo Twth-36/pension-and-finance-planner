@@ -107,6 +107,9 @@ def show_vestedBenefitForm(vestedBenefit_card, vestedBenefit=None):
 
             if vestedBenefit and Scenario.instanceDic:
 
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 with ui.column():
 
                     # Scenario-Selection for chips
@@ -134,5 +137,9 @@ def show_vestedBenefitForm(vestedBenefit_card, vestedBenefit=None):
 
             # Detail-options
             if vestedBenefit:
+
+                # vertical line for separation
+                ui.separator().props("vertical")
+
                 detail_card = ui.column()
                 show_vestedBenefitDetail(card=detail_card, vestedBenefit=vestedBenefit)

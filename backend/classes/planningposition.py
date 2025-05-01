@@ -65,3 +65,26 @@ class Planningposition(BaseModel):
                 return p
 
         return None
+
+    @classmethod
+    def get_lastItem(
+        cls,
+        startDate: MonthYear,
+        endDate: MonthYear,
+        scenario: Scenario,
+        list: list["Planningposition"],
+    ):
+        currentDate = endDate
+        while currentDate.year >= startDate.year or (
+            currentDate.month >= startDate.month and currentDate == startDate.year
+        ):
+
+            pos = Planningposition.get_item(
+                period=currentDate, scenario=scenario, list=list
+            )
+            if pos is not None:
+                return pos
+            else:
+                currentDate = currentDate.nextMonth(-1)
+
+        return None
