@@ -1,16 +1,12 @@
 from nicegui import ui
 from frontend.dataInput import *
 from frontend.dataInput.dataInput import show_dataInput
-from backend.showPurposes.examplePlans import *
 from frontend.finPlan.finPlan import show_finPlan
+from frontend.startPage.startPage import show_startPage
 from frontend.taxOverview.taxOverview import show_taxOverview
 from frontend.utils.planningProcess import show_planningProcess
-from frontend.utils.storageManager import handle_upload, save_all_classes
+from frontend.utils.storageManager import save_all_classes
 from frontend.wealthOverview.wealthOverview import show_wealthOverview
-
-
-####### Load example data for developement purposes
-examplePlanMarried()
 
 
 # Create left drawer (sidebar) with modern styling.
@@ -19,6 +15,10 @@ left_drawer = ui.left_drawer(fixed=True).style(
 )
 with left_drawer:
     ui.label("Navigation").classes("text-h6")
+
+    ui.button("Start", on_click=lambda: show_startPage(main_content)).classes(
+        "w-full text-left bg-gray-200 text-black normal-case transition-shadow duration-300 hover:shadow-lg q-pa-sm"
+    ).props("flat")
 
     ui.button("Dateneingabe", on_click=lambda: show_dataInput(main_content)).classes(
         "w-full text-left bg-gray-200 text-black normal-case transition-shadow duration-300 hover:shadow-lg q-pa-sm"
@@ -72,7 +72,6 @@ with ui.header(elevated=True).style(
             ).tooltip("Starte die Berechnung deines Finanzplanes")
 
             ui.button(icon="save", on_click=save_all_classes).props("flat color=white")
-            ui.upload(label="Upload", on_upload=handle_upload)
 
             fs = ui.fullscreen()
             fs_button = ui.button(
@@ -93,7 +92,7 @@ with ui.footer().style("background-color: #616161; padding: 16px;"):
 
 # Main Content Area
 main_content = ui.column().classes("w-full h-full")
-show_dataInput(main_content)
+show_startPage(main_content)
 
 
 # Run the NiceGUI application.

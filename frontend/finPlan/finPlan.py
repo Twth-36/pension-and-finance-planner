@@ -9,7 +9,7 @@ async def show_finPlan(main_content, scenario: Scenario = None):
     with main_content:
         with ui.column().classes("w-full"):
             with ui.card().classes("q-pa-md border hover:!shadow-2xl"):
-                with ui.row():
+                with ui.row().classes("items-center gap-2"):
                     ui.label("Finanzplan").classes("text-h6")
                     ui.button(
                         icon="refresh",

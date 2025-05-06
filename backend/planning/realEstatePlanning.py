@@ -1,11 +1,10 @@
-from pandas import Period
-
 from backend.classes.planningposition import Planningposition
 from backend.classes.realEstate import RealEstate
 from backend.classes.scenario import Scenario
+from backend.utils.monthYear import MonthYear
 
 
-def exe_realEstatePlanning(period: Period, scenario: Scenario):
+def exe_realEstatePlanning(period: MonthYear, scenario: Scenario):
 
     # work through every object in instanceDic:
     for obj in RealEstate.instanceDic.values():

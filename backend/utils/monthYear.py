@@ -80,3 +80,7 @@ class MonthYear(BaseModel):
             result.append(current)
             current = current.nextMonth()
         return result
+
+    @classmethod
+    def months_diff(cls, startDate: "MonthYear", endDate: "MonthYear"):
+        return (endDate.year - startDate.year) * 12 + (endDate.month - startDate.month)

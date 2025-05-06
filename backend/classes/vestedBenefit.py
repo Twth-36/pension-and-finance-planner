@@ -26,6 +26,19 @@ class VestedBenefit(Planningobject):
             raise ValueError(f"{baseValue} may not be negative")
         return baseValue
 
+    @field_validator("payoutCF", mode="before")
+    @classmethod
+    def _load_payoutCF(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Cashflow.get_itemByName(v["name"])
+        return v
+
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "VestedBenefit":

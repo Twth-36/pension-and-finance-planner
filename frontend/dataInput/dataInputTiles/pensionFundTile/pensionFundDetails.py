@@ -146,7 +146,7 @@ def show_pensionFundDetail(
                     "flat unelevated"
                 ).tooltip("Neue Cashflow-Position erstellen")
 
-            # Cashflow-Position for payout
+            # Income-Position for Pension
             # needed functions
             def update_pensionIncome(change):
                 try:
@@ -207,6 +207,71 @@ def show_pensionFundDetail(
                     "flat unelevated"
                 ).tooltip("Einkommensposition bearbeiten")
 
-                ui.button(icon="add", on_click=new_pensionCF).props(
+                ui.button(icon="add", on_click=new_pensionIncome).props(
                     "flat unelevated"
                 ).tooltip("Neue Einkommensposition erstellen")
+
+            # Cashflow-Position for WEF
+            # needed functions
+            def update_WEFCF(change):
+                try:
+                    pensionFund.WEFCF = Cashflow.get_itemByName(change.value)
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+                ui.notify("Änderung gespeichert", color="positive")
+
+            async def edit_WEFCF():
+                try:
+                    if await dialog_Cashflow(pensionFund.WEFCF):
+                        show_pensionFundDetail(
+                            card=card,
+                            pensionFund=pensionFund,
+                            show_details=detail_ext.value,
+                        )
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+
+            async def new_WEFCF():
+                try:
+                    new_CF = await dialog_Cashflow()
+                    if new_CF:
+                        pensionFund.WEFCF = new_CF
+                    show_pensionFundDetail(
+                        card=card,
+                        pensionFund=pensionFund,
+                        show_details=detail_ext.value,
+                    )
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+
+            with ui.row().classes("items-center gap-2"):
+
+                ui.select(
+                    label="WEF",
+                    options=[e.name for e in Cashflow.instanceDic.values()],
+                    value=pensionFund.WEFCF.name,
+                    with_input=True,
+                    on_change=update_WEFCF,
+                ).tooltip(
+                    "Cashflow-Position über welche eine Kapitalauszahlung im Zusammenhang mit einer WEF verrechnet wird."
+                )
+
+                ui.button(
+                    icon="edit",
+                    on_click=edit_WEFCF,
+                ).props(
+                    "flat unelevated"
+                ).tooltip("Cashflow-Position bearbeiten")
+
+                ui.button(icon="add", on_click=new_WEFCF).props(
+                    "flat unelevated"
+                ).tooltip("Neue Cashflow-Position erstellen")

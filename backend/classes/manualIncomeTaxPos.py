@@ -15,6 +15,9 @@ class ManualIncomeTaxPos(IncomeTaxPos):
     baseValue: float  # YEARLY
     fixValue: Optional[List[Planningposition]] = []  # overturns planning value
 
+    # Object-attributes
+    type: Optional[TaxPositionType] = TaxPositionType.income
+
     # Class-attributes
     instanceDic: ClassVar[dict] = {}
 

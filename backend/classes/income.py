@@ -24,6 +24,19 @@ class Income(Planningobject):
     instanceDic: ClassVar[dict] = {}
     cashflowPos: ClassVar[Cashflow] = None  # cashlowposition on which the total flows
 
+    @field_validator("taxPosition", mode="before")
+    @classmethod
+    def _load_taxPosition(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return IncomeTaxPos.get_itemByName(v["name"])
+        return v
+
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "Income":
@@ -40,3 +53,4 @@ class Income(Planningobject):
 
 # rebuild model to ensure other classes are loaded
 Income.model_rebuild()
+Income.cashflowPos = Cashflow.create(name="Übertrag Einkommen", taxablePortion=0)

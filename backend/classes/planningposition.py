@@ -13,6 +13,19 @@ class Planningposition(BaseModel):
     inDoc: Optional[bool] = False
     description: Optional[str] = None
 
+    @field_validator("scenario", mode="before")
+    @classmethod
+    def _load_scenario(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Scenario.get_itemByName(v["name"])
+        return v
+
     def is_inList(self, list: List["Planningposition"]) -> bool:
         return any(
             p.scenario.name == self.scenario.name and p.period == self.period

@@ -17,6 +17,7 @@ class RealEstate(Planningobject):
     baseTaxValue: Optional[float] = 0
     taxFixValue: Optional[List[Planningposition]] = []
     taxPlanValue: Optional[List[Planningposition]] = []
+
     taxRate: Optional[float] = 0
     taxExpense: Optional[Expense] = None
 
@@ -47,6 +48,84 @@ class RealEstate(Planningobject):
         if baseValue < 0:
             raise ValueError(f"{baseValue} is strict smaller than 0")
         return baseValue
+
+    @field_validator("taxExpense", mode="before")
+    @classmethod
+    def _load_taxExpense(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Expense.get_itemByName(v["name"])
+        return v
+
+    @field_validator("imputedRentalValueIncomeTaxPos", mode="before")
+    @classmethod
+    def _load_imputedRentalValueIncomeTaxPos(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return IncomeTaxPos.get_itemByName(v["name"])
+        return v
+
+    @field_validator("maintenanceExpense", mode="before")
+    @classmethod
+    def _load_maintenanceExpense(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Expense.get_itemByName(v["name"])
+        return v
+
+    @field_validator("renovationExpense", mode="before")
+    @classmethod
+    def _load_renovationExpense(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Expense.get_itemByName(v["name"])
+        return v
+
+    @field_validator("purchaseCF", mode="before")
+    @classmethod
+    def _load_purchaseCF(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Cashflow.get_itemByName(v["name"])
+        return v
+
+    @field_validator("saleCF", mode="before")
+    @classmethod
+    def _load_saleCF(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Cashflow.get_itemByName(v["name"])
+        return v
 
     # Create new object with validation and adding to instanceDic
     @classmethod

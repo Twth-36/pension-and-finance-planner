@@ -1,6 +1,9 @@
 from frontend.dataInput.dataInputTiles.creditTile import *
 from frontend.dataInput.dataInputTiles.creditTile.creditTile import show_creditTile
-from frontend.dataInput.dataInputTiles.freeAssetTile import *
+from frontend.dataInput.dataInputTiles.freeAssetTile.freeAssetOverview import *
+from frontend.dataInput.dataInputTiles.freeAssetTile.freeAssetTile import (
+    show_freeAssetTile,
+)
 from frontend.dataInput.dataInputTiles.manualExpenseTile.manualExpenseTile import *
 from frontend.dataInput.dataInputTiles.manualIncomeTaxPosTile.manualIncomeTaxPosTile import (
     show_manualIncomeTaxPosTile,

@@ -12,9 +12,13 @@ class Pillar3a(Planningobject):
     returnRate: Optional[float] = 0
 
     deposit: Optional[List[Planningposition]] = []
+    depositAutomatic: Optional[List[Planningposition]] = []
     depositExpense: Optional[Expense] = (
         None  # expense Position where deposits are accounted
     )
+
+    WEF: Optional[List[Planningposition]] = []
+    WEFCF: Optional[Cashflow] = None
 
     payoutDate: Optional[List[Planningposition]] = (
         []
@@ -32,6 +36,32 @@ class Pillar3a(Planningobject):
             raise ValueError(f"{baseValue} may not be negative")
         return baseValue
 
+    @field_validator("depositExpense", mode="before")
+    @classmethod
+    def _load_depositExpense(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Expense.get_itemByName(v["name"])
+        return v
+
+    @field_validator("payoutCF", mode="before")
+    @classmethod
+    def _load_payoutCF(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Cashflow.get_itemByName(v["name"])
+        return v
+
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "Pillar3a":
@@ -43,6 +73,12 @@ class Pillar3a(Planningobject):
                 param["person"] = obj.person
             obj.depositExpense = Expense.create(**param)
 
+        if obj.WEFCF is None:
+            param = {"name": "WEF: " + obj.name, "taxablePortion": 100}
+            if obj.person:
+                param["person"] = obj.person
+            obj.WEFCF = Cashflow.create(**param)
+
         if obj.payoutCF is None:
             param = {"name": "Auszahlung: " + obj.name, "taxablePortion": 100}
             if obj.person:
@@ -50,6 +86,20 @@ class Pillar3a(Planningobject):
             obj.payoutCF = Cashflow.create(**param)
 
         return obj
+
+    # overwrite super-function since not only planValue needs to be reset
+    def reset_planValue(self, scenario: Scenario):
+        # delets all planValue of an object with a specific scenario
+        if not self.planValue:
+            return
+        super().reset_planValue(
+            scenario=scenario
+        )  # call super-function for resetting planValue
+
+        # additionally reset depositAutomatic
+        self.depositAutomatic = [
+            p for p in self.depositAutomatic if p.scenario != scenario
+        ]
 
 
 # rebuild model to ensure other classes are loaded

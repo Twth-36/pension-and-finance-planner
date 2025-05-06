@@ -141,3 +141,68 @@ def show_pillar3aDetail(card, pillar3a: Pillar3a = None, show_details: bool = Fa
                 ui.button(icon="add", on_click=new_payoutCF).props(
                     "flat unelevated"
                 ).tooltip("Neue Cashflow-Position erstellen")
+
+            # Cashflow-Position for WEF
+            # needed functions
+            def update_WEFCF(change):
+                try:
+                    pillar3a.WEFCF = Cashflow.get_itemByName(change.value)
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+                ui.notify("Änderung gespeichert", color="positive")
+
+            async def edit_WEFCF():
+                try:
+                    if await dialog_Cashflow(pillar3a.WEFCF):
+                        show_pillar3aDetail(
+                            card=card,
+                            pillar3a=pillar3a,
+                            show_details=detail_ext.value,
+                        )
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+
+            async def new_WEFCF():
+                try:
+                    new_CF = await dialog_Cashflow()
+                    if new_CF:
+                        pillar3a.WEFCF = new_CF
+                    show_pillar3aDetail(
+                        card=card,
+                        pillar3a=pillar3a,
+                        show_details=detail_ext.value,
+                    )
+                except Exception as e:
+                    ui.notify(
+                        f"Upps, etwas passte da nicht:  \n{e}",
+                        color="negative",
+                    )
+
+            with ui.row().classes("items-center gap-2"):
+
+                ui.select(
+                    label="Auszahlung",
+                    options=[e.name for e in Cashflow.instanceDic.values()],
+                    value=pillar3a.WEFCF.name,
+                    with_input=True,
+                    on_change=update_WEFCF,
+                ).tooltip(
+                    "Cashflow-Position über welche die Auszahlung des Säule 3a-Gefässes in Zusammenhang mit einer WEF verrechnet werden."
+                )
+
+                ui.button(
+                    icon="edit",
+                    on_click=edit_WEFCF,
+                ).props(
+                    "flat unelevated"
+                ).tooltip("Cashflow-Position bearbeiten")
+
+                ui.button(icon="add", on_click=new_WEFCF).props(
+                    "flat unelevated"
+                ).tooltip("Neue Cashflow-Position erstellen")

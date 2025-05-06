@@ -65,6 +65,9 @@ class PensionFund(Planningobject):
     buyin: Optional[List[Planningposition]] = []
     buyinExpense: Optional[Expense] = None  # Expenseobject to make buyins
 
+    WEF: Optional[List[Planningposition]] = []
+    WEFCF: Optional[Cashflow] = None
+
     payout: Optional[List[PensFundPayoutPos]] = []
     monthlyPensionPlanValue: Optional[List[Planningposition]] = (
         []
@@ -83,6 +86,45 @@ class PensionFund(Planningobject):
             raise ValueError(f"{baseValue} may not be negative")
         return baseValue
 
+    @field_validator("buyinExpense", mode="before")
+    @classmethod
+    def _load_buyinExpense(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Expense.get_itemByName(v["name"])
+        return v
+
+    @field_validator("pensionIncome", mode="before")
+    @classmethod
+    def _load_pensionIncome(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Income.get_itemByName(v["name"])
+        return v
+
+    @field_validator("pensionCF", mode="before")
+    @classmethod
+    def _load_pensionCF(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Cashflow.get_itemByName(v["name"])
+        return v
+
     # Create new object with validation and adding to instanceDic
     @classmethod
     def create(cls, **data) -> "PensionFund":
@@ -93,6 +135,12 @@ class PensionFund(Planningobject):
             if obj.person:
                 param["person"] = obj.person
             obj.buyinExpense = Expense.create(**param)
+
+        if obj.WEFCF is None:
+            param = {"name": "WEF: " + obj.name, "taxablePortion": 100}
+            if obj.person:
+                param["person"] = obj.person
+            obj.WEFCF = Cashflow.create(**param)
 
         if obj.pensionIncome is None:
             param = {"name": "PK-Rente: " + obj.name, "taxablePortion": 100}

@@ -14,7 +14,7 @@ class Pillar3bPolice(Planningobject):
 
     baseValue: Optional[float] = 0
     expPayoutValue: Optional[float] = 0
-    expPensionValue: Optional[float] = 0
+    expPensionValue: Optional[float] = 0  # monthly
     deposit: Optional[float] = 0
     depositFreq: PayFrequency = PayFrequency.Y
     payoutDate: MonthYear
@@ -33,6 +33,45 @@ class Pillar3bPolice(Planningobject):
         if baseValue < 0:
             raise ValueError(f"{baseValue} may not be negative")
         return baseValue
+
+    @field_validator("depositExpense", mode="before")
+    @classmethod
+    def _load_depositExpense(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Expense.get_itemByName(v["name"])
+        return v
+
+    @field_validator("payoutCF", mode="before")
+    @classmethod
+    def _load_payoutCF(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Cashflow.get_itemByName(v["name"])
+        return v
+
+    @field_validator("pensionIncome", mode="before")
+    @classmethod
+    def _load_pensionIncome(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Income.get_itemByName(v["name"])
+        return v
 
     # Create new object with validation and adding to instanceDic
     @classmethod

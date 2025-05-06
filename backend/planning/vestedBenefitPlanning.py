@@ -1,12 +1,11 @@
-from pandas import Period
-
 from backend.classes.planningposition import Planningposition
 from backend.classes.scenario import Scenario
 from backend.classes.vestedBenefit import VestedBenefit
 from backend.utils.mathFunctions import geometric12th
+from backend.utils.monthYear import MonthYear
 
 
-def exe_vestedBenefitPlanning(period: Period, scenario: Scenario):
+def exe_vestedBenefitPlanning(period: MonthYear, scenario: Scenario):
 
     # work through every object in instanceDic:
     for obj in VestedBenefit.instanceDic.values():

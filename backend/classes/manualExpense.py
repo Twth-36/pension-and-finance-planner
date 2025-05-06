@@ -18,7 +18,6 @@ class ManualExpense(Expense):
 
     # Class-attribute
     instanceDic: ClassVar[dict] = {}
-    cashflowPos: ClassVar[Cashflow]  # cashlowposition on which the total flows
 
     # Validation non-negative baseValue
     @field_validator("baseValue", mode="after")

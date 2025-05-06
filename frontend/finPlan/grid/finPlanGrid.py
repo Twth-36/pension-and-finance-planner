@@ -8,6 +8,9 @@ from backend.classes.manualExpense import ManualExpense
 from backend.classes.manualIncome import ManualIncome
 from backend.classes.manualIncomeTaxPos import ManualIncomeTaxPos
 from backend.classes.pensionFund import PensionFund
+from backend.classes.pillar3a import Pillar3a
+from backend.classes.pillar3aPolice import Pillar3aPolice
+from backend.classes.pillar3bPolice import Pillar3bPolice
 from backend.classes.realEstate import RealEstate
 from backend.classes.scenario import Scenario
 from backend.classes.vestedBenefit import VestedBenefit
@@ -15,6 +18,7 @@ from backend.utils.monthYear import MonthYear
 from nicegui import ui
 
 
+from frontend.finPlan.grid.freeAssetRows import get_freeAssetRows
 from frontend.finPlan.grid.rowsGenerator import get_rows
 
 
@@ -48,7 +52,12 @@ async def show_finPlanGrid(scenario: Scenario):
                     "filter": False,
                     "type": ["numericColumn"],
                     # formatter to show 1000er
-                    ":valueFormatter": 'params => params.value != null ? Math.round(params.value / 1000) : ""',
+                    ":valueFormatter": "params => (params.value == null || params.value === 0)"
+                    + ' ? ""'
+                    + " : (Math.abs(params.value) < 10000"
+                    + "     ? (params.value/1000).toFixed(1)"
+                    + "     : Math.round(params.value/1000)"
+                    + "   )",
                 }
             ]
             + [
@@ -61,11 +70,17 @@ async def show_finPlanGrid(scenario: Scenario):
                     "filter": False,
                     "type": ["numericColumn"],
                     # formatter to show 1000er
-                    ":valueFormatter": 'params => params.value != null ? Math.round(params.value / 1000) : ""',
+                    ":valueFormatter": "params => (params.value == null || params.value === 0)"
+                    + ' ? ""'
+                    + " : (Math.abs(params.value) < 10000"
+                    + "     ? (params.value/1000).toFixed(1)"
+                    + "     : Math.round(params.value/1000)"
+                    + "   )",
                     # format blue if tooltip available
                     ":cellClassRules": {
                         "bg-blue-100": "data[colDef.tooltipField] != null",
                     },
+                    "maxWidth": 80,
                 }
                 for m in months
                 if m.year == y
@@ -105,6 +120,9 @@ async def show_finPlanGrid(scenario: Scenario):
     )
     rows.append({})  # add empty row
 
+    # freeAsset rows
+    rows.extend(await asyncio.to_thread(get_freeAssetRows, scenario, months))
+
     # pensionFund rows
     rows.extend(
         await asyncio.to_thread(
@@ -125,6 +143,42 @@ async def show_finPlanGrid(scenario: Scenario):
             months,
             "Freizügigkeitsguthaben",
             list(VestedBenefit.instanceDic.values()),
+            False,
+        )
+    )
+
+    # pillar3a
+    rows.extend(
+        await asyncio.to_thread(
+            get_rows,
+            scenario,
+            months,
+            "Säule 3a",
+            list(Pillar3a.instanceDic.values()),
+            False,
+        )
+    )
+
+    # pillar3aPolice
+    rows.extend(
+        await asyncio.to_thread(
+            get_rows,
+            scenario,
+            months,
+            "Säule 3a Policen",
+            list(Pillar3aPolice.instanceDic.values()),
+            False,
+        )
+    )
+
+    # pillar3bPolice
+    rows.extend(
+        await asyncio.to_thread(
+            get_rows,
+            scenario,
+            months,
+            "Säule 3b Policen",
+            list(Pillar3bPolice.instanceDic.values()),
             False,
         )
     )
@@ -160,7 +214,7 @@ async def show_finPlanGrid(scenario: Scenario):
             get_rows,
             scenario,
             months,
-            "Cashflow",
+            "Cashflow / Veränderung fr. Verm'werte",
             list(Cashflow.instanceDic.values()),
             True,
         )
@@ -201,13 +255,11 @@ async def show_finPlanGrid(scenario: Scenario):
                 "columnDefs": columns_def,
                 "rowData": filtered_rows,
                 "rowClassRules": {"font-bold": "data.isTitle"},  # makes bold if title
-                "defaultColDef": {
-                    "resizable": True,
-                    "minWidth": 80,
-                },
+                "defaultColDef": {"resizable": True, "minWidth": 80},
                 "tooltipShowDelay": 0.5,
+                "autoSizeStrategy": {"type": "fitCellContents"},
             },
         )
-        .classes("w-full h-96 resize-y overflow-auto")
+        .classes("w-full h-[800px] resize-y overflow-auto")
         .on("cellDoubleClicked", lambda event: print(event.args))
     )

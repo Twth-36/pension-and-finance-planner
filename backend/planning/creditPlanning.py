@@ -1,11 +1,10 @@
-from pandas import Period
-
 from backend.classes.credit import Credit
 from backend.classes.planningposition import Planningposition
 from backend.classes.scenario import Scenario
+from backend.utils.monthYear import MonthYear
 
 
-def exe_creditPlanning(period: Period, scenario: Scenario):
+def exe_creditPlanning(period: MonthYear, scenario: Scenario):
 
     # work through every object in instanceDic:
     for obj in Credit.instanceDic.values():

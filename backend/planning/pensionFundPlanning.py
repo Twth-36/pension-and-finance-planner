@@ -1,12 +1,11 @@
-from pandas import Period
-
 from backend.classes.pensionFund import PensionFund
 from backend.classes.planningposition import Planningposition
 from backend.classes.scenario import Scenario
 from backend.utils.mathFunctions import geometric12th
+from backend.utils.monthYear import MonthYear
 
 
-def exe_pensionFundPlanning(period: Period, scenario: Scenario):
+def exe_pensionFundPlanning(period: MonthYear, scenario: Scenario):
 
     # work through every object in instanceDic:
     for obj in PensionFund.instanceDic.values():
@@ -70,6 +69,24 @@ def exe_pensionFundPlanning(period: Period, scenario: Scenario):
                     new_pos.description += "; " + buyin_pos.description
                 else:
                     new_pos.description = buyin_pos.description
+
+        """handle WEF"""
+        WEF_pos = Planningposition.get_item(
+            period=period, scenario=scenario, list=obj.WEF
+        )
+        if WEF_pos:
+            # get Cashflow-Pos
+            WEFCF_pos = Planningposition.get_item(
+                period=period, scenario=scenario, list=obj.WEFCF.planValue
+            )
+
+            WEFCF_pos.value += min(WEF_pos.value, new_pos.value)
+            new_pos.value -= min(WEF_pos.value, new_pos.value)
+            if WEF_pos.description:
+                if new_pos.description:
+                    new_pos.description += "; " + WEF_pos.description
+                else:
+                    new_pos.description = WEF_pos.description
 
         """ handle monthly pension"""  # calculate obj.monthlyPensionPlanValue
         new_monthlyPensionPos = Planningposition(period=period, scenario=scenario)

@@ -2,21 +2,12 @@
 Class for cashflows i.e. not relevant for income tax for example credit back payments etc.
 """
 
-# for future importing Income due to circular import
-from __future__ import annotations
-
-from backend.classes.person import Person
 from backend.classes.planningobject import Planningobject
 
-from .planningposition import Planningposition
-from typing import TYPE_CHECKING, ClassVar, Optional, List
-from pydantic import BaseModel
+
+from typing import ClassVar, Optional
 from ..utils.monthYear import *
 from .scenario import *
-
-# import Income only for typechecking due to circular import
-if TYPE_CHECKING:
-    from classes.income import Income
 
 
 ## class for aggregated free assets i.e. liqudity and assets to generate income

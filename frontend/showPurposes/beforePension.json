@@ -1,0 +1,1642 @@
+{
+    "Person_objects": [
+        {
+            "name": "Anna",
+            "birth": {
+                "month": 11,
+                "year": 1967
+            },
+            "conf": "evangelisch-reformiert"
+        },
+        {
+            "name": "Bernd",
+            "birth": {
+                "month": 9,
+                "year": 1966
+            },
+            "conf": "konfessionslos / andere"
+        }
+    ],
+    "Scenario_objects": [
+        {
+            "name": "Testszenario 1",
+            "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+        },
+        {
+            "name": "Testzenario 2",
+            "description": null
+        }
+    ],
+    "IncomeTaxPos_objects": [
+        {
+            "name": "Einkommen aus Kapital",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Einkommenssteuer",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Verm\u00f6genssteuer",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Kapitalauszahlungssteuer",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Erwerbseinkommen Migros",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": []
+        },
+        {
+            "name": "Erwerbseinkommen Coop",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": []
+        },
+        {
+            "name": "Lebenshaltungskosten",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Miete Zweitwohnung",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": []
+        },
+        {
+            "name": "PK-Einkauf: PK Migros",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": []
+        },
+        {
+            "name": "PK-Rente: PK Migros",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": []
+        },
+        {
+            "name": "PK-Einkauf: PK Coop",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": []
+        },
+        {
+            "name": "PK-Rente: PK Coop",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": []
+        },
+        {
+            "name": "Einzahlung: S\u00e4ule 3a Depot UBS",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": []
+        },
+        {
+            "name": "Einzahlung: S\u00e4ule 3a Depot PostFinance",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": []
+        },
+        {
+            "name": "Einzahlung: S\u00e4ule 3a Police AXA",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": []
+        },
+        {
+            "name": "Liegenschaftssteuer: EFH in Biel",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Unterhaltskosten: EFH in Biel",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Renovationen: EFH in Biel",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Eigenmietwert: EFH in Biel",
+            "person": null,
+            "planValue": []
+        },
+        {
+            "name": "Zinszahlung: Darlehen",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": []
+        },
+        {
+            "name": "Zinszahlung: Hypothek",
+            "person": null,
+            "planValue": []
+        }
+    ],
+    "ManualIncomeTaxPos_objects": [
+        {
+            "name": "Berufskosten Anna",
+            "person": null,
+            "planValue": [],
+            "baseValue": 2000.0,
+            "fixValue": [],
+            "type": "Steuerabzug"
+        },
+        {
+            "name": "Berufskosten Bernd",
+            "person": null,
+            "planValue": [],
+            "baseValue": 2000.0,
+            "fixValue": [],
+            "type": "Steuerabzug"
+        }
+    ],
+    "Expense_objects": [
+        {
+            "name": "Einkommenssteuer",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Einkommenssteuer",
+                "person": null,
+                "planValue": []
+            }
+        },
+        {
+            "name": "Verm\u00f6genssteuer",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Verm\u00f6genssteuer",
+                "person": null,
+                "planValue": []
+            }
+        },
+        {
+            "name": "Kapitalauszahlungssteuer",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Kapitalauszahlungssteuer",
+                "person": null,
+                "planValue": []
+            }
+        },
+        {
+            "name": "PK-Einkauf: PK Migros",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "PK-Einkauf: PK Migros",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": []
+            }
+        },
+        {
+            "name": "PK-Einkauf: PK Coop",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "PK-Einkauf: PK Coop",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": []
+            }
+        },
+        {
+            "name": "Einzahlung: S\u00e4ule 3a Depot UBS",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "Einzahlung: S\u00e4ule 3a Depot UBS",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": []
+            }
+        },
+        {
+            "name": "Einzahlung: S\u00e4ule 3a Depot PostFinance",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "Einzahlung: S\u00e4ule 3a Depot PostFinance",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": []
+            }
+        },
+        {
+            "name": "Einzahlung: S\u00e4ule 3a Police AXA",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "Einzahlung: S\u00e4ule 3a Police AXA",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": []
+            }
+        },
+        {
+            "name": "Liegenschaftssteuer: EFH in Biel",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Liegenschaftssteuer: EFH in Biel",
+                "person": null,
+                "planValue": []
+            }
+        },
+        {
+            "name": "Unterhaltskosten: EFH in Biel",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Unterhaltskosten: EFH in Biel",
+                "person": null,
+                "planValue": []
+            }
+        },
+        {
+            "name": "Renovationen: EFH in Biel",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Renovationen: EFH in Biel",
+                "person": null,
+                "planValue": []
+            }
+        },
+        {
+            "name": "Zinszahlung: Darlehen",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "Zinszahlung: Darlehen",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": []
+            }
+        },
+        {
+            "name": "Zinszahlung: Hypothek",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "Zinszahlung: Hypothek",
+                "person": null,
+                "planValue": []
+            }
+        }
+    ],
+    "Income_objects": [
+        {
+            "name": "Einkommen aus Kapital",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 50.0,
+            "taxPosition": {
+                "name": "Einkommen aus Kapital",
+                "person": null,
+                "planValue": []
+            }
+        },
+        {
+            "name": "PK-Rente: PK Migros",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "PK-Rente: PK Migros",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": []
+            }
+        },
+        {
+            "name": "PK-Rente: PK Coop",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "PK-Rente: PK Coop",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": []
+            }
+        }
+    ],
+    "ManualExpense_objects": [
+        {
+            "name": "Lebenshaltungskosten",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Lebenshaltungskosten",
+                "person": null,
+                "planValue": []
+            },
+            "baseValue": 3000.0,
+            "fixValue": [],
+            "inflationRate": 0.0,
+            "repetitive": true
+        },
+        {
+            "name": "Miete Zweitwohnung",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Miete Zweitwohnung",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": []
+            },
+            "baseValue": 1000.0,
+            "fixValue": [],
+            "inflationRate": 0.0,
+            "repetitive": true
+        }
+    ],
+    "ManualIncome_objects": [
+        {
+            "name": "Erwerbseinkommen Migros",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "Erwerbseinkommen Migros",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": []
+            },
+            "baseValue": 6000.0,
+            "fixValue": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 11,
+                        "year": 2032
+                    },
+                    "value": 0.0,
+                    "inDoc": false,
+                    "description": "Pensionierung"
+                }
+            ]
+        },
+        {
+            "name": "Erwerbseinkommen Coop",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0,
+            "taxPosition": {
+                "name": "Erwerbseinkommen Coop",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": []
+            },
+            "baseValue": 4000.0,
+            "fixValue": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 9,
+                        "year": 2031
+                    },
+                    "value": 0.0,
+                    "inDoc": false,
+                    "description": "Pensionierung"
+                }
+            ]
+        }
+    ],
+    "Cashflow_objects": [
+        {
+            "name": "\u00dcbertrag Ausgaben",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0
+        },
+        {
+            "name": "\u00dcbertrag Einkommen",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0
+        },
+        {
+            "name": "PK-Auszahlung: PK Migros",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0
+        },
+        {
+            "name": "PK-Auszahlung: PK Coop",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0
+        },
+        {
+            "name": "Auszahlung: Freiz\u00fcgigkeitsdepot Bernd",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0
+        },
+        {
+            "name": "Auszahlung: S\u00e4ule 3a Depot UBS",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0
+        },
+        {
+            "name": "Auszahlung: S\u00e4ule 3a Depot PostFinance",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0
+        },
+        {
+            "name": "Auszahlung: S\u00e4ule 3a Police AXA",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 100.0
+        },
+        {
+            "name": "Kauf / Investition: EFH in Biel",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0
+        },
+        {
+            "name": "Verkauf: EFH in Biel",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0
+        },
+        {
+            "name": "Krediterh\u00f6hung: Darlehen",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 0.0
+        },
+        {
+            "name": "Amortisation: Darlehen",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "taxablePortion": 0.0
+        },
+        {
+            "name": "Krediterh\u00f6hung: Hypothek",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0
+        },
+        {
+            "name": "Amortisation: Hypothek",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0
+        }
+    ],
+    "RealEstate_objects": [
+        {
+            "name": "EFH in Biel",
+            "person": null,
+            "planValue": [],
+            "baseValue": 1000000.0,
+            "baseTaxValue": 0.0,
+            "taxFixValue": [],
+            "taxPlanValue": [],
+            "taxRate": 0.0,
+            "taxExpense": {
+                "name": "Liegenschaftssteuer: EFH in Biel",
+                "person": null,
+                "planValue": [],
+                "taxablePortion": 0.0,
+                "taxPosition": {
+                    "name": "Liegenschaftssteuer: EFH in Biel",
+                    "person": null,
+                    "planValue": []
+                }
+            },
+            "baseImputedRentalValue": 0.0,
+            "imputedRentalFixValue": [],
+            "imputedRentalPlanValue": [],
+            "imputedRentalValueIncomeTaxPos": {
+                "name": "Eigenmietwert: EFH in Biel",
+                "person": null,
+                "planValue": []
+            },
+            "maintCostRate": 1.0,
+            "maintenanceExpense": {
+                "name": "Unterhaltskosten: EFH in Biel",
+                "person": null,
+                "planValue": [],
+                "taxablePortion": 0.0,
+                "taxPosition": {
+                    "name": "Unterhaltskosten: EFH in Biel",
+                    "person": null,
+                    "planValue": []
+                }
+            },
+            "renovations": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 10,
+                        "year": 2027
+                    },
+                    "value": 10000.0,
+                    "inDoc": false,
+                    "description": "Renovation Badezimmer"
+                }
+            ],
+            "renovationExpense": {
+                "name": "Renovationen: EFH in Biel",
+                "person": null,
+                "planValue": [],
+                "taxablePortion": 0.0,
+                "taxPosition": {
+                    "name": "Renovationen: EFH in Biel",
+                    "person": null,
+                    "planValue": []
+                }
+            },
+            "purchase": [],
+            "purchaseCF": {
+                "name": "Kauf / Investition: EFH in Biel",
+                "person": null,
+                "planValue": [],
+                "taxablePortion": 0.0
+            },
+            "sale": [],
+            "saleCF": {
+                "name": "Verkauf: EFH in Biel",
+                "person": null,
+                "planValue": [],
+                "taxablePortion": 0.0
+            }
+        }
+    ],
+    "Credit_objects": [
+        {
+            "name": "Darlehen",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "endDate": null,
+            "baseValue": 20000.0,
+            "baseInterestRate": 0.0,
+            "interestRate": [],
+            "interestExpense": {
+                "name": "Zinszahlung: Darlehen",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "Zinszahlung: Darlehen",
+                    "person": {
+                        "name": "Anna",
+                        "birth": {
+                            "month": 11,
+                            "year": 1967
+                        },
+                        "conf": "evangelisch-reformiert"
+                    },
+                    "planValue": []
+                }
+            },
+            "payback": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 2,
+                        "year": 2026
+                    },
+                    "value": 20000.0,
+                    "inDoc": false,
+                    "description": "R\u00fcckzahlung Darlehen"
+                }
+            ],
+            "paybackCF": {
+                "name": "Amortisation: Darlehen",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 0.0
+            },
+            "increase": [],
+            "increaseCF": {
+                "name": "Krediterh\u00f6hung: Darlehen",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 0.0
+            },
+            "realEstate": null
+        },
+        {
+            "name": "Hypothek",
+            "person": null,
+            "planValue": [],
+            "endDate": {
+                "month": 8,
+                "year": 2030
+            },
+            "baseValue": 100000.0,
+            "baseInterestRate": 0.0,
+            "interestRate": [],
+            "interestExpense": {
+                "name": "Zinszahlung: Hypothek",
+                "person": null,
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "Zinszahlung: Hypothek",
+                    "person": null,
+                    "planValue": []
+                }
+            },
+            "payback": [],
+            "paybackCF": {
+                "name": "Amortisation: Hypothek",
+                "person": null,
+                "planValue": [],
+                "taxablePortion": 0.0
+            },
+            "increase": [],
+            "increaseCF": {
+                "name": "Krediterh\u00f6hung: Hypothek",
+                "person": null,
+                "planValue": [],
+                "taxablePortion": 0.0
+            },
+            "realEstate": {
+                "name": "EFH in Biel",
+                "person": null,
+                "planValue": [],
+                "baseValue": 1000000.0,
+                "baseTaxValue": 0.0,
+                "taxFixValue": [],
+                "taxPlanValue": [],
+                "taxRate": 0.0,
+                "taxExpense": {
+                    "name": "Liegenschaftssteuer: EFH in Biel",
+                    "person": null,
+                    "planValue": [],
+                    "taxablePortion": 0.0,
+                    "taxPosition": {
+                        "name": "Liegenschaftssteuer: EFH in Biel",
+                        "person": null,
+                        "planValue": []
+                    }
+                },
+                "baseImputedRentalValue": 0.0,
+                "imputedRentalFixValue": [],
+                "imputedRentalPlanValue": [],
+                "imputedRentalValueIncomeTaxPos": {
+                    "name": "Eigenmietwert: EFH in Biel",
+                    "person": null,
+                    "planValue": []
+                },
+                "maintCostRate": 1.0,
+                "maintenanceExpense": {
+                    "name": "Unterhaltskosten: EFH in Biel",
+                    "person": null,
+                    "planValue": [],
+                    "taxablePortion": 0.0,
+                    "taxPosition": {
+                        "name": "Unterhaltskosten: EFH in Biel",
+                        "person": null,
+                        "planValue": []
+                    }
+                },
+                "renovations": [
+                    {
+                        "scenario": {
+                            "name": "Testszenario 1",
+                            "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                        },
+                        "period": {
+                            "month": 10,
+                            "year": 2027
+                        },
+                        "value": 10000.0,
+                        "inDoc": false,
+                        "description": "Renovation Badezimmer"
+                    }
+                ],
+                "renovationExpense": {
+                    "name": "Renovationen: EFH in Biel",
+                    "person": null,
+                    "planValue": [],
+                    "taxablePortion": 0.0,
+                    "taxPosition": {
+                        "name": "Renovationen: EFH in Biel",
+                        "person": null,
+                        "planValue": []
+                    }
+                },
+                "purchase": [],
+                "purchaseCF": {
+                    "name": "Kauf / Investition: EFH in Biel",
+                    "person": null,
+                    "planValue": [],
+                    "taxablePortion": 0.0
+                },
+                "sale": [],
+                "saleCF": {
+                    "name": "Verkauf: EFH in Biel",
+                    "person": null,
+                    "planValue": [],
+                    "taxablePortion": 0.0
+                }
+            }
+        }
+    ],
+    "FreeAsset_objects": [
+        {
+            "name": "Sparkonto UBS",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "baseValue": 100000.0
+        },
+        {
+            "name": "Sparkonto PostFinance",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "baseValue": 150000.0
+        },
+        {
+            "name": "Haushaltskonto Valiant",
+            "person": null,
+            "planValue": [],
+            "baseValue": 10000.0
+        }
+    ],
+    "PensionFund_objects": [
+        {
+            "name": "PK Migros",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "baseValue": 450000.0,
+            "fixValue": [],
+            "returnRate": 1.5,
+            "baseSavingContribution": 1500.0,
+            "savingContribution": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 11,
+                        "year": 2032
+                    },
+                    "value": 0.0,
+                    "inDoc": false,
+                    "description": null
+                }
+            ],
+            "buyin": [],
+            "buyinExpense": {
+                "name": "PK-Einkauf: PK Migros",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "PK-Einkauf: PK Migros",
+                    "person": {
+                        "name": "Anna",
+                        "birth": {
+                            "month": 11,
+                            "year": 1967
+                        },
+                        "conf": "evangelisch-reformiert"
+                    },
+                    "planValue": []
+                }
+            },
+            "payout": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 11,
+                        "year": 2032
+                    },
+                    "value": 100.0,
+                    "inDoc": false,
+                    "description": null,
+                    "capitalPortion": 50.0,
+                    "conversionRate": 6.0
+                }
+            ],
+            "monthlyPensionPlanValue": [],
+            "pensionIncome": {
+                "name": "PK-Rente: PK Migros",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "PK-Rente: PK Migros",
+                    "person": {
+                        "name": "Anna",
+                        "birth": {
+                            "month": 11,
+                            "year": 1967
+                        },
+                        "conf": "evangelisch-reformiert"
+                    },
+                    "planValue": []
+                }
+            },
+            "pensionCF": {
+                "name": "PK-Auszahlung: PK Migros",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0
+            }
+        },
+        {
+            "name": "PK Coop",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "baseValue": 400000.0,
+            "fixValue": [],
+            "returnRate": 1.0,
+            "baseSavingContribution": 1000.0,
+            "savingContribution": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 9,
+                        "year": 2031
+                    },
+                    "value": 0.0,
+                    "inDoc": false,
+                    "description": null
+                }
+            ],
+            "buyin": [],
+            "buyinExpense": {
+                "name": "PK-Einkauf: PK Coop",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "PK-Einkauf: PK Coop",
+                    "person": {
+                        "name": "Bernd",
+                        "birth": {
+                            "month": 9,
+                            "year": 1966
+                        },
+                        "conf": "konfessionslos / andere"
+                    },
+                    "planValue": []
+                }
+            },
+            "payout": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 9,
+                        "year": 2031
+                    },
+                    "value": 100.0,
+                    "inDoc": false,
+                    "description": "Kapitalbezug 25%",
+                    "capitalPortion": 25.0,
+                    "conversionRate": 6.8
+                }
+            ],
+            "monthlyPensionPlanValue": [],
+            "pensionIncome": {
+                "name": "PK-Rente: PK Coop",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "PK-Rente: PK Coop",
+                    "person": {
+                        "name": "Bernd",
+                        "birth": {
+                            "month": 9,
+                            "year": 1966
+                        },
+                        "conf": "konfessionslos / andere"
+                    },
+                    "planValue": []
+                }
+            },
+            "pensionCF": {
+                "name": "PK-Auszahlung: PK Coop",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0
+            }
+        }
+    ],
+    "Pillar3a_objects": [
+        {
+            "name": "S\u00e4ule 3a Depot UBS",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "baseValue": 70000.0,
+            "returnRate": 0.0,
+            "deposit": [],
+            "depositAutomatic": [],
+            "depositExpense": {
+                "name": "Einzahlung: S\u00e4ule 3a Depot UBS",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "Einzahlung: S\u00e4ule 3a Depot UBS",
+                    "person": {
+                        "name": "Anna",
+                        "birth": {
+                            "month": 11,
+                            "year": 1967
+                        },
+                        "conf": "evangelisch-reformiert"
+                    },
+                    "planValue": []
+                }
+            },
+            "payoutDate": [],
+            "payoutCF": {
+                "name": "Auszahlung: S\u00e4ule 3a Depot UBS",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0
+            }
+        },
+        {
+            "name": "S\u00e4ule 3a Depot PostFinance",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "baseValue": 80000.0,
+            "returnRate": 0.0,
+            "deposit": [],
+            "depositAutomatic": [],
+            "depositExpense": {
+                "name": "Einzahlung: S\u00e4ule 3a Depot PostFinance",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "Einzahlung: S\u00e4ule 3a Depot PostFinance",
+                    "person": {
+                        "name": "Bernd",
+                        "birth": {
+                            "month": 9,
+                            "year": 1966
+                        },
+                        "conf": "konfessionslos / andere"
+                    },
+                    "planValue": []
+                }
+            },
+            "payoutDate": [],
+            "payoutCF": {
+                "name": "Auszahlung: S\u00e4ule 3a Depot PostFinance",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0
+            }
+        }
+    ],
+    "Pillar3aPolice_objects": [
+        {
+            "name": "S\u00e4ule 3a Police AXA",
+            "person": {
+                "name": "Anna",
+                "birth": {
+                    "month": 11,
+                    "year": 1967
+                },
+                "conf": "evangelisch-reformiert"
+            },
+            "planValue": [],
+            "baseValue": 10000.0,
+            "expPayoutValue": 20000.0,
+            "deposit": 1000.0,
+            "depositFreq": "j\u00e4hrlich",
+            "payoutDate": {
+                "month": 11,
+                "year": 2032
+            },
+            "depositExpense": {
+                "name": "Einzahlung: S\u00e4ule 3a Police AXA",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0,
+                "taxPosition": {
+                    "name": "Einzahlung: S\u00e4ule 3a Police AXA",
+                    "person": {
+                        "name": "Anna",
+                        "birth": {
+                            "month": 11,
+                            "year": 1967
+                        },
+                        "conf": "evangelisch-reformiert"
+                    },
+                    "planValue": []
+                }
+            },
+            "payoutCF": {
+                "name": "Auszahlung: S\u00e4ule 3a Police AXA",
+                "person": {
+                    "name": "Anna",
+                    "birth": {
+                        "month": 11,
+                        "year": 1967
+                    },
+                    "conf": "evangelisch-reformiert"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0
+            }
+        }
+    ],
+    "Pillar3bPolice_objects": [],
+    "VestedBenefit_objects": [
+        {
+            "name": "Freiz\u00fcgigkeitsdepot Bernd",
+            "person": {
+                "name": "Bernd",
+                "birth": {
+                    "month": 9,
+                    "year": 1966
+                },
+                "conf": "konfessionslos / andere"
+            },
+            "planValue": [],
+            "baseValue": 100000.0,
+            "returnRate": 3.5,
+            "payoutDate": [
+                {
+                    "scenario": {
+                        "name": "Testszenario 1",
+                        "description": "Dies ist ein erstes Szenario welches zu Testzwecken dient."
+                    },
+                    "period": {
+                        "month": 12,
+                        "year": 2030
+                    },
+                    "value": 0.0,
+                    "inDoc": false,
+                    "description": null
+                }
+            ],
+            "payoutCF": {
+                "name": "Auszahlung: Freiz\u00fcgigkeitsdepot Bernd",
+                "person": {
+                    "name": "Bernd",
+                    "birth": {
+                        "month": 9,
+                        "year": 1966
+                    },
+                    "conf": "konfessionslos / andere"
+                },
+                "planValue": [],
+                "taxablePortion": 100.0
+            }
+        }
+    ],
+    "expense_classVars": {
+        "cashflowPos": {
+            "name": "\u00dcbertrag Ausgaben",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0
+        }
+    },
+    "freeAsset_classVars": {
+        "liqRes": 0,
+        "returnRateInvestCap": 0,
+        "returnIncome": {
+            "name": "Einkommen aus Kapital",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 50.0,
+            "taxPosition": {
+                "name": "Einkommen aus Kapital",
+                "person": null,
+                "planValue": []
+            }
+        }
+    },
+    "income_classVars": {
+        "cashflowPos": {
+            "name": "\u00dcbertrag Einkommen",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0
+        }
+    },
+    "scenario_classVars": {
+        "baseDate": {
+            "month": 12,
+            "year": 2024
+        },
+        "endDate": {
+            "month": 12,
+            "year": 2035
+        }
+    },
+    "taxes_classVars": {
+        "canton": "Bern",
+        "place": "Biel/Bienne",
+        "taxation": "Verheirateten-Satz",
+        "childrenCnt": 0,
+        "incTaxExpense": {
+            "name": "Einkommenssteuer",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Einkommenssteuer",
+                "person": null,
+                "planValue": []
+            }
+        },
+        "wlthTaxExpense": {
+            "name": "Verm\u00f6genssteuer",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Verm\u00f6genssteuer",
+                "person": null,
+                "planValue": []
+            }
+        },
+        "capPayoutTaxExpense": {
+            "name": "Kapitalauszahlungssteuer",
+            "person": null,
+            "planValue": [],
+            "taxablePortion": 0.0,
+            "taxPosition": {
+                "name": "Kapitalauszahlungssteuer",
+                "person": null,
+                "planValue": []
+            }
+        }
+    }
+}

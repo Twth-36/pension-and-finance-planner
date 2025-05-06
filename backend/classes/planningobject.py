@@ -34,8 +34,23 @@ class Planningobject(BaseModel):
         if name == "":
             raise ValueError(f"May not be empty")
         if name in cls.instanceDic:
-            raise ValueError(f"An object with name '{name}' already exists")
+            raise ValueError(
+                f"An {cls.__name__}-object with name '{name}' already exists"
+            )
         return name
+
+    @field_validator("person", mode="before")
+    @classmethod
+    def _load_person(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Person.get_itemByName(v["name"])
+        return v
 
     # Create new object with validation and adding to instanceDic
     @classmethod

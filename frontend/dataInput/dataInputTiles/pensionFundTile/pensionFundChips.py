@@ -222,3 +222,55 @@ def show_pensionFundChips(card, pensionFund: PensionFund, scenario: Scenario):
                         )
 
                     create_chip(payoutPos)
+
+            # Chip for WEF
+            with ui.column():
+
+                async def edit_planPos(params):
+                    if await dialog_planPos(**params):
+                        show_pensionFundChips(
+                            card=card, pensionFund=pensionFund, scenario=scenario
+                        )
+
+                params_new = {
+                    "planPosList": pensionFund.WEF,
+                    "scenario": scenario,
+                    "periodLabel": "Monat",
+                    "periodTooltip": "Zeitpunkt per wann die Kapitalauszahlung als WEF stattfindet.",
+                    "valueLabel": "Betrag",
+                    "valueTooltip": "Betrag der Kapitalauszahlung. Falls dieser das verfügbare Kapital übersteigt wird der maximal mögliche Betrag berücksichtigt",
+                }
+                ui.chip(
+                    text="WEF",
+                    icon="add",
+                    color="green",
+                    removable=False,
+                    on_click=lambda param=params_new: edit_planPos(param),
+                )
+
+                filtered_WEF = [r for r in pensionFund.WEF if r.scenario == scenario]
+                for planPos in filtered_WEF:
+
+                    def create_chip(planPos):
+                        ui.chip(
+                            text=f"{planPos.period.dateToString()}: {formatswiss(value=planPos.value)}",
+                            color="green",
+                            removable=True,
+                            on_click=lambda p=planPos: edit_planPos(
+                                {
+                                    "planPosList": pensionFund.WEF,
+                                    "planPos": p,
+                                    "periodLabel": "Monat",
+                                    "periodTooltip": "Zeitpunkt per wann die Kapitalauszahlung als WEF stattfindet.",
+                                    "valueLabel": "Betrag",
+                                    "valueTooltip": "Betrag der Kapitalauszahlung. Falls dieser das verfügbare Kapital übersteigt wird der maximal mögliche Betrag berücksichtigt",
+                                }
+                            ),
+                        ).on(
+                            "remove",
+                            lambda p=planPos: pensionFund.WEF.remove(p),
+                        ).props(
+                            "outline"
+                        )
+
+                    create_chip(planPos)

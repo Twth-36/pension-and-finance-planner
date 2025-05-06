@@ -120,3 +120,55 @@ def show_pillar3aChips(card, pillar3a: Pillar3a, scenario: Scenario):
                         )
 
                     create_chip(planPos)
+
+            # Chip for WEF
+            with ui.column():
+
+                async def edit_planPos(params):
+                    if await dialog_planPos(**params):
+                        show_pillar3aChips(
+                            card=card, pillar3a=pillar3a, scenario=scenario
+                        )
+
+                params_new = {
+                    "planPosList": pillar3a.WEF,
+                    "scenario": scenario,
+                    "periodLabel": "Monat",
+                    "periodTooltip": "Zeitpunkt per wann die Kapitalauszahlung als WEF stattfindet.",
+                    "valueLabel": "Betrag",
+                    "valueTooltip": "Betrag der Kapitalauszahlung. Falls dieser das verfügbare Kapital übersteigt wird der maximal mögliche Betrag berücksichtigt",
+                }
+                ui.chip(
+                    text="WEF",
+                    icon="add",
+                    color="orange",
+                    removable=False,
+                    on_click=lambda param=params_new: edit_planPos(param),
+                )
+
+                filtered_WEF = [r for r in pillar3a.WEF if r.scenario == scenario]
+                for planPos in filtered_WEF:
+
+                    def create_chip(planPos):
+                        ui.chip(
+                            text=f"{planPos.period.dateToString()}: {formatswiss(value=planPos.value)}",
+                            color="orange",
+                            removable=True,
+                            on_click=lambda p=planPos: edit_planPos(
+                                {
+                                    "planPosList": pillar3a.WEF,
+                                    "planPos": p,
+                                    "periodLabel": "Monat",
+                                    "periodTooltip": "Zeitpunkt per wann die Kapitalauszahlung als WEF stattfindet.",
+                                    "valueLabel": "Betrag",
+                                    "valueTooltip": "Betrag der Kapitalauszahlung. Falls dieser das verfügbare Kapital übersteigt wird der maximal mögliche Betrag berücksichtigt",
+                                }
+                            ),
+                        ).on(
+                            "remove",
+                            lambda p=planPos: pillar3a.WEF.remove(p),
+                        ).props(
+                            "outline"
+                        )
+
+                    create_chip(planPos)

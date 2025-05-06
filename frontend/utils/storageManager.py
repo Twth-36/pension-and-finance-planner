@@ -1,128 +1,207 @@
 # frontend/utils/storageManager.py
 
-from io import BytesIO
-from zipfile import ZipFile
 from datetime import datetime
 import json
 from nicegui import ui
+from pydantic import TypeAdapter, parse_obj_as
 
+from backend.classes.cashflow import Cashflow
+from backend.classes.credit import Credit
+from backend.classes.expense import Expense
+from backend.classes.freeAsset import FreeAsset
+from backend.classes.income import Income
+from backend.classes.incomeTaxPos import IncomeTaxPos
+from backend.classes.manualExpense import ManualExpense
+from backend.classes.manualIncome import ManualIncome
+from backend.classes.manualIncomeTaxPos import ManualIncomeTaxPos
+from backend.classes.pensionFund import PensionFund
 from backend.classes.person import Person
+from backend.classes.pillar3a import Pillar3a
+from backend.classes.pillar3aPolice import Pillar3aPolice
+from backend.classes.pillar3bPolice import Pillar3bPolice
 from backend.classes.realEstate import RealEstate
+from backend.classes.scenario import Scenario
+from backend.classes.taxes import Taxes
+from backend.classes.vestedBenefit import VestedBenefit
+from backend.tax.taxproperties import Canton, Taxation
+from backend.utils.monthYear import MonthYear
+from frontend.utils.confDialog import show_confDialog
+
+# order is crucial no class may have an object-attribute of a later class
+classes_with_instanceDic = [
+    Person,
+    Scenario,
+    IncomeTaxPos,
+    ManualIncomeTaxPos,
+    Expense,
+    Income,
+    ManualExpense,
+    ManualIncome,
+    Cashflow,
+    RealEstate,
+    Credit,
+    FreeAsset,
+    PensionFund,
+    Pillar3a,
+    Pillar3aPolice,
+    Pillar3bPolice,
+    VestedBenefit,
+]
 
 
 def save_all_classes() -> None:
-    """
-    Erstellt ein ZIP-Archiv mit Person.json und RealEstate.json im Arbeitsspeicher
-    und bietet es direkt zum Download im Browser an, ohne eine Datei im Projektordner abzulegen.
-    """
 
-    # 1. Daten als JSON-Strings serialisieren
-    person_list = [p.model_dump(mode="json") for p in Person.instanceDic.values()]
-    realestate_list = [
-        r.model_dump(mode="json") for r in RealEstate.instanceDic.values()
-    ]
-    person_json = json.dumps(person_list, indent=4)
-    realestate_json = json.dumps(realestate_list, indent=4)
+    data_for_json = {}
 
-    # 2. In-Memory-ZIP erzeugen
-    buffer = BytesIO()
-    with ZipFile(buffer, "w") as zipf:
-        zipf.writestr("Person.json", person_json)
-        zipf.writestr("RealEstate.json", realestate_json)
-    buffer.seek(0)  # zurück an den Anfang des Buffers
+    for cls in classes_with_instanceDic:
+        data_for_json[cls.__name__ + "_objects"] = [
+            obj.model_dump(mode="json") for obj in cls.instanceDic.values()
+        ]
 
-    # 3. Timestamp-basierten Dateinamen erstellen
+    # classVars of Classes with additional information which needs to be saved
+    """Expense"""
+    data_for_json["expense_classVars"] = {
+        "cashflowPos": Expense.cashflowPos.model_dump(mode="json")
+    }
+
+    """ FreeAssets"""
+    data_for_json["freeAsset_classVars"] = {
+        "liqRes": FreeAsset.liqRes,
+        "returnRateInvestCap": FreeAsset.returnRateInvestCap,
+        "returnIncome": (
+            FreeAsset.returnIncome.model_dump(mode="json")
+            if FreeAsset.returnIncome
+            else None
+        ),
+    }
+
+    """Income"""
+    data_for_json["income_classVars"] = {
+        "cashflowPos": Income.cashflowPos.model_dump(mode="json")
+    }
+
+    """Scneario"""
+    data_for_json["scenario_classVars"] = {
+        "baseDate": Scenario.baseDate.model_dump(mode="json"),
+        "endDate": Scenario.endDate.model_dump(mode="json"),
+    }
+
+    """Taxes"""
+    data_for_json["taxes_classVars"] = {
+        "canton": Taxes.canton.value,
+        "place": Taxes.place,
+        "taxation": Taxes.taxation.value,
+        "childrenCnt": Taxes.childrenCnt,
+        "incTaxExpense": Taxes.incTaxExpense.model_dump(mode="json"),
+        "wlthTaxExpense": Taxes.wlthTaxExpense.model_dump(mode="json"),
+        "capPayoutTaxExpense": Taxes.capPayoutTaxExpense.model_dump(mode="json"),
+    }
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"export_{timestamp}.zip"
+    filename = f"export_{timestamp}.json"
 
-    # 4. Download direkt aus Bytes anbieten (kein Schreiben auf Platte)
-    ui.download(buffer.getvalue(), filename)
+    # create JSON with nice format (4)
+    json_str = json.dumps(data_for_json, indent=4)
 
-
-from nicegui import ui
-import os, zipfile, json, shutil
-
-# Annahme: Klassen Person und RealEstate sind importiert
-# from backend.classes.person import Person
-# from backend.classes.realEstate import RealEstate
+    # download JSON-File
+    ui.download(json_str.encode("utf-8"), filename)
 
 
-def handle_upload(event):
-    """Callback-Funktion für NiceGUI ui.upload, die das hochgeladene ZIP-Archiv verarbeitet."""
-    # Hinweis: 'event' ist vom Typ UploadEventArguments und enthält die hochgeladene Datei.
-    temp_zip_path = "uploaded_data.zip"  # Temporärer Pfad für die ZIP-Datei
-    temp_extract_dir = (
-        "temp_extracted_dir"  # Temporäres Verzeichnis für entpackte Dateien
-    )
+async def load_data_dict(data: dict) -> None:
 
     try:
-        ui.notify("Kommt noch")  # TODO
-        return
-        # Schritt 1: Hochgeladene ZIP-Datei speichern
-        with open(temp_zip_path, "wb") as f:
-            # 'event.content' ist ein Dateiobjekt (z.B. BytesIO) – lesen und speichern
-            f.write(event.content.read())
 
-        # Schritt 1 (Fortsetzung): ZIP-Archiv entpacken
-        with zipfile.ZipFile(temp_zip_path, "r") as zip_ref:
-            # Entpacken in das temporäre Verzeichnis (Verzeichnis erstellen, falls nicht vorhanden)
-            os.makedirs(temp_extract_dir, exist_ok=True)
-            zip_ref.extractall(temp_extract_dir)
+        n = ui.notification("Lade Daten…")
+        # 1) delete old instances
+        for cls in classes_with_instanceDic:
+            cls.instanceDic.clear()
 
-        # Schritt 1 (Fortsetzung): Pfade der erwarteten JSON-Dateien definieren
-        person_json = os.path.join(temp_extract_dir, "Person.json")
-        realestate_json = os.path.join(temp_extract_dir, "RealEstate.json")
+        # 3) recreate objects (order of classes_with_instanceDic is crucial)
+        for cls in classes_with_instanceDic:
+            key = cls.__name__ + "_objects"
+            objects = data.get(key, [])
+            if not isinstance(objects, list):
+                raise ValueError(f"{key} is not a list")
+            for attrs in objects:
+                cls.create(**attrs)
 
-        # Überprüfen, ob beide Dateien existieren
-        if not os.path.isfile(person_json) or not os.path.isfile(realestate_json):
-            raise FileNotFoundError(
-                "Person.json oder RealEstate.json fehlt im ZIP-Archiv."
+        # 4) manually assign classVars
+        """Expense"""
+        cv = data.get("expense_classVars", {})
+        if cv.get("cashflowPos"):
+            Expense.cashflowPos = Cashflow.get_itemByName(cv.get("cashflowPos")["name"])
+
+        """FreeAsset"""
+        cv = data.get("freeAsset_classVars", {})
+        FreeAsset.liqRes = cv.get("liqRes", 0)
+        FreeAsset.returnRateInvestCap = cv.get("returnRateInvestCap", 0)
+        if cv.get("returnIncome"):
+            FreeAsset.returnIncome = Income.get_itemByName(
+                cv.get("returnIncome")["name"]
             )
 
-        # Schritt 3: JSON-Dateien einlesen
-        with open(person_json, "r", encoding="utf-8") as pf:
-            person_data_list = json.load(pf)
-        with open(realestate_json, "r", encoding="utf-8") as rf:
-            realestate_data_list = json.load(rf)
+        """Income"""
+        cv = data.get("income_classVars", {})
+        if cv.get("cashflowPos"):
+            Income.cashflowPos = Cashflow.get_itemByName(cv.get("cashflowPos")["name"])
 
-        # Sicherstellen, dass die JSON-Daten Listen sind
-        if not isinstance(person_data_list, list) or not isinstance(
-            realestate_data_list, list
-        ):
-            raise ValueError("JSON-Dateien haben nicht das erwartete Listenformat.")
+        """Scenario"""
+        cv = data.get("scenario_classVars", {})
+        # baseDate: Dict → MonthYear
+        base_date_data = cv.get("baseDate")
+        if isinstance(base_date_data, dict):
+            Scenario.baseDate = MonthYear.model_validate(base_date_data)
+        elif isinstance(base_date_data, MonthYear):
+            Scenario.baseDate = base_date_data
+        else:
+            Scenario.baseDate = None
 
-        # Schritt 2: Existierende Objekte löschen
-        Person.instanceDic.clear()
-        RealEstate.instanceDic.clear()
+        # endDate: Dict → MonthYear
+        end_date_data = cv.get("endDate")
+        if isinstance(end_date_data, dict):
+            Scenario.endDate = MonthYear.model_validate(end_date_data)
+        elif isinstance(end_date_data, MonthYear):
+            Scenario.endDate = end_date_data
+        else:
+            Scenario.endDate = None
 
-        # Schritt 3 & 4: Neue Objekte erstellen
-        # Zuerst Personen-Objekte erzeugen
-        for person_attrs in person_data_list:
-            Person.create(**person_attrs)
-        # Dann Immobilien-Objekte erzeugen
-        for re_attrs in realestate_data_list:
-            RealEstate.create(**re_attrs)
+        # Taxes
+        cv = data.get("taxes_classVars", {})
+        Taxes.canton = TypeAdapter(Canton).validate_python(cv.get("canton"))
+        Taxes.place = cv.get("place")
+        Taxes.taxation = TypeAdapter(Taxation).validate_python(cv.get("taxation"))
+        Taxes.childrenCnt = cv.get("childrenCnt", 0)
+        if cv.get("incTaxExpense"):
+            Taxes.incTaxExpense = Expense.get_itemByName(cv["incTaxExpense"]["name"])
+        if cv.get("wlthTaxExpense"):
+            Taxes.wlthTaxExpense = Expense.get_itemByName(cv["wlthTaxExpense"]["name"])
+        if cv.get("capPayoutTaxExpense"):
+            Taxes.capPayoutTaxExpense = Expense.get_itemByName(
+                cv["capPayoutTaxExpense"]["name"]
+            )
 
-        # Schritt 4: Erfolgsnachricht anzeigen
+        n.dismiss()
         ui.notify(
-            "Daten erfolgreich geladen"
-        )  # Erfolgreiche Benachrichtigung für den Benutzer
+            "Daten erfolgreich geladen. Denke daran die aktuelle Seite allenfalls erneut zu laden!",
+            color="positive",
+        )
 
     except Exception as e:
-        # Schritt 4: Fehlerbehandlung – Fehlermeldung im UI anzeigen
+        n.dismiss()
         ui.notify(f"Fehler beim Laden: {e}", type="error")
 
-    finally:
-        # Schritt 5: Aufräumen der temporären Dateien
-        try:
-            if os.path.exists(temp_zip_path):
-                os.remove(temp_zip_path)  # Lösche die gespeicherte ZIP-Datei
-            if os.path.isdir(temp_extract_dir):
-                shutil.rmtree(
-                    temp_extract_dir
-                )  # Lösche das entpackte Verzeichnis und dessen Inhalt
-        except Exception as cleanup_error:
-            # Im Fehlerfall beim Aufräumen kann optional eine Log-Meldung erfolgen.
-            print(
-                f"Warnung: Temporäre Dateien konnten nicht vollständig gelöscht werden: {cleanup_error}"
-            )
+
+async def handle_upload(event):
+    """Load JSON-File and build all data new up"""
+
+    if await show_confDialog("Bist du sicher?  \n Alle Daten werden überschrieben!"):
+
+        # JSON einlesen
+        content = event.content.read()
+        data = json.loads(content)
+
+        if not isinstance(data, dict):
+            raise ValueError("Erwartetes JSON-Objekt, aber got " + type(data).__name__)
+
+        await load_data_dict(data)
+
+    event.sender.reset()
