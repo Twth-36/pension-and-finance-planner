@@ -1,6 +1,6 @@
 # pension-and-finance-planner
 
-pension-and-finance-planner takes taxquestions, wealth-management and other important parts into account for successfully plan ones retirement or generar financial decisions. In a first approach it is limited to the canton of Bern.
+pension-and-finance-planner takes into account tax questions, wealth management and other key factors to help you successfully plan your retirement or make broader financial decisions. In its initial version, it is limited to the Canton of Bern.
 
 ## Package-Installation
 For installing all packages use a virtual environemtent to install all packages of 'requirements.txt'
