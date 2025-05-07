@@ -112,6 +112,19 @@ class PensionFund(Planningobject):
             return Income.get_itemByName(v["name"])
         return v
 
+    @field_validator("WEFCF", mode="before")
+    @classmethod
+    def _load_WEFCF(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Cashflow.get_itemByName(v["name"])
+        return v
+
     @field_validator("pensionCF", mode="before")
     @classmethod
     def _load_pensionCF(cls, v):
@@ -169,6 +182,44 @@ class PensionFund(Planningobject):
         self.monthlyPensionPlanValue = [
             p for p in self.monthlyPensionPlanValue if p.scenario != scenario
         ]
+
+    @classmethod
+    def copy_toNewScenario(cls, new_scenario: Scenario, src_scenario: Scenario):
+        for obj in cls.instanceDic.values():
+
+            # all lists with planValue where the scenario needs to be dublicated
+            lists = [
+                obj.planValue,
+                obj.fixValue,
+                obj.savingContribution,
+                obj.buyin,
+                obj.WEF,
+            ]
+
+            # duplicates all scenario related fields to a newscenario
+            for planPosList in lists:
+                for pos in planPosList:
+                    if pos.scenario == src_scenario:
+                        Planningposition(
+                            scenario=new_scenario,
+                            period=pos.period,
+                            value=pos.value,
+                            inDoc=pos.inDoc,
+                            description=pos.description,
+                        ).add_toList(planPosList)
+
+            # treat payout seperatly since of class PensFundPayoutPos
+            for pos in obj.payout:
+                if pos.scenario == src_scenario:
+                    PensFundPayoutPos(
+                        scenario=new_scenario,
+                        period=pos.period,
+                        value=pos.value,
+                        capitalPortion=pos.capitalPortion,
+                        conversionRate=pos.conversionRate,
+                        inDoc=pos.inDoc,
+                        description=pos.description,
+                    ).add_toList(obj.payout)
 
 
 # rebuild model to ensure other classes are loaded

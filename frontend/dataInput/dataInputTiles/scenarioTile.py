@@ -1,5 +1,7 @@
 from nicegui import ui
+from backend.classes.planningobject import Planningobject
 from backend.classes.scenario import *
+from backend.utils.copyScenario import copyAllFromScenario
 from backend.utils.monthYear import *
 from frontend.utils import *
 from frontend.utils.confDialog import show_confDialog
@@ -107,6 +109,26 @@ def show_scenarioTile():
                     ui.button(icon="edit", on_click=edit_action).props(
                         "flat unelevated"
                     )
+
+                    def copy_action():
+                        if len(tbl.selected) != 1:
+                            ui.notify("Wähle eine Zeile aus.")
+                        else:
+                            selected_name = tbl.selected[0]["Name"]
+                            src_scenario = Scenario.get_itemByName(name=selected_name)
+                            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                            new_scenario = Scenario.create(
+                                name=src_scenario.name + "_KOPIE_" + timestamp
+                            )
+
+                            copyAllFromScenario(
+                                new_scenario=new_scenario, src_scenario=src_scenario
+                            )
+                            show_scenario_form(scenario=new_scenario)
+
+                    ui.button(icon="content_copy", on_click=copy_action).props(
+                        "flat unelevated"
+                    ).tooltip("Erstellt eine Kopie des ausgewählten Szenarios")
 
                     async def del_action():
                         if len(tbl.selected) == 0:

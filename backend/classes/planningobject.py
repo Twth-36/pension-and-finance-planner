@@ -5,16 +5,6 @@ from backend.classes.person import Person
 from backend.classes.planningposition import Planningposition
 from backend.classes.scenario import Scenario
 
-import json
-import os
-
-# If using a GUI environment (like desktop), we might use tkinter for file dialogs:
-try:
-    import tkinter as tk
-    from tkinter import filedialog
-except ImportError:
-    tk = None  # tkinter might not be available (e.g., in some web/server contexts)
-
 
 class Planningobject(BaseModel):
     # Object-attributes
@@ -83,3 +73,8 @@ class Planningobject(BaseModel):
         # delets all planValue of all objects with a specific scenario
         for obj in cls.instanceDic.values():
             obj.reset_planValue(scenario=scenario)
+
+    @classmethod
+    def copy_toNewScenario(cls, new_scenario: Scenario, src_scenario: Scenario):
+        # empty function in case the function is not overwritten in subclass
+        return

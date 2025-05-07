@@ -12,7 +12,7 @@ def show_startPage(main_content):
             continuePlan = ui.tab("Ich möchte an einem bestehenden Plan weiterarbeiten")
             newPlan = ui.tab("Ich starte eine neuen Plan")
             examplePlan = ui.tab("Zeig mir ein Beispiel")
-        with ui.tab_panels(tabs, value=newPlan).classes("w-full"):
+        with ui.tab_panels(tabs, value=continuePlan).classes("w-full"):
 
             with ui.tab_panel(continuePlan) as continuePlanPanel:
                 ui.label("Lade hier deine JSON-Datei vom letzten Mal hoch")

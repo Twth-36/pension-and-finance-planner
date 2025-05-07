@@ -49,6 +49,19 @@ class Pillar3a(Planningobject):
             return Expense.get_itemByName(v["name"])
         return v
 
+    @field_validator("WEFCF", mode="before")
+    @classmethod
+    def _load_WEFCF(cls, v):
+        """
+        If loading from JSON: when v is a dict like {"name": "..."},
+        replace it with the existing instance
+        (avoiding a duplicate‐name validation error).
+        Otherwise (v is already a object or None), return it unchanged.
+        """
+        if isinstance(v, dict):
+            return Cashflow.get_itemByName(v["name"])
+        return v
+
     @field_validator("payoutCF", mode="before")
     @classmethod
     def _load_payoutCF(cls, v):
@@ -100,6 +113,31 @@ class Pillar3a(Planningobject):
         self.depositAutomatic = [
             p for p in self.depositAutomatic if p.scenario != scenario
         ]
+
+    @classmethod
+    def copy_toNewScenario(cls, new_scenario: Scenario, src_scenario: Scenario):
+        for obj in cls.instanceDic.values():
+
+            # all lists with planValue where the scenario needs to be dublicated
+            lists = [
+                obj.planValue,
+                obj.deposit,
+                obj.depositAutomatic,
+                obj.WEF,
+                obj.payoutDate,
+            ]
+
+            # duplicates all scenario related fields to a newscenario
+            for planPosList in lists:
+                for pos in planPosList:
+                    if pos.scenario == src_scenario:
+                        Planningposition(
+                            scenario=new_scenario,
+                            period=pos.period,
+                            value=pos.value,
+                            inDoc=pos.inDoc,
+                            description=pos.description,
+                        ).add_toList(planPosList)
 
 
 # rebuild model to ensure other classes are loaded

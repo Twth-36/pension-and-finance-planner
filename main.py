@@ -92,6 +92,7 @@ with ui.footer().style("background-color: #616161; padding: 16px;"):
 
 # Main Content Area
 main_content = ui.column().classes("w-full h-full")
+
 show_startPage(main_content)
 
 

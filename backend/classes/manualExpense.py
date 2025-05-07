@@ -27,6 +27,25 @@ class ManualExpense(Expense):
             raise ValueError(f"baseValue: {baseValue} may not be negative")
         return baseValue
 
+    @classmethod
+    def copy_toNewScenario(cls, new_scenario: Scenario, src_scenario: Scenario):
+        for obj in cls.instanceDic.values():
+
+            # all lists with planValue where the scenario needs to be dublicated
+            lists = [obj.planValue, obj.fixValue]
+
+            # duplicates all scenario related fields to a newscenario
+            for planPosList in lists:
+                for pos in planPosList:
+                    if pos.scenario == src_scenario:
+                        Planningposition(
+                            scenario=new_scenario,
+                            period=pos.period,
+                            value=pos.value,
+                            inDoc=pos.inDoc,
+                            description=pos.description,
+                        ).add_toList(planPosList)
+
 
 # rebuild model to ensure other classes are loaded
 ManualExpense.model_rebuild()
